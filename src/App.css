@@ -13,22 +13,13 @@
 
 
 }
-.header{
-grid-area: h;
- background: lightgreen;
-}
-header img{
- width: 30px;
-}
-.nav{
- background: lightskyblue;
- grid-area: n;
-}
+
+
 .contains{
  background: lightgrey;
  grid-area: c;
 }
-.contains img{
- width: 600px;
- height: 100px;
-}
+/*.contains img{*/
+/* width: 600px;*/
+/* height: 100px;*/
+/*}*/

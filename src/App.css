@@ -13,12 +13,16 @@
 
 
 }
-
-
-.contains{
+.app-wrapper-content{
  background: lightgrey;
  grid-area: c;
 }
+
+
+/*.contains{*/
+/* background: lightgrey;*/
+/* grid-area: c;*/
+/*}*/
 /*.contains img{*/
 /* width: 600px;*/
 /* height: 100px;*/

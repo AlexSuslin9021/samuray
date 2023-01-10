@@ -2,9 +2,10 @@
     background: lightskyblue;
     grid-area: n;
 }
-.item {
+.item a {
     color: white;
+    text-decoration: none;
 }
-.active{
-    background: yellow;
+.item a.active{
+    color: yellow;
 }

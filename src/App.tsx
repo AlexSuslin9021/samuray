@@ -9,7 +9,21 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
-function App() {
+// export type PropsPost={
+// id: string,
+//     message:string,
+//     likes:number
+// }
+
+type PropsPost={
+    id: string,
+    message:string,
+    likes:number
+}
+export type PropsArray={
+   posts: Array<PropsPost>
+}
+function App(props:PropsArray) {
 
   return (    <BrowserRouter>
         <div className="app-wrapper">
@@ -17,7 +31,7 @@ function App() {
         <Navbar/>
 
         <div className={'app-wrapper-content'}>
-            <Route path={'/profile'} component={Profile}/>
+            <Route path={'/profile'} render={()=> <Profile messages={props.posts}/>}/>
             <Route path={'/dialogs'} component={Dialogs}/>
             <Route path={'/news'} component={News}/>
             <Route path={'/music'} component={Music}/>

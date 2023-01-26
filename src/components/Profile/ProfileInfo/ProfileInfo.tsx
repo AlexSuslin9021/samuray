@@ -1,6 +1,11 @@
-import React from "react";
+import React, {LegacyRef} from "react";
 import a from "../Profile.module.css";
 export function ProfileInfo (){
+    let newPostElement=React.createRef<HTMLTextAreaElement>()
+    let onClickHandler=()=>{
+        let text=newPostElement.current?.value
+        alert(text)
+    }
     return (
         <div>
 
@@ -13,10 +18,10 @@ export function ProfileInfo (){
                 ava + descript
             </div>
             <div>
-                <textarea></textarea>
+                <textarea ref={newPostElement}></textarea>
             </div>
             <div>
-                <button> Add</button>
+                <button onClick={onClickHandler}> Add</button>
             </div>
         </div>)
 }

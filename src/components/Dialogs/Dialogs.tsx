@@ -1,37 +1,42 @@
 
-import React from "react";
+import React, {ChangeEvent, useState} from "react";
 import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
+import {propsDialogsType, propsUsersName} from "../../Redux/State";
 
 type DialogsItemProps ={
     name:string
     id:string
 }
-const DialogsItem=(props:DialogsItemProps)=>{
-    return <div className={s.user}><NavLink to={`/dialogs/ +${props.id}`}> {props.name}</NavLink></div>
+type PropsDialogs={
+    users:propsUsersName[],
+    dialogs:propsDialogsType[]
+}
+
+const DialogsItem: React.FC<DialogsItemProps>=(props)=>{
+    return <div className={s.user}>
+        <NavLink to={`/dialogs/ +${props.id}`}> <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPLhCHrIzLc6qb_JwYWf3c77vFOAFb16Nl8w&usqp=CAU'} alt={'#'} /> {props.name}</NavLink>
+    </div>
 }
 type DialogProps={
     dial:string
 }
-const Dialog=(props:DialogProps)=>{
+const Dialog:React.FC<DialogProps>=(props)=>{
     return<div className={s.dialog}> {props.dial}</div>
 }
-function Dialogs(){
 
-    const users=[
-        {id:'1', name:'Alex'},
-        {id:'2', name:'Dima'},
-        {id:'3', name:'Misha'},
-        {id:'4', name:'Tanya'},
-        {id:'5', name:'Valera'},
-        {id:'6', name:'Serg'},
-    ]
-    const dialogs=[
-        {id:'1', name:'Hello'},
-        {id:'2', name:'How are you'},
-        {id:'3', name:'I am good!'},]
-    const user= users.map(u=><DialogsItem id={u.id} name ={u.name}/>)
-    const  dialog=dialogs.map(d=><Dialog dial={d.name}/>)
+function Dialogs(props:PropsDialogs){
+
+let[title, setTitle]=useState<string>('')
+
+    const add=()=>{
+alert(title)
+}
+const onChangehandler=(e:ChangeEvent<HTMLTextAreaElement>)=>{
+   setTitle(e.currentTarget.value)
+}
+    const user= props.users.map(u=><DialogsItem id={u.id}    name ={u.name}/>)
+    const  dialog=props.dialogs.map(d=><Dialog dial={d.name}/>)
     return<div className={s.dialogsContent}>
         <div className={s.users}>
             {user}
@@ -40,7 +45,10 @@ function Dialogs(){
         <div className={s.dialogs}>
             {dialog}
         </div>
-
+        <textarea  onChange={onChangehandler} value={title}> </textarea>
+        <div>
+        <button onClick={add}> ass</button>
+        </div>
     </div>
 }
 export default Dialogs

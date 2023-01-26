@@ -1,18 +1,16 @@
 import React from "react";
 import a from './Profile.module.css'
-// import {MyPost} from './MyPost/MyPost'
+
 import {MyPost} from './MyPost/MyPost'
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-// import {PropsPost} from "../../App";
 
-type PropsPost={
-    id: string,
-    message:string,
-    likes:number
-}
+import {propsPostMessege} from "../../Redux/State";
+
+
+
 
 type PropsType={
-    messages:Array<PropsPost>
+    messages:propsPostMessege[]
 }
 export function Profile(props:PropsType){
     return(

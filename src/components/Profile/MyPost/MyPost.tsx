@@ -1,17 +1,14 @@
 import React from "react";
 import a from './MyPost.module.css'
 import {Post} from './Post/Post'
+import {propsPostMessege, propsProfilePage} from "../../../Redux/State";
 // import {PropsArray} from "../../../App";
 
- type PropsPost={
-id: string,
-    message:string,
-    likes:number
+type PropsType={
+    message:propsPostMessege[]
 }
 
-type PropsType={
-    message:PropsPost[]
-}
+
 export function MyPost(props: PropsType){
     // const posts= [
     //     {id: '1', message: 'How are you?', likes:15},
@@ -21,6 +18,7 @@ export function MyPost(props: PropsType){
 
     return (
         <div className={a.item}>
+
             {post}
         </div>
 )

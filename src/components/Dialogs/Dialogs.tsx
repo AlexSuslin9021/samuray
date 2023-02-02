@@ -1,5 +1,5 @@
 
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, LegacyRef, useState} from "react";
 import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
 import {propsDialogsType, propsUsersName} from "../../Redux/State";
@@ -25,16 +25,18 @@ const Dialog:React.FC<DialogProps>=(props)=>{
     return<div className={s.dialog}> {props.dial}</div>
 }
 
+
+
 function Dialogs(props:PropsDialogs){
 
-let[title, setTitle]=useState<string>('')
+let newPost=React.createRef<HTMLTextAreaElement>()
 
     const add=()=>{
-alert(title)
+alert(newPost.current?.value)
 }
-const onChangehandler=(e:ChangeEvent<HTMLTextAreaElement>)=>{
-   setTitle(e.currentTarget.value)
-}
+// const onChangehandler=(e:ChangeEvent<HTMLTextAreaElement>)=>{
+//    setTitle(e.currentTarget.value)
+// }
     const user= props.users.map(u=><DialogsItem id={u.id}    name ={u.name}/>)
     const  dialog=props.dialogs.map(d=><Dialog dial={d.name}/>)
     return<div className={s.dialogsContent}>
@@ -45,7 +47,7 @@ const onChangehandler=(e:ChangeEvent<HTMLTextAreaElement>)=>{
         <div className={s.dialogs}>
             {dialog}
         </div>
-        <textarea  onChange={onChangehandler} value={title}> </textarea>
+        <textarea  ref={newPost} > </textarea>
         <div>
         <button onClick={add}> ass</button>
         </div>

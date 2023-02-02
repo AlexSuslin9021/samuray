@@ -1,10 +1,22 @@
-import React, {LegacyRef} from "react";
+import React, {ChangeEvent} from "react";
 import a from "../Profile.module.css";
-export function ProfileInfo (){
-    let newPostElement=React.createRef<HTMLTextAreaElement>()
-    let onClickHandler=()=>{
-        let text=newPostElement.current?.value
-        alert(text)
+
+
+type PropsType = {
+    addPost: (post?: string) => void
+
+    messages: string
+    changeCallback: (newText:string) => void
+}
+
+export function ProfileInfo(props: PropsType) {
+
+    let onClickHandler = () => {
+        props.addPost(props.messages)
+    }
+    const onchangePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
+      props.changeCallback(e.currentTarget.value)
+
     }
     return (
         <div>
@@ -18,7 +30,7 @@ export function ProfileInfo (){
                 ava + descript
             </div>
             <div>
-                <textarea ref={newPostElement}></textarea>
+                <textarea value={props.messages} onChange={onchangePost}/>
             </div>
             <div>
                 <button onClick={onClickHandler}> Add</button>

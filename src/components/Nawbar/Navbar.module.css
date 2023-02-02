@@ -9,3 +9,24 @@
 .item a.active{
     color: yellow;
 }
+.friends{
+    margin-top: 80px;
+   text-align: center;
+}
+.friends a{
+
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+
+}
+.image{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+.image img{
+  width: 40px;
+    border-radius: 50%;
+
+}

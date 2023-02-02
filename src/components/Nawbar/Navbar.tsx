@@ -9,8 +9,13 @@ type PropsType={
   function Navbar(props:PropsType) {
     return <nav className={s.nav}>
         {props.list.map(el=> <div className={ s.item}><NavLink to={el.to}  activeClassName={s.active}>{el.title} </NavLink></div>)}
-        <div className={s.item}>
+        <div className={s.friends}>
             <NavLink to={'/friends'} activeClassName={s.active}>Friends</NavLink>
+           <div className={s.image}>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4jVmZsr1RiXjhULphFZKCr8BgPwQhjI7BoA&usqp=CAU" alt="#"/>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4jVmZsr1RiXjhULphFZKCr8BgPwQhjI7BoA&usqp=CAU" alt="#"/>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4jVmZsr1RiXjhULphFZKCr8BgPwQhjI7BoA&usqp=CAU" alt="#"/>
+        </div>
         </div>
 
 

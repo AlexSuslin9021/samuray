@@ -1,7 +1,7 @@
 import React from "react";
 import a from './Post.module.css'
 type PostPropsType={
-    message:string
+    message?:string
     value:number
 }
 export function Post(props:PostPropsType){

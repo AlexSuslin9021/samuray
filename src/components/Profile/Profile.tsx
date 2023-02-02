@@ -10,13 +10,17 @@ import {propsPostMessege} from "../../Redux/State";
 
 
 type PropsType={
-    messages:propsPostMessege[]
+    post:propsPostMessege[]
+    messages:string
+    addPost:(post?:string)=>void
+    changeCallback: (newText:string) => void
+
 }
 export function Profile(props:PropsType){
     return(
         <div className='contains'>
-            <ProfileInfo/>
-            <MyPost message={props.messages} />
+            <ProfileInfo changeCallback={props.changeCallback} messages={props.messages} addPost={props.addPost}  />
+            <MyPost post={props.post} />
         </div>
 )
 }

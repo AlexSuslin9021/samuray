@@ -3,11 +3,11 @@ let rerender=()=>{
 }
 type StoreType={
     _state:PropsState
-    getState:()=>void
+    getState:()=>PropsState
     addPost: (post?: string)=>void
      changeCallback : (newText:string) => void,
     subscriber:(observer:()=>void)=>void
-
+     _rerender:()=>void
 }
 
 export let store :StoreType ={_state:{
@@ -73,14 +73,17 @@ export let store :StoreType ={_state:{
     addPost (post?: string){
         let newPOst: propsPostMessege = {id: new Date().getTime(), message:post, likes: 15};
        this._state.profilePage.post.push(newPOst)
-        rerender()
+        this._rerender()
     },
      changeCallback (newText:string){
        this._state.profilePage.newTextPost=newText
-        rerender()
+         this._rerender()
     },
-   subscriber(observer:()=>void){
-        rerender=observer
+     _rerender(){
+        console.log('state')
+    },
+   subscriber(observer){
+       this._rerender=observer
     }
 
 }

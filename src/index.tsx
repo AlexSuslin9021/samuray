@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 export const rerender=()=>{
  ReactDOM.render(
-     <App state={store._state} addPost={store.addPost} changeCallback={store.changeCallback}  />,
+     <App state={store._state} addPost={store.addPost.bind(store)} changeCallback={store.changeCallback.bind(store)}  />,
      document.getElementById('root')
  );}
 

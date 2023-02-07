@@ -1,10 +1,13 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
+import store from "./Redux/State";
+import ReactDOM from "react-dom";
+import App from "./App";
+export const rerender=()=>{
+ ReactDOM.render(
+     <App state={store._state} addPost={store.addPost} changeCallback={store.changeCallback}  />,
+     document.getElementById('root')
+ );}
 
-import state, {addPost, PropsState} from "./Redux/State";
-import {rerender} from "./render/Render";
-
-
- rerender(state)
+rerender()
+store.subscriber(rerender)

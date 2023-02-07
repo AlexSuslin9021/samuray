@@ -10,25 +10,7 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import { PropsState} from "./Redux/State";
 
-//
-// export type PropsPost={
-// id: string,
-//     message:string,
-//     likes:number
-// }
-//
-//
-// export type PropsMD={
-//     id:string, name:string
-// }
-// export type PropsArray={
-//    posts: Array<PropsPost>
-//     dialogs: PropsMD[]
-//     users:PropsMD[]
-// }
-// type PropsState={
-//     state:object
-// }
+
 
 type appStateProps = {
     state: PropsState

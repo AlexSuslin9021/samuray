@@ -7,7 +7,19 @@ type StoreType={
     addPost: (post?: string)=>void
      changeCallback : (newText:string) => void,
     subscriber:(observer:()=>void)=>void
-     _rerender:()=>void
+     rerender:()=>void
+    dispatch:(action:actionAddPost |changeNewTekst )=>void
+}
+
+export type actionAddPost={
+    type:'ADD-POST'
+    post:string
+
+}
+export type changeNewTekst={
+    type:'CHANGE-CALLBASK'
+    newTekst:string
+
 }
 
 export let store :StoreType ={_state:{
@@ -73,19 +85,28 @@ export let store :StoreType ={_state:{
     addPost (post?: string){
         let newPOst: propsPostMessege = {id: new Date().getTime(), message:post, likes: 15};
        this._state.profilePage.post.push(newPOst)
-        this._rerender()
+        rerender()
     },
      changeCallback (newText:string){
        this._state.profilePage.newTextPost=newText
-         this._rerender()
+        rerender()
     },
-     _rerender(){
-        console.log('state')
+   subscriber(observer:()=>void){
+        rerender=observer
     },
-   subscriber(observer){
-       this._rerender=observer
+     rerender(){
+        console.log('hello')
+    },
+    dispatch(action){
+    if(action.type==='ADD-POST'){
+        let newPOst: propsPostMessege = {id: new Date().getTime(), message:action.post, likes: 15};
+        this._state.profilePage.post.push(newPOst)
+        rerender()
+    } else if(action.type==='CHANGE-CALLBASK'){
+        this._state.profilePage.newTextPost= action.newTekst
+        rerender()
     }
-
+    }
 }
 
 

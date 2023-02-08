@@ -8,14 +8,33 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import { PropsState} from "./Redux/State";
+import {actionAddPost, changeNewTekst, PropsState} from "./Redux/State";
 
-
+//
+// export type PropsPost={
+// id: string,
+//     message:string,
+//     likes:number
+// }
+//
+//
+// export type PropsMD={
+//     id:string, name:string
+// }
+// export type PropsArray={
+//    posts: Array<PropsPost>
+//     dialogs: PropsMD[]
+//     users:PropsMD[]
+// }
+// type PropsState={
+//     state:object
+// }
 
 type appStateProps = {
     state: PropsState
-    addPost: (post?: string) => void
-    changeCallback: (newText:string) => void
+    // addPost: (post?: string) => void
+    // changeCallback: (newText:string) => void
+    dispatch:(action:actionAddPost |changeNewTekst )=>void
 
 }
 
@@ -29,10 +48,10 @@ function App(props: appStateProps) {
 
                 <div className={'app-wrapper-content'}>
                     <Route path={'/profile'} render={() => <Profile
-                        changeCallback={props.changeCallback}
+
                         post={props.state.profilePage.post}
                         messages={props.state.profilePage.newTextPost}
-                        addPost={props.addPost}
+                        dispatch={props.dispatch}
                         />}/>
                     <Route path={'/dialogs'} render={() => <Dialogs dialogs={props.state.dialogsPage.dialogs}
                                                                     users={props.state.dialogsPage.users}/>}/>

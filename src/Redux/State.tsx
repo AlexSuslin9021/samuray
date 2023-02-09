@@ -1,24 +1,28 @@
-let rerender=()=>{
-    console.log('hello')
-}
+// let rerender=()=>{
+//     console.log('hello')
+// }
 type StoreType={
     _state:PropsState
     getState:()=>PropsState
-    addPost: (post?: string)=>void
-     changeCallback : (newText:string) => void,
+    // addPost: (post?: string)=>void
+     // changeCallback : (newText:string) => void,
     subscriber:(observer:()=>void)=>void
-     rerender:()=>void
-    dispatch:(action:actionAddPost |changeNewTekst )=>void
+     _rerender:()=>void
+    dispatch:(action: actionType)=>void
 }
 
-export type actionAddPost={
+export  type actionType=actionTypeAdd |actionTypechange
+
+type actionTypeAdd={
     type:'ADD-POST'
     post:string
 
+
 }
-export type changeNewTekst={
+type actionTypechange={
     type:'CHANGE-CALLBASK'
-    newTekst:string
+    newText:any
+
 
 }
 
@@ -82,29 +86,30 @@ export let store :StoreType ={_state:{
 
     },
     getState(){return this._state},
-    addPost (post?: string){
-        let newPOst: propsPostMessege = {id: new Date().getTime(), message:post, likes: 15};
-       this._state.profilePage.post.push(newPOst)
-        rerender()
+    // addPost (post?: string){
+    //     let newPOst: propsPostMessege = {id: new Date().getTime(), message:post, likes: 15};
+    //    this._state.profilePage.post.push(newPOst)
+    //     this._rerender()
+    // },
+    //  changeCallback (newText:string){
+    //    this._state.profilePage.newTextPost=newText
+    //      this._rerender()
+    // },
+     _rerender(){
+        console.log('state')
     },
-     changeCallback (newText:string){
-       this._state.profilePage.newTextPost=newText
-        rerender()
+   subscriber(observer){
+       this._rerender=observer
     },
-   subscriber(observer:()=>void){
-        rerender=observer
-    },
-     rerender(){
-        console.log('hello')
-    },
-    dispatch(action){
-    if(action.type==='ADD-POST'){
-        let newPOst: propsPostMessege = {id: new Date().getTime(), message:action.post, likes: 15};
+
+    dispatch(action: any){
+    if(action.type==='ADD-POST')
+    { let newPOst: propsPostMessege = {id: new Date().getTime(), message:action.post, likes: 15};
         this._state.profilePage.post.push(newPOst)
-        rerender()
-    } else if(action.type==='CHANGE-CALLBASK'){
-        this._state.profilePage.newTextPost= action.newTekst
-        rerender()
+        this._rerender()}
+    else if(action.type==='CHANGE-CALLBASK'){
+        this._state.profilePage.newTextPost = action.newText
+        this._rerender()
     }
     }
 }

@@ -1,24 +1,29 @@
 import React, {ChangeEvent} from "react";
 import a from "../Profile.module.css";
-import {actionAddPost, changeNewTekst} from "../../../Redux/State";
+import {actionType} from "../../../Redux/State";
 
 
 type PropsType = {
 
 
     messages: string
-    dispatch:(action:actionAddPost |changeNewTekst )=>void
+    dispatch: (action: actionType) => void
 }
 
 export function ProfileInfo(props: PropsType) {
 
     let onClickHandler = () => {
-        props.dispatch({type:'ADD-POST',
-            post:props.messages})
+        props.dispatch({
+            type: 'ADD-POST',
+            post: props.messages
+        })
     }
     const onchangePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-      props.dispatch({type:'CHANGE-CALLBASK',
-          newTekst:e.currentTarget.value})
+        props.dispatch({
+                type: 'CHANGE-CALLBASK',
+                newText: e.currentTarget.value
+            }
+        )
 
     }
     return (

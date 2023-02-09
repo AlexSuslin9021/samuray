@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 export const rerender=()=>{
  ReactDOM.render(
-     <App state={store.getState()} dispatch={store.dispatch.bind(store)}   />,
+     <App state={store._state} dispatch={store.dispatch.bind(store)}   />,
      document.getElementById('root')
  );}
 

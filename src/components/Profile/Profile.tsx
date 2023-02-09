@@ -4,7 +4,7 @@ import a from './Profile.module.css'
 import {MyPost} from './MyPost/MyPost'
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
-import {actionAddPost, changeNewTekst, propsPostMessege} from "../../Redux/State";
+import { actionType, propsPostMessege} from "../../Redux/State";
 
 
 
@@ -14,7 +14,7 @@ type PropsType={
     messages:string
     // addPost:(post?:string)=>void
     // changeCallback: (newText:string) => void
-    dispatch:(action:actionAddPost |changeNewTekst )=>void
+    dispatch:(action:actionType )=>void
 
 }
 export function Profile(props:PropsType){

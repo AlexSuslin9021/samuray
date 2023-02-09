@@ -8,33 +8,15 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {actionAddPost, changeNewTekst, PropsState} from "./Redux/State";
+import { actionType, PropsState} from "./Redux/State";
 
-//
-// export type PropsPost={
-// id: string,
-//     message:string,
-//     likes:number
-// }
-//
-//
-// export type PropsMD={
-//     id:string, name:string
-// }
-// export type PropsArray={
-//    posts: Array<PropsPost>
-//     dialogs: PropsMD[]
-//     users:PropsMD[]
-// }
-// type PropsState={
-//     state:object
-// }
+
 
 type appStateProps = {
     state: PropsState
     // addPost: (post?: string) => void
     // changeCallback: (newText:string) => void
-    dispatch:(action:actionAddPost |changeNewTekst )=>void
+    dispatch:(action:actionType )=>void
 
 }
 

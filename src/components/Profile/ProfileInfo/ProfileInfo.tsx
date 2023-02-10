@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from "react";
 import a from "../Profile.module.css";
-import {actionType} from "../../../Redux/State";
+import {actionType, addPOstAc, ChangeCreator} from "../../../Redux/State";
 
 
 type PropsType = {
@@ -13,17 +13,12 @@ type PropsType = {
 export function ProfileInfo(props: PropsType) {
 
     let onClickHandler = () => {
-        props.dispatch({
-            type: 'ADD-POST',
-            post: props.messages
-        })
+        props.dispatch(addPOstAc(props.messages))
+
     }
     const onchangePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({
-                type: 'CHANGE-CALLBASK',
-                newText: e.currentTarget.value
-            }
-        )
+      props.dispatch(ChangeCreator(e.currentTarget.value))
+
 
     }
     return (

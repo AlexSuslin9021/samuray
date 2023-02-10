@@ -1,5 +1,5 @@
 import React from "react";
-import a from './Profile.module.css'
+// import a from './Profile.module.css'
 
 import {MyPost} from './MyPost/MyPost'
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
@@ -25,4 +25,3 @@ export function Profile(props:PropsType){
         </div>
 )
 }
-export default Profile

@@ -1,6 +1,4 @@
-// let rerender=()=>{
-//     console.log('hello')
-// }
+
 type StoreType={
     _state:PropsState
     getState:()=>PropsState
@@ -11,20 +9,7 @@ type StoreType={
     dispatch:(action: actionType)=>void
 }
 
-export  type actionType=actionTypeAdd |actionTypechange
-
-type actionTypeAdd={
-    type:'ADD-POST'
-    post:string
-
-
-}
-type actionTypechange={
-    type:'CHANGE-CALLBASK'
-    newText:any
-
-
-}
+export  type actionType=ReturnType<typeof addPOstAc> |ReturnType<typeof ChangeCreator> | ReturnType<typeof addNewDialog >
 
 export let store :StoreType ={_state:{
         profilePage: {
@@ -72,6 +57,7 @@ export let store :StoreType ={_state:{
                 {id: '3', name: 'I am good!'},]
 
         },
+        newDialog:'',
 
         sidebar: [
             {id: '1', title: 'Profile', to: '/profile'},
@@ -86,15 +72,7 @@ export let store :StoreType ={_state:{
 
     },
     getState(){return this._state},
-    // addPost (post?: string){
-    //     let newPOst: propsPostMessege = {id: new Date().getTime(), message:post, likes: 15};
-    //    this._state.profilePage.post.push(newPOst)
-    //     this._rerender()
-    // },
-    //  changeCallback (newText:string){
-    //    this._state.profilePage.newTextPost=newText
-    //      this._rerender()
-    // },
+
      _rerender(){
         console.log('state')
     },
@@ -111,9 +89,33 @@ export let store :StoreType ={_state:{
         this._state.profilePage.newTextPost = action.newText
         this._rerender()
     }
+    else if(action.type==='NEW-DIALOG') {
+        let newPost={id:'7', name: this._state.newDialog}
+       this._state.dialogsPage.dialogs.push(newPost)
+        this._rerender()
+    }
     }
 }
+export const addPOstAc=(title:string)=>{
+return {
+    type: 'ADD-POST',
+    post: title
+}
+}
 
+export const ChangeCreator=(title:string)=>{
+    return {
+        type: 'CHANGE-CALLBASK',
+        newText: title
+    }
+}
+export const addNewDialog=(newDialog:string )=>{
+
+  store.dispatch( {
+        type: 'NEW-DIALOG',
+        newText: newDialog
+    })
+}
 
 export type propsPostMessege = {
     id: string | number
@@ -143,22 +145,12 @@ export type PropsSidebar = {
     id: string
     title: string
     to: string
-
 }
 
 export type PropsState = {
     profilePage: propsProfilePage
     dialogsPage: propsDialogsPage
+    newDialog:string
     sidebar: PropsSidebar[]
 }
-
-
-
-
-
-
-
-
-
-
 export default store

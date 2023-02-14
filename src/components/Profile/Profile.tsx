@@ -18,6 +18,7 @@ type PropsType={
 
 }
 export function Profile(props:PropsType){
+    debugger
     return(
         <div className='contains'>
             <ProfileInfo dispatch={props.dispatch} messages={props.messages}   />

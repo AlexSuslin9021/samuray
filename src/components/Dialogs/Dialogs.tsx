@@ -2,7 +2,7 @@
 import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
-import {addNewDialog, propsDialogsType, propsUsersName} from "../../Redux/State";
+import {actionType, addNewDialog, changeNewDialogCreator, propsDialogsType, propsUsersName} from "../../Redux/State";
 
 type DialogsItemProps ={
     name:string
@@ -11,6 +11,8 @@ type DialogsItemProps ={
 type PropsDialogs={
     users:propsUsersName[],
     dialogs:propsDialogsType[]
+    newDialog: string
+    dispatch: (action: actionType) => void
 }
 
 const DialogsItem: React.FC<DialogsItemProps>=(props)=>{
@@ -29,18 +31,16 @@ const Dialog:React.FC<DialogProps>=(props)=>{
 
 function Dialogs(props:PropsDialogs){
 
-// let newPost=React.createRef<HTMLTextAreaElement>()
-const onChangeText=(e:ChangeEvent<HTMLTextAreaElement>)=>{
- return   e.currentTarget.value
-}
+
+
 
     const add=()=>{
 
-        // addNewDialog(onChangeText())
+       props.dispatch(addNewDialog(props.newDialog))
 }
-// const onChangehandler=(e:ChangeEvent<HTMLTextAreaElement>)=>{
-//    setTitle(e.currentTarget.value)
-// }
+const onChangeText=(e:ChangeEvent<HTMLTextAreaElement>)=>{
+   props.dispatch(changeNewDialogCreator(e.currentTarget.value))
+}
     const user= props.users.map(u=><DialogsItem id={u.id}    name ={u.name}/>)
     const  dialog=props.dialogs.map(d=><Dialog dial={d.name}/>)
     return<div className={s.dialogsContent}>
@@ -51,7 +51,7 @@ const onChangeText=(e:ChangeEvent<HTMLTextAreaElement>)=>{
         <div className={s.dialogs}>
             {dialog}
         </div>
-        <textarea   onChange={onChangeText} > </textarea>
+        <textarea value={props.newDialog}  onChange={onChangeText} > </textarea>
         <div>
         <button onClick={add}> ass</button>
         </div>

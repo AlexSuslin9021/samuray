@@ -13,15 +13,19 @@ type PropsType = {
 export function ProfileInfo(props: PropsType) {
 
     let onClickHandler = () => {
+        debugger
         props.dispatch(addPOstAc(props.messages))
 
     }
     const onchangePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        debugger
       props.dispatch(ChangeCreator(e.currentTarget.value))
 
 
     }
+    debugger
     return (
+
         <div>
 
             <div className={a.item}>

@@ -1,3 +1,5 @@
+import reducerProfile from "./reducerProfile";
+import reducerDialogs from "./reducerDialogs";
 
 type StoreType={
     _state:PropsState
@@ -16,7 +18,7 @@ export let store :StoreType ={_state:{
             post: [
                 {id: '1', message: 'How are you?', likes: 15},
                 {id: '1', message: 'It\'s my first post!', likes: 20}],
-            newTextPost: 'test'
+            newTextPost: ''
         },
         dialogsPage: {
             users: [
@@ -54,10 +56,11 @@ export let store :StoreType ={_state:{
             dialogs: [
                 {id: '1', name: 'Hello'},
                 {id: '2', name: 'How are you'},
-                {id: '3', name: 'I am good!'},]
+                {id: '3', name: 'I am good!'},],
 
+            newDialog:'',
         },
-        newDialog:'',
+
 
         sidebar: [
             {id: '1', title: 'Profile', to: '/profile'},
@@ -81,22 +84,29 @@ export let store :StoreType ={_state:{
     },
 
     dispatch(action: any){
-    if(action.type==='ADD-POST')
-    { let newPOst: propsPostMessege = {id: new Date().getTime(), message:action.post, likes: 15};
-        this._state.profilePage.post.push(newPOst)
-        this._rerender()}
-    else if(action.type==='CHANGE-CALLBASK'){
-        this._state.profilePage.newTextPost = action.newText
+    debugger
+        reducerProfile(this._state.profilePage, action)
+        reducerDialogs(this._state.dialogsPage, action)
+        this._rerender()
+
+
+    if(action.type==='NEW-MESSEGES') {
+
+        this._state.dialogsPage.newDialog=action.newText
+
         this._rerender()
     }
     else if(action.type==='NEW-DIALOG') {
-        let newPost={id:'7', name: this._state.newDialog}
+        let newPost={id:'7', name: this._state.dialogsPage.newDialog}
        this._state.dialogsPage.dialogs.push(newPost)
+        this._state.dialogsPage.newDialog=''
         this._rerender()
     }
     }
 }
 export const addPOstAc=(title:string)=>{
+    debugger
+
 return {
     type: 'ADD-POST',
     post: title
@@ -111,10 +121,17 @@ export const ChangeCreator=(title:string)=>{
 }
 export const addNewDialog=(newDialog:string )=>{
 
-  store.dispatch( {
+ return {
         type: 'NEW-DIALOG',
         newText: newDialog
-    })
+    }
+}
+export const changeNewDialogCreator=(newDialog:string)=>{
+    return {
+            type: 'NEW-MESSEGES',
+            newText: newDialog
+        }
+
 }
 
 export type propsPostMessege = {
@@ -140,6 +157,7 @@ export type propsProfilePage = {
 export type propsDialogsPage = {
     users: propsUsersName[]
     dialogs: propsDialogsType[]
+    newDialog:string
 }
 export type PropsSidebar = {
     id: string
@@ -150,7 +168,7 @@ export type PropsSidebar = {
 export type PropsState = {
     profilePage: propsProfilePage
     dialogsPage: propsDialogsPage
-    newDialog:string
+
     sidebar: PropsSidebar[]
 }
 export default store

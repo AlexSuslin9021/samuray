@@ -1,7 +1,8 @@
 
-import {actionType, PropsState} from "./State";
+import { PropsSidebar} from "./State";
 
-const reducerSidebar = (state:PropsState, action:actionType) => {
+const reducerSidebar = (state:PropsSidebar[], action:any) => {
+    return state
 
 };
 

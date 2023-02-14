@@ -1,19 +1,31 @@
+import {propsPostMessege, propsProfilePage} from "./State";
 
-import { propsPostMessege, propsProfilePage} from "./State";
-
-const reducerProfile = (state:propsProfilePage, action:any) => {
-
-    if(action.type ==='ADD-POST')
-    { let newPOst: propsPostMessege = {id: new Date().getTime(), message:action.post, likes: 15};
-       state.post.push(newPOst)
-        }
-    else if(action.type==='CHANGE-CALLBASK'){
-       state.newTextPost= action.post
-
+const reducerProfile = (state: propsProfilePage, action: any) => {
+    switch (action.type) {
+        case'ADD-POST':
+            let newPOst: propsPostMessege = {id: new Date().getTime(), message: action.post, likes: 15};
+            state.post.push(newPOst);
+            return state;
+        case 'CHANGE-CALLBASK':
+            state.newTextPost = action.post
+            return state;
+        default:return state
     }
-    return state
+}
+export const addPOstAc=(title:string)=>{
+
+
+    return {
+        type: 'ADD-POST',
+        post: title
+    }
 }
 
-
+export const ChangeCreator=(title:string)=>{
+    return {
+        type: 'CHANGE-CALLBASK',
+        newText: title
+    }
+}
 
 export default reducerProfile;

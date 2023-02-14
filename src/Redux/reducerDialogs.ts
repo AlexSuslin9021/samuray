@@ -10,4 +10,19 @@ const reducerDialogs = (state:propsDialogsPage, action:any) => {
         state.newDialog=''
     }
 };
+
+export const addNewDialog=(newDialog:string )=>{
+
+    return {
+        type: 'NEW-DIALOG',
+        newText: newDialog
+    }
+}
+export const changeNewDialogCreator=(newDialog:string)=>{
+    return {
+        type: 'NEW-MESSEGES',
+        newText: newDialog
+    }
+
+}
 export default reducerDialogs;

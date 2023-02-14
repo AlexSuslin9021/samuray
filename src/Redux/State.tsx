@@ -1,5 +1,6 @@
-import reducerProfile from "./reducerProfile";
-import reducerDialogs from "./reducerDialogs";
+import reducerProfile, {addPOstAc, ChangeCreator} from "./reducerProfile";
+import reducerDialogs, {addNewDialog} from "./reducerDialogs";
+import reducerSidebar from "./reducerSidebar";
 
 type StoreType={
     _state:PropsState
@@ -60,8 +61,6 @@ export let store :StoreType ={_state:{
 
             newDialog:'',
         },
-
-
         sidebar: [
             {id: '1', title: 'Profile', to: '/profile'},
             {id: '2', title: 'Messages', to: '/dialogs'},
@@ -71,8 +70,6 @@ export let store :StoreType ={_state:{
             // {id:'6', title:'Friends',to:'/friends'},
 
         ]
-
-
     },
     getState(){return this._state},
 
@@ -87,51 +84,9 @@ export let store :StoreType ={_state:{
     debugger
         reducerProfile(this._state.profilePage, action)
         reducerDialogs(this._state.dialogsPage, action)
-        this._rerender()
-
-
-    if(action.type==='NEW-MESSEGES') {
-
-        this._state.dialogsPage.newDialog=action.newText
-
+        reducerSidebar(this._state.sidebar, action)
         this._rerender()
     }
-    else if(action.type==='NEW-DIALOG') {
-        let newPost={id:'7', name: this._state.dialogsPage.newDialog}
-       this._state.dialogsPage.dialogs.push(newPost)
-        this._state.dialogsPage.newDialog=''
-        this._rerender()
-    }
-    }
-}
-export const addPOstAc=(title:string)=>{
-    debugger
-
-return {
-    type: 'ADD-POST',
-    post: title
-}
-}
-
-export const ChangeCreator=(title:string)=>{
-    return {
-        type: 'CHANGE-CALLBASK',
-        newText: title
-    }
-}
-export const addNewDialog=(newDialog:string )=>{
-
- return {
-        type: 'NEW-DIALOG',
-        newText: newDialog
-    }
-}
-export const changeNewDialogCreator=(newDialog:string)=>{
-    return {
-            type: 'NEW-MESSEGES',
-            newText: newDialog
-        }
-
 }
 
 export type propsPostMessege = {

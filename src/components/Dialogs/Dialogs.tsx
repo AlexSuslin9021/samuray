@@ -2,8 +2,8 @@
 import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
-import {actionType, addNewDialog, changeNewDialogCreator, propsDialogsType, propsUsersName} from "../../Redux/State";
-
+import { addNewDialog, changeNewDialogCreator} from "../../Redux/reducerDialogs";
+import {actionType,propsDialogsType, propsUsersName} from "../../Redux/State"
 type DialogsItemProps ={
     name:string
     id:string

@@ -1,6 +1,7 @@
 import React, {ChangeEvent} from "react";
 import a from "../Profile.module.css";
-import {actionType, addPOstAc, ChangeCreator} from "../../../Redux/State";
+import { addPOstAc, ChangeCreator} from "../../../Redux/reducerProfile";
+import {actionType} from "../../../Redux/State";
 
 
 type PropsType = {

@@ -51,6 +51,7 @@ const reducerDialogs = (state:propsDialogsPage=initialState, action:any) => {
         state.dialogs.push(newPost)
         state.newDialog=''
     }
+    return state
 };
 
 export const addNewDialog=(newDialog:string )=>{

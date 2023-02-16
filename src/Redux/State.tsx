@@ -2,7 +2,7 @@ import reducerProfile, {addPOstAc, ChangeCreator} from "./reducerProfile";
 import reducerDialogs, {addNewDialog} from "./reducerDialogs";
 import reducerSidebar from "./reducerSidebar";
 
-type StoreType={
+export type StoreType={
     _state:PropsState
     getState:()=>PropsState
     // addPost: (post?: string)=>void

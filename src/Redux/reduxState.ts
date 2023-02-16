@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {combineReducers, createStore} from "redux";
 import reducerSidebar from "./reducerSidebar";
 import reducerProfile from "./reducerProfile";
@@ -10,4 +10,6 @@ let redusers = combineReducers({
     reducerDialogs
 }
 )
+
 let store = createStore(redusers)
+export default store

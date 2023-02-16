@@ -8,14 +8,16 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import store, {actionType, PropsState} from "./Redux/State";
+import {propsDialogsPage, propsProfilePage, PropsSidebar, PropsState, StoreType} from "./Redux/State";
+import {EmptyObject, Store} from "redux";
+// import store, {actionType, PropsState} from "./Redux/State";
 
 
 type appStateProps = {
-    state: PropsState
+    state: Store<EmptyObject & { reducerSidebar: PropsSidebar[]; reducerProfile: propsProfilePage; reducerDialogs: propsDialogsPage; }, any>
     // addPost: (post?: string) => void
     // changeCallback: (newText:string) => void
-    dispatch: (action: actionType) => void
+    dispatch: (action: any) => void
 
 }
 
@@ -25,18 +27,18 @@ function App(props: appStateProps) {
     return (<BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar list={props.state.sidebar}/>
+                <Navbar list={props.state.getState().reducerSidebar}/>
 
                 <div className={'app-wrapper-content'}>
                     <Route path={'/profile'} render={() => <Profile
 
-                        post={props.state.profilePage.post}
-                        messages={props.state.profilePage.newTextPost}
+                        post={props.state.getState().reducerProfile.post}
+                        messages={props.state.getState().reducerProfile.newTextPost}
                         dispatch={props.dispatch}
                     />}/>
-                    <Route path={'/dialogs'} render={() => <Dialogs dialogs={props.state.dialogsPage.dialogs}
-                                                                    users={props.state.dialogsPage.users}
-                                                                    newDialog={props.state.dialogsPage.newDialog}
+                    <Route path={'/dialogs'} render={() => <Dialogs dialogs={props.state.getState().reducerDialogs.dialogs}
+                                                                    users={props.state.getState().reducerDialogs.users}
+                                                                    newDialog={props.state.getState().reducerDialogs.newDialog}
                                                                         dispatch={props.dispatch}
                     />}/>
                     <Route path={'/news'} component={News}/>

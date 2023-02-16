@@ -1,6 +1,11 @@
 import {propsPostMessege, propsProfilePage} from "./State";
-
-const reducerProfile = (state: propsProfilePage, action: any) => {
+let initialState={
+    post: [
+        {id: '1', message: 'How are you?', likes: 15},
+        {id: '1', message: 'It\'s my first post!', likes: 20}],
+    newTextPost: ''
+}
+const reducerProfile = (state: propsProfilePage=initialState, action: any) => {
     switch (action.type) {
         case'ADD-POST':
             let newPOst: propsPostMessege = {id: new Date().getTime(), message: action.post, likes: 15};

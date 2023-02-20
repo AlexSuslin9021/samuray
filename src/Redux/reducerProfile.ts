@@ -5,21 +5,29 @@ let initialState={
         {id: '1', message: 'It\'s my first post!', likes: 20}],
     newTextPost: ''
 }
-const reducerProfile = (state: propsProfilePage=initialState, action: any) => {
+type actionPOstAc={
+    type: 'ADD-POST',
+    post: string
+}
+type changeAc={
+    type: 'CHANGE-CALLBASK',
+    newText: string
+}
+
+const reducerProfile = (state: propsProfilePage=initialState, action: actionPOstAc|changeAc ):propsProfilePage => {
+    debugger
     switch (action.type) {
         case'ADD-POST':
             let newPOst: propsPostMessege = {id: new Date().getTime(), message: action.post, likes: 15};
             state.post.push(newPOst);
             return state;
         case 'CHANGE-CALLBASK':
-            state.newTextPost = action.post
-            return state;
+            // state.newTextPost = action.post
+            return {...state, newTextPost:action.newText};
         default:return state
     }
 }
 export const addPOstAc=(title:string)=>{
-
-
     return {
         type: 'ADD-POST',
         post: title

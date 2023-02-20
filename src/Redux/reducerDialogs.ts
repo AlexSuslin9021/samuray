@@ -1,4 +1,4 @@
-import {propsDialogsPage} from "./State";
+import {actionType, propsDialogsPage} from "./State";
 
 
 let initialState={
@@ -41,7 +41,16 @@ let initialState={
 
     newDialog:'',
 }
-const reducerDialogs = (state:propsDialogsPage=initialState, action:any) => {
+
+type addNewDialogType={
+    type: 'NEW-DIALOG',
+    newText: string
+}
+type changeNewDialogType={
+    type: 'NEW-MESSEGES',
+    newText: string
+}
+const reducerDialogs = (state:propsDialogsPage=initialState, action:addNewDialogType | changeNewDialogType) => {
     if(action.type==='NEW-MESSEGES')
     {
         state.newDialog=action.newText

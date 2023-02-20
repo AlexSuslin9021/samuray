@@ -1,5 +1,5 @@
 import reducerProfile, {addPOstAc, ChangeCreator} from "./reducerProfile";
-import reducerDialogs, {addNewDialog} from "./reducerDialogs";
+import reducerDialogs, {addNewDialog, changeNewDialogCreator} from "./reducerDialogs";
 import reducerSidebar from "./reducerSidebar";
 
 export type StoreType={
@@ -12,7 +12,7 @@ export type StoreType={
     dispatch:(action: actionType)=>void
 }
 
-export  type actionType=ReturnType<typeof addPOstAc> |ReturnType<typeof ChangeCreator> | ReturnType<typeof addNewDialog >
+export  type actionType=ReturnType<typeof addPOstAc> |ReturnType<typeof ChangeCreator> | ReturnType<typeof addNewDialog > | ReturnType<typeof changeNewDialogCreator>
 
 export let store :StoreType ={_state:{
         profilePage: {
@@ -91,7 +91,7 @@ export let store :StoreType ={_state:{
 
 export type propsPostMessege = {
     id: string | number
-    message?: string
+    message: string
     likes: number
 }
 export type propsUsersName = {

@@ -21,8 +21,8 @@ export function Profile(props:PropsType){
     debugger
     return(
         <div className='contains'>
-            <ProfileInfo dispatch={props.dispatch} messages={props.messages}   />
-            <MyPost post={props.post} />
+            <ProfileInfo   />
+            <MyPost post={props.post} dispatch={props.dispatch} messages={props.messages}  />
         </div>
 )
 }

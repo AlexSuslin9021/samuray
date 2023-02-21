@@ -5,6 +5,7 @@ import {MyPost} from './MyPost/MyPost'
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 import { actionType, propsPostMessege} from "../../Redux/State";
+import {MyPostContainer} from "./MyPost/MyPostContainer";
 
 
 
@@ -22,7 +23,8 @@ export function Profile(props:PropsType){
     return(
         <div className='contains'>
             <ProfileInfo   />
-            <MyPost post={props.post} dispatch={props.dispatch} messages={props.messages}  />
+            <MyPostContainer post={props.post} dispatch={props.dispatch} messages={props.messages}/>
+            {/*<MyPost post={props.post} dispatch={props.dispatch} messages={props.messages}  />*/}
         </div>
 )
 }

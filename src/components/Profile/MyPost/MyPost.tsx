@@ -8,19 +8,21 @@ import {addPOstAc, ChangeCreator} from "../../../Redux/reducerProfile";
 type PropsType={
     post:propsPostMessege[]
     messages: string
-    dispatch: (action: actionType) => void
+    // dispatch: (action: actionType) => void
+    addPost :()=>void
+    onChangeText:(e: any)=>void
+
 }
 
 
 export function MyPost(props: PropsType){
     let onClickHandler = () => {
-        debugger
-        props.dispatch(addPOstAc(props.messages))
+       props.addPost()
 
     }
     const onchangePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
         debugger
-        props.dispatch(ChangeCreator(e.currentTarget.value))
+        props.onChangeText(e.currentTarget.value)
 
 
     }

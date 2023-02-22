@@ -57,18 +57,24 @@ export type propsDialogsPage = {
     newDialog: string
 }
 
-const reducerDialogs = (state:propsDialogsPage=initialState, action:addNewDialogType | changeNewDialogType) => {
-    if(action.type==='NEW-MESSEGES')
-    {
-        state.newDialog=action.newText
-    } else if(action.type==='NEW-DIALOG')
-    {
-        let newPost={id:'7', name: state.newDialog}
-        state.dialogs.push(newPost)
-        state.newDialog=''
+
+    const reducerDialogs = (state:propsDialogsPage=initialState, action:addNewDialogType | changeNewDialogType) => {
+        switch(action.type) {
+            case 'NEW-MESSEGES': {
+                return {...state, newDialog :action.newText}
+            }
+            case 'NEW-DIALOG': {
+                let newPost = {id: '7', name: action.newText}
+                state.newDialog=''
+                return {...state, dialogs:[...state.dialogs,newPost]}
+            }
+            default: return state
+
+        }
+
     }
-    return state
-};
+
+
 
 export const addNewDialog=(newDialog:string )=>{
 
@@ -77,6 +83,7 @@ export const addNewDialog=(newDialog:string )=>{
         newText: newDialog
     }
 }
+
 export const changeNewDialogCreator=(newDialog:string)=>{
     return {
         type: 'NEW-MESSEGES',

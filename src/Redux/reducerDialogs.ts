@@ -1,4 +1,4 @@
-import {actionType, propsDialogsPage} from "./State";
+import { propsDialogsType, propsUsersName} from "./State";
 
 
 let initialState={
@@ -50,6 +50,13 @@ type changeNewDialogType={
     type: 'NEW-MESSEGES',
     newText: string
 }
+
+export type propsDialogsPage = {
+    users: propsUsersName[]
+    dialogs: propsDialogsType[]
+    newDialog: string
+}
+
 const reducerDialogs = (state:propsDialogsPage=initialState, action:addNewDialogType | changeNewDialogType) => {
     if(action.type==='NEW-MESSEGES')
     {

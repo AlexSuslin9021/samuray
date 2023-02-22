@@ -5,19 +5,18 @@ import {actionType, propsPostMessege, propsProfilePage} from "../../../Redux/Sta
 import {addPOstAc, ChangeCreator} from "../../../Redux/reducerProfile";
 // import {PropsArray} from "../../../App";
 
-type PropsType={
-    post:propsPostMessege[]
-    messages: string
+type PropsType = {
+    profilePage: propsProfilePage
     // dispatch: (action: actionType) => void
-    addPost :()=>void
-    onChangeText:(e: any)=>void
+    addPost: (messages: string) => void
+    onChangeText: (e: any) => void
 
 }
 
 
-export function MyPost(props: PropsType){
+function MyPost(props: PropsType) {
     let onClickHandler = () => {
-       props.addPost()
+        props.addPost(props.profilePage.newTextPost)
 
     }
     const onchangePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -27,12 +26,12 @@ export function MyPost(props: PropsType){
 
     }
 
-    const post = props.post.map(m=><Post message={m.message}  value ={m.likes}/> )
+    const post = props.profilePage.post.map(m => <Post message={m.message} value={m.likes}/>)
 
     return (
         <div className={a.item}>
             <div>
-                <textarea value={props.messages} onChange={onchangePost}/>
+                <textarea value={props.profilePage.newTextPost} onChange={onchangePost}/>
             </div>
             <div>
                 <button onClick={onClickHandler}> Add</button>
@@ -40,7 +39,8 @@ export function MyPost(props: PropsType){
 
             {post}
         </div>
-)
+    )
 
 }
-// export default MyPost
+
+export default MyPost

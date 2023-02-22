@@ -3,9 +3,12 @@ import './index.css';
 import store from "./Redux/reduxState";
 import ReactDOM from "react-dom";
 import App from "./App";
+import {Provider} from "react-redux";
 export const rerender=()=>{
  ReactDOM.render(
-     <App state={store} dispatch={store.dispatch.bind(store)}   />,
+     <Provider store={store}>
+     <App/>
+     </Provider>,
      document.getElementById('root')
  );}
 

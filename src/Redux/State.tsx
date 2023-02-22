@@ -109,12 +109,12 @@ export type propsProfilePage = {
     post: propsPostMessege[]
     newTextPost: string
 }
-export type propsDialogsPage = {
+type propsDialogsPage = {
     users: propsUsersName[]
     dialogs: propsDialogsType[]
     newDialog:string
 }
-export type PropsSidebar = {
+ type PropsSidebar = {
     id: string
     title: string
     to: string

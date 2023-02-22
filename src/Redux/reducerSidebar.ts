@@ -1,5 +1,11 @@
 
-import { PropsSidebar} from "./State";
+
+
+export type PropsSidebar = {
+    id: string
+    title: string
+    to: string
+}
 let initialState=[
     {id: '1', title: 'Profile', to: '/profile'},
     {id: '2', title: 'Messages', to: '/dialogs'},

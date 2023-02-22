@@ -1,36 +1,33 @@
-import React, {ChangeEvent} from "react";
-import a from './MyPost.module.css'
-import {Post} from './Post/Post'
-import {actionType, propsPostMessege, propsProfilePage} from "../../../Redux/State";
+import React from "react";
+
+import { propsPostMessege, propsProfilePage} from "../../../Redux/State";
 import {addPOstAc, ChangeCreator} from "../../../Redux/reducerProfile";
-import {MyPost} from "./MyPost";
-// import {PropsArray} from "../../../App";
+import MyPost from "./MyPost";
+import {connect} from "react-redux";
+import {AppstateType} from "../../../Redux/reduxState";
+import {Dispatch} from "redux";
 
-type PropsType={
-    post:propsPostMessege[]
-    messages: string
-    dispatch: (action: actionType) => void
+type mapStateToPropsType={
+    profilePage:propsProfilePage
+}
+const mapStateToProps=(state:AppstateType):mapStateToPropsType=>{
+    return{
+        profilePage: state.reducerProfile
+    }
 }
 
-
-export function MyPostContainer(props: PropsType){
-    let addPost = () => {
-
-        props.dispatch(addPOstAc(props.messages))
-
-    }
-    const onChangeText = (e: any) => {
-        debugger
-        props.dispatch(ChangeCreator(e))
-
-
-    }
-
-    // const post = props.post.map(m=><Post message={m.message}  value ={m.likes}/> )
-
-    return (
-   <MyPost post={props.post} messages={props.messages} onChangeText={onChangeText} addPost={addPost}/>
-)
-
+type mapDispatchToPropsType={
+    addPost:(messages:string)=>void
+    onChangeText:(e:string)=>void
 }
-// export default MyPost
+const mapDispatchToProps=(dispatch:Dispatch):mapDispatchToPropsType=>{
+    return{
+        addPost:(messages:string)=>{
+            dispatch(addPOstAc(messages))
+        },
+        onChangeText:(e:string)=>{
+            dispatch(ChangeCreator(e))
+        }
+    }
+}
+export const MyPostContainer=connect(mapStateToProps, mapDispatchToProps)(MyPost)

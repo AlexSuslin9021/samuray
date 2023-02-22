@@ -10,6 +10,6 @@ let redusers = combineReducers({
     reducerDialogs
 }
 )
-
+export type AppstateType=ReturnType< typeof redusers>
 let store = createStore(redusers)
 export default store

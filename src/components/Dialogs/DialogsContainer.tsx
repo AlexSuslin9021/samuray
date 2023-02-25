@@ -16,6 +16,7 @@ type mapStatePropsType={
     dialogs:propsDialogsPage
 }
 const mapStateProps=(state:AppstateType):mapStatePropsType =>{
+
     return{
         dialogs:state.reducerDialogs
     }

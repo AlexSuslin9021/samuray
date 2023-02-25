@@ -1,10 +1,6 @@
 
 import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
-
-
-
-// import { propsDialogsPage} from "../../Redux/State"
 import {DialogsItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {propsDialogsPage} from "../../Redux/reducerDialogs";
@@ -20,6 +16,7 @@ type propsDoalogs={
 
 
 function Dialogs(props:propsDoalogs){
+
     const add=()=>{
 
         props.add(props.dialogs.newDialog)

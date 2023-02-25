@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import {Provider} from "react-redux";
 export const rerender=()=>{
+
  ReactDOM.render(
      <Provider store={store}>
      <App/>
@@ -13,4 +14,4 @@ export const rerender=()=>{
  );}
 
 rerender()
-store.subscribe(rerender)
+// store.subscribe(rerender)

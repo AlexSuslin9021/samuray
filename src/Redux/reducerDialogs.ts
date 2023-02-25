@@ -59,6 +59,7 @@ export type propsDialogsPage = {
 
 
     const reducerDialogs = (state:propsDialogsPage=initialState, action:addNewDialogType | changeNewDialogType) => {
+
         switch(action.type) {
             case 'NEW-MESSEGES': {
                 return {...state, newDialog :action.newText}

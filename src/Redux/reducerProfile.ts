@@ -16,7 +16,7 @@ type changeAc = {
 }
 
 const reducerProfile = (state: propsProfilePage = initialState, action: actionPOstAc | changeAc): propsProfilePage => {
-    debugger
+
     switch (action.type) {
         case'ADD-POST':
             let newPOst: propsPostMessege = {id: new Date().getTime(), message: action.post, likes: 15};

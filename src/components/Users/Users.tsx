@@ -1,7 +1,7 @@
 import React from 'react';
 import {initialStateType, usersType} from "../../Redux/reducerUsers";
 type PropsUsersType={
-    users:initialStateType
+    users:usersType[]
     follow:(id: number)=>void
     unFollow: (id: number)=>void
     setUsers: (users: usersType[]) =>void
@@ -10,7 +10,7 @@ const Users = (props:PropsUsersType) => {
     debugger
     return (
         <div>
-            {props.users.users.map (u=><div>
+            {props.users.map (u=><div>
             <div>
                 <img src={u.urlFoto} alt=""/>
                 <span> {u.name}</span>

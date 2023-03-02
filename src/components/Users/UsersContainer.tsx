@@ -6,13 +6,13 @@ import {AppstateType} from "../../Redux/reduxState";
 import {Dispatch} from "redux";
 
 type mapStateToPropsType={
-    users:initialStateType
+    users:usersType[]
 
 }
 const mapStateToProps = (state: AppstateType) :mapStateToPropsType => {
     debugger
     return {
-        users: state.reducerUsers
+        users: state.reducerUsers.users
     }
 }
 type mapDispatchToPropsType={

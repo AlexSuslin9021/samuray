@@ -18,7 +18,7 @@ const mapStateToProps = (state: AppstateType) :mapStateToPropsType => {
 type mapDispatchToPropsType={
     follow:(id: number)=>void
     unFollow: (id: number)=>void
-    setUsers: (users: usersType) =>void
+    setUsers: (users: usersType[]) =>void
 }
 
 // если что-то меняется в стейте, то мы это dispatch, внутрь которого передаем объект, который говорит, что делать
@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch: Dispatch) : mapDispatchToPropsType => {
             dispatch(unFollowAC(id))
         },
 
-        setUsers: (users: usersType) => {
+        setUsers: (users: usersType[]) => {
             dispatch(setUsersAC(users))
         }
     }

@@ -4,7 +4,7 @@ type PropsUsersType={
     users:initialStateType
     follow:(id: number)=>void
     unFollow: (id: number)=>void
-    setUsers: (users: usersType) =>void
+    setUsers: (users: usersType[]) =>void
 }
 const Users = (props:PropsUsersType) => {
     debugger

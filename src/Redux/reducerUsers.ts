@@ -35,7 +35,7 @@ let initialState= {
                 return {...state, users:state.users.map(u=>u.id===action.id ?{...u,follow:false }: u) }
             }
             case setUsers: {
-                return {...state, users: [...state.users, action.user] }
+                return {...state, users: [...state.users, ...action.user] }
             }
             default: return state
         }
@@ -67,9 +67,9 @@ export const unFollowAC=(id:number)=>{
 }
  type setUsersAC={
     type: 'setUsers',
-    user: usersType
+    user: usersType[]
 }
-export const setUsersAC=(users:usersType)=>{
+export const setUsersAC=(users:usersType[])=>{
     return {
         type: unFollow,
         user: users

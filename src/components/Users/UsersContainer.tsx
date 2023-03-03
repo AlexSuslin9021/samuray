@@ -1,7 +1,8 @@
+
 import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
-import {followAC, initialStateType, setUsersAC, unFollowAC, usersType} from "../../Redux/reducerUsers";
+import {followAC, setUsersAC, unFollowAC, usersType} from "../../Redux/reducerUsers";
 import {AppstateType} from "../../Redux/reduxState";
 import {Dispatch} from "redux";
 
@@ -10,7 +11,7 @@ type mapStateToPropsType={
 
 }
 const mapStateToProps = (state: AppstateType) :mapStateToPropsType => {
-    debugger
+
     return {
         users: state.reducerUsers.users
     }
@@ -23,7 +24,7 @@ type mapDispatchToPropsType={
 
 // если что-то меняется в стейте, то мы это dispatch, внутрь которого передаем объект, который говорит, что делать
 const mapDispatchToProps = (dispatch: Dispatch) : mapDispatchToPropsType => {
-    debugger
+
     return {
         follow: (id: number) => {
             dispatch(followAC(id))

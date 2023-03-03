@@ -1,13 +1,12 @@
 import React, {ChangeEvent} from "react";
 import a from './MyPost.module.css'
 import {Post} from './Post/Post'
-import {actionType, propsPostMessege, propsProfilePage} from "../../../Redux/State";
-import {addPOstAc, ChangeCreator} from "../../../Redux/reducerProfile";
-// import {PropsArray} from "../../../App";
+import {propsProfilePage} from "../../../Redux/State";
+
 
 type PropsType = {
     profilePage: propsProfilePage
-    // dispatch: (action: actionType) => void
+
     addPost: (messages: string) => void
     onChangeText: (e: any) => void
 

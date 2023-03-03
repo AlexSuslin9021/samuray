@@ -1,11 +1,30 @@
 
 
+
+
+
+
 const follow='FOLLOW'
 const unFollow='UNFOLLOW'
 const setUsers='setUsers'
-
+type PhotosType={
+    small: null | string
+    large: null | string
+}
 export type usersType=
-    {id:number, urlFoto: string, follow:boolean, name: string, status: string, location:locationtype}
+    {id:number, photos: PhotosType, follow:boolean, name: string, status: string, location:locationtype}
+
+// {
+//     "name": "Vitaliy16",
+//     "id": 28233,
+//     "uniqueUrlName": null,
+//     "photos": {
+//     "small": null,
+//         "large": null
+// },
+//     "status": null,
+//     "followed": false
+// },
 
 type locationtype={
     city: string
@@ -16,17 +35,14 @@ export type initialStateType={
 }
 
 let initialState= {
-    users: [{id: 1, urlFoto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPwtLELR6UBlHi5ZFe04WtAijnDam0G94bMQ&usqp=CAU' , follow: true, name: 'alex', status: 'I am good', location: {city: 'London', country: 'England'}},
-        {id: 2, urlFoto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPwtLELR6UBlHi5ZFe04WtAijnDam0G94bMQ&usqp=CAU', follow: false, name: 'Sveta', status: 'I am crazy', location: {city: 'Milan', country: 'Italy'}},
-        {id: 3, urlFoto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPwtLELR6UBlHi5ZFe04WtAijnDam0G94bMQ&usqp=CAU', follow: true, name: 'Dima', status: 'I am smart', location: {city: 'LA', country: 'USA'}}
+    users: [
+        // {id: 1, urlFoto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPwtLELR6UBlHi5ZFe04WtAijnDam0G94bMQ&usqp=CAU' , follow: true, name: 'alex', status: 'I am good', location: {city: 'London', country: 'England'}},
+        // {id: 2, urlFoto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPwtLELR6UBlHi5ZFe04WtAijnDam0G94bMQ&usqp=CAU', follow: false, name: 'Sveta', status: 'I am crazy', location: {city: 'Milan', country: 'Italy'}},
+        // {id: 3, urlFoto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPwtLELR6UBlHi5ZFe04WtAijnDam0G94bMQ&usqp=CAU', follow: true, name: 'Dima', status: 'I am smart', location: {city: 'LA', country: 'USA'}}
     ]
 }
 
-
-
-
   export  const reducerUsers = (state:initialStateType=initialState, action:followTupe | unFollow | setUsersAC):initialStateType => {
-    debugger
         switch(action.type) {
             case follow: {
                 return {...state, users:state.users.map(u=>u.id==action.id ?{...u,follow:true }: u) }
@@ -71,7 +87,7 @@ export const unFollowAC=(id:number)=>{
 }
 export const setUsersAC=(users:usersType[])=>{
     return {
-        type: unFollow,
+        type: setUsers,
         user: users
     }
 

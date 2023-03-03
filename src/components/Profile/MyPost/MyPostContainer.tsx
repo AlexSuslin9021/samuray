@@ -1,6 +1,6 @@
 import React from "react";
 
-import { propsPostMessege, propsProfilePage} from "../../../Redux/State";
+import {  propsProfilePage} from "../../../Redux/State";
 import {addPOstAc, ChangeCreator} from "../../../Redux/reducerProfile";
 import MyPost from "./MyPost";
 import {connect} from "react-redux";

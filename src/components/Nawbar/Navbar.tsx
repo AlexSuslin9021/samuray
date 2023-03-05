@@ -10,7 +10,7 @@ type PropsType={
 }
   function Navbar(props:PropsType) {
     return <nav className={s.nav}>
-        {props.sidebar.map(el=> <div className={ s.item}><NavLink to={el.to}  activeClassName={s.active}>{el.title} </NavLink></div>)}
+        {props.sidebar.map(el=> <div key={el.id} className={ s.item}><NavLink to={el.to}  activeClassName={s.active}>{el.title} </NavLink></div>)}
         <div className={s.friends}>
             <NavLink to={'/friends'} activeClassName={s.active}>Friends</NavLink>
            <div className={s.image}>

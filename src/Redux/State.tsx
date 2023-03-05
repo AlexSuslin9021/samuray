@@ -1,5 +1,5 @@
 import reducerProfile, {addPOstAc, ChangeCreator} from "./reducerProfile";
-import reducerDialogs, {addNewDialog, changeNewDialogCreator} from "./reducerDialogs";
+import reducerDialogs, {addNewDialog, changeNewDialogCreator} from "./reduserDialogs/reducerDialogs";
 import reducerSidebar from "./reducerSidebar";
 
 export type StoreType={

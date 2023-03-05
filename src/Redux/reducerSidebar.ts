@@ -12,7 +12,7 @@ let initialState=[
     {id: '3', title: 'News', to: '/news'},
     {id: '4', title: 'Music', to: '/music'},
     {id: '5', title: 'Settings', to: '/settings'},
-    // {id:'6', title:'Friends',to:'/friends'},
+    {id:'6', title:'Users',to:'/users'},
 
 ]
 const reducerSidebar = (state:PropsSidebar[]=initialState, action:any) => {

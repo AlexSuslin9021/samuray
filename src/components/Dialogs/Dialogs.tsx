@@ -3,7 +3,7 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import {DialogsItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {propsDialogsPage} from "../../Redux/reducerDialogs";
+import {propsDialogsPage} from "../../Redux/reduserDialogs/reducerDialogs";
 
 
 

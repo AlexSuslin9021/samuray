@@ -1,6 +1,6 @@
 import React from "react";
 
-import {addNewDialog, changeNewDialogCreator, propsDialogsPage} from "../../Redux/reducerDialogs";
+import {addNewDialog, changeNewDialogCreator, propsDialogsPage} from "../../Redux/reduserDialogs/reducerDialogs";
 
 import Dialogs from "./Dialogs";
 import {AppstateType} from "../../Redux/reduxState";

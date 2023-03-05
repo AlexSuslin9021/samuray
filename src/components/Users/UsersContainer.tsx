@@ -5,6 +5,7 @@ import Users from "./Users";
 import {followAC, setUsersAC, unFollowAC, usersType} from "../../Redux/reducerUsers";
 import {AppstateType} from "../../Redux/reduxState";
 import {Dispatch} from "redux";
+import UsersC from "./UsersC";
 
 type mapStateToPropsType={
     users:usersType[]
@@ -40,7 +41,7 @@ const mapDispatchToProps = (dispatch: Dispatch) : mapDispatchToPropsType => {
     }
 }
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersC)
 //создает контейнерную компоненту UsersContainer для Users
 // mapStateToProps, mapDispatchToProps- функции которые возвращают пропсы
 export default UsersContainer

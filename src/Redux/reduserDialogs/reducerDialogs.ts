@@ -1,4 +1,4 @@
-import { propsDialogsType, propsUsersName} from "./State";
+import { propsDialogsType, propsUsersName} from "../State";
 
 
 let initialState={
@@ -77,7 +77,7 @@ export type propsDialogsPage = {
 
 
 
-export const addNewDialog=(newDialog:string )=>{
+export const addNewDialog=(newDialog:string ):addNewDialogType=>{
 
     return {
         type: 'NEW-DIALOG',
@@ -85,7 +85,7 @@ export const addNewDialog=(newDialog:string )=>{
     }
 }
 
-export const changeNewDialogCreator=(newDialog:string)=>{
+export const changeNewDialogCreator=(newDialog:string):changeNewDialogType=>{
     return {
         type: 'NEW-MESSEGES',
         newText: newDialog

@@ -1,7 +1,5 @@
 import React from "react";
-
-import {  propsProfilePage} from "../../../Redux/State";
-import {addPOstAc, ChangeCreator} from "../../../Redux/reducerProfile";
+import {addPOstAc, changeCreator, propsProfilePage} from "../../../Redux/reducerProfile/reducerProfile";
 import MyPost from "./MyPost";
 import {connect} from "react-redux";
 import {AppstateType} from "../../../Redux/reduxState";
@@ -26,7 +24,7 @@ const mapDispatchToProps=(dispatch:Dispatch):mapDispatchToPropsType=>{
             dispatch(addPOstAc(messages))
         },
         onChangeText:(e:string)=>{
-            dispatch(ChangeCreator(e))
+            dispatch(changeCreator(e))
         }
     }
 }

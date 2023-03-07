@@ -1,9 +1,14 @@
 import React, {ChangeEvent} from "react";
 import a from './MyPost.module.css'
 import {Post} from './Post/Post'
-import {propsProfilePage} from "../../../Redux/State";
+import {propsPostMessege} from "../../../Redux/reducerProfile/reducerProfile";
 
 
+
+type propsProfilePage = {
+    post: propsPostMessege[]
+    newTextPost: string
+}
 type PropsType = {
     profilePage: propsProfilePage
 

@@ -1,21 +1,30 @@
-import {propsPostMessege, propsProfilePage} from "./State";
 
+
+export type propsProfilePage = {
+    post: propsPostMessege[]
+    newTextPost: string
+}
+export type propsPostMessege = {
+    id: string | number
+    message: string
+    likes: number
+}
 let initialState = {
     post: [
         {id: '1', message: 'How are you?', likes: 15},
         {id: '1', message: 'It\'s my first post!', likes: 20}],
     newTextPost: ''
 }
-type actionPOstAc = {
+type actionPOstType = {
     type: 'ADD-POST',
     post: string
 }
-type changeAc = {
+type changeType = {
     type: 'CHANGE-CALLBASK',
     newText: string
 }
 
-const reducerProfile = (state: propsProfilePage = initialState, action: actionPOstAc | changeAc): propsProfilePage => {
+export const reducerProfile = (state: propsProfilePage = initialState, action: actionPOstType | changeType): propsProfilePage => {
 
     switch (action.type) {
         case'ADD-POST':
@@ -29,18 +38,17 @@ const reducerProfile = (state: propsProfilePage = initialState, action: actionPO
             return state
     }
 }
-export const addPOstAc = (title: string) => {
+export const addPOstAc = (title: string):actionPOstType => {
     return {
         type: 'ADD-POST',
         post: title
     }
 }
 
-export const ChangeCreator = (title: string) => {
+export const changeCreator = (title: string):changeType => {
     return {
         type: 'CHANGE-CALLBASK',
         newText: title
     }
 }
 
-export default reducerProfile;

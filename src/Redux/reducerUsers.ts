@@ -7,6 +7,8 @@
 const follow='FOLLOW'
 const unFollow='UNFOLLOW'
 const setUsers='setUsers'
+const setCurrentPage='SET_CURRENT-PAGE'
+const setTotalUser='SET-TOTAL-USER'
 type PhotosType={
     small: null | string
     large: null | string
@@ -32,6 +34,9 @@ type locationtype={
 }
 export type initialStateType={
     users:usersType[]
+    totalUsersCount:number
+    pageSize:number
+    currentPage:number
 }
 
 let initialState= {
@@ -39,10 +44,14 @@ let initialState= {
         // {id: 1, urlFoto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPwtLELR6UBlHi5ZFe04WtAijnDam0G94bMQ&usqp=CAU' , follow: true, name: 'alex', status: 'I am good', location: {city: 'London', country: 'England'}},
         // {id: 2, urlFoto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPwtLELR6UBlHi5ZFe04WtAijnDam0G94bMQ&usqp=CAU', follow: false, name: 'Sveta', status: 'I am crazy', location: {city: 'Milan', country: 'Italy'}},
         // {id: 3, urlFoto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPwtLELR6UBlHi5ZFe04WtAijnDam0G94bMQ&usqp=CAU', follow: true, name: 'Dima', status: 'I am smart', location: {city: 'LA', country: 'USA'}}
-    ]
+    ],
+    totalUsersCount:20,
+    pageSize:5,
+    currentPage:1,
 }
 
-  export  const reducerUsers = (state:initialStateType=initialState, action:followTupe | unFollow | setUsersAC):initialStateType => {
+  export  const reducerUsers = (state:initialStateType=initialState, action:followTupe | unFollow | setUsersAC | setCurrentPageType | setTotalUserType) :initialStateType => {
+       debugger
         switch(action.type) {
             case follow: {
                 return {...state, users:state.users.map(u=>u.id==action.id ?{...u,follow:true }: u) }
@@ -51,13 +60,41 @@ let initialState= {
                 return {...state, users:state.users.map(u=>u.id===action.id ?{...u,follow:false }: u) }
             }
             case setUsers: {
-                return {...state, users: [...state.users, ...action.user] }
+                return {...state, users: action.user }
+            }
+            case setCurrentPage: {
+                return {...state, currentPage: action.page }
+            }
+            case setTotalUser : {
+                return {...state, totalUsersCount: action.totalUser }
             }
             default: return state
         }
     }
 
 
+export const setCurrentPageAC=( page:number)=>{
+
+    return {
+        type: setCurrentPage,
+       page
+    }
+}
+type setCurrentPageType={
+    type:'SET_CURRENT-PAGE'
+    page:number
+}
+export const setTotalUserAC=( totalUser:number)=>{
+
+    return {
+        type: setTotalUser,
+        totalUser
+    }
+}
+type setTotalUserType={
+    type:'SET-TOTAL-USER'
+    totalUser:number
+}
 
 type followTupe={
     type:'FOLLOW'

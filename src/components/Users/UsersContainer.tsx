@@ -2,28 +2,36 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
-import {followAC, setUsersAC, unFollowAC, usersType} from "../../Redux/reducerUsers";
+import {followAC, setCurrentPageAC, setTotalUserAC, setUsersAC, unFollowAC, usersType} from "../../Redux/reducerUsers";
 import {AppstateType} from "../../Redux/reduxState";
 import {Dispatch} from "redux";
 import UsersC from "./UsersC";
 
 type mapStateToPropsType={
     users:usersType[]
+    totalUsersCount:number
+    pageSize:number
+    currentPage:number
 
 }
 const mapStateToProps = (state: AppstateType) :mapStateToPropsType => {
 
     return {
-        users: state.reducerUsers.users
+        users: state.reducerUsers.users,
+        totalUsersCount:state.reducerUsers.totalUsersCount,
+        pageSize:state.reducerUsers.pageSize,
+        currentPage:state.reducerUsers.currentPage
     }
 }
 type mapDispatchToPropsType={
     follow:(id: number)=>void
     unFollow: (id: number)=>void
     setUsers: (users: usersType[]) =>void
+    setCurrentPage:( page:number)=>void
+    setTotalUser:( totalUser:number)=>void
 }
 
-// если что-то меняется в стейте, то мы это dispatch, внутрь которого передаем объект, который говорит, что делать
+// если что-то меняется в стейте, то мы это dispatch
 const mapDispatchToProps = (dispatch: Dispatch) : mapDispatchToPropsType => {
 
     return {
@@ -37,6 +45,12 @@ const mapDispatchToProps = (dispatch: Dispatch) : mapDispatchToPropsType => {
 
         setUsers: (users: usersType[]) => {
             dispatch(setUsersAC(users))
+        },
+        setCurrentPage:( page:number)=>{
+            dispatch(setCurrentPageAC(page))
+        },
+        setTotalUser:( totalUser:number)=>{
+            dispatch(setTotalUserAC(totalUser))
         }
     }
 }

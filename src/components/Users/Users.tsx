@@ -1,39 +1,39 @@
 import React from 'react';
-import { usersType} from "../../Redux/reducerUsers";
-import  axios from "axios";
+
 import usersPhoto from '../../assets/image/3607444.png'
+import s from "./Users.module.css";
+import {usersType} from "../../Redux/reducerUsers";
 
 type PropsUsersType={
     users:usersType[]
     follow:(id: number)=>void
     unFollow: (id: number)=>void
     setUsers: (users: usersType[]) =>void
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    onClickPage:(pageNumber: number)=>void
 }
 
 
-export type GetUsersResponse = {
-    items: usersType[]
-    totalCount: number
-    error: string | null
-}
-
-const Users = (props:PropsUsersType) => {
 
 
-    if(props.users.length===0) {
-        axios.get<GetUsersResponse>("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-            debugger
-            props.setUsers(response.data.items)
-        })
+export const Users = (props:PropsUsersType) => {
+    let pageCount=Math.ceil(props.totalUsersCount / props.pageSize)
+    let page=[]
+    for(let i=1; i<=pageCount;i++){
+        page.push(i)
     }
 
     return (
         <div>
+            {page.map(p=><span  className={props.currentPage===p ? s.selected :''}
+                                onClick={()=>props.onClickPage(p)}>{p}</span>)}
             {props.users.map(u=><div key={u.id}>
-            <div>
-                <img src={ u.photos.small !==null ? u.photos.small :usersPhoto} alt=""/>
-                <span> {u.name}</span>
-            </div>
+                <div>
+                    <img src={ u.photos.small !==null ? u.photos.small :usersPhoto} alt=""/>
+                    <span> {u.name}</span>
+                </div>
                 <div>
                     {/*<span> {'location.city'}</span>*/}
                     {/*<span> {'location.country'}</span>*/}
@@ -42,9 +42,9 @@ const Users = (props:PropsUsersType) => {
             </div>)}
         </div>
     );
-};
+}
 
-export default Users;
+
 
 //===============
 //     props.setUsers(

@@ -9,6 +9,7 @@ const unFollow='UNFOLLOW'
 const setUsers='setUsers'
 const setCurrentPage='SET_CURRENT-PAGE'
 const setTotalUser='SET-TOTAL-USER'
+const toggleFetching="TOGGLE-FETCHING"
 type PhotosType={
     small: null | string
     large: null | string
@@ -37,6 +38,7 @@ export type initialStateType={
     totalUsersCount:number
     pageSize:number
     currentPage:number
+    isFetching:boolean
 }
 
 let initialState= {
@@ -48,9 +50,10 @@ let initialState= {
     totalUsersCount:20,
     pageSize:5,
     currentPage:1,
+    isFetching:false
 }
 
-  export  const reducerUsers = (state:initialStateType=initialState, action:followTupe | unFollow | setUsersAC | setCurrentPageType | setTotalUserType) :initialStateType => {
+  export  const reducerUsers = (state:initialStateType=initialState, action:followTupe | unFollow | setUsersAC | setCurrentPageType | setTotalUserType | ToggleFetchingType) :initialStateType => {
        debugger
         switch(action.type) {
             case follow: {
@@ -68,29 +71,20 @@ let initialState= {
             case setTotalUser : {
                 return {...state, totalUsersCount: action.totalUser }
             }
+            case toggleFetching : {
+                return {...state, isFetching: action.isFetching }
+            }
             default: return state
         }
     }
 
-
-export const setCurrentPageAC=( page:number)=>{
-
-    return {
-        type: setCurrentPage,
-       page
-    }
-}
+export const toggleFetchingAC=( isFetching:boolean)=>{return {type: toggleFetching, isFetching}}
+type ToggleFetchingType= {type: "TOGGLE-FETCHING" , isFetching:boolean}
+export const setCurrentPageAC=( page:number)=>{return {type: setCurrentPage, page}}
 type setCurrentPageType={
     type:'SET_CURRENT-PAGE'
-    page:number
-}
-export const setTotalUserAC=( totalUser:number)=>{
-
-    return {
-        type: setTotalUser,
-        totalUser
-    }
-}
+    page:number }
+export const setTotalUserAC=( totalUser:number)=>{return {type: setTotalUser, totalUser}}
 type setTotalUserType={
     type:'SET-TOTAL-USER'
     totalUser:number
@@ -100,34 +94,17 @@ type followTupe={
     type:'FOLLOW'
     id:number
 }
-export const followAC=( id:number)=>{
-
-    return {
-        type: follow,
-        id:id
-    }
-}
-type unFollow={
-    type:'UNFOLLOW'
+export const followAC=( id:number)=>{return {type: follow, id:id}}
+type unFollow={ type:'UNFOLLOW'
     id:number
 }
-export const unFollowAC=(id:number)=>{
-    return {
-        type: unFollow,
-        id: id
-    }
+export const unFollowAC=(id:number)=>{return {type: unFollow, id: id }
 
 }
  type setUsersAC={
     type: 'setUsers',
     user: usersType[]
 }
-export const setUsersAC=(users:usersType[])=>{
-    return {
-        type: setUsers,
-        user: users
-    }
-
-}
+export const setUsersAC=(users:usersType[])=>{return {type: setUsers, user: users}}
 
 export default reducerUsers;

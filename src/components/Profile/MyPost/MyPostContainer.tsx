@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {AppstateType} from "../../../Redux/reduxState";
 import {Dispatch} from "redux";
 
-type mapStateToPropsType={
+export type mapStateToPropsType={
     profilePage:propsProfilePage
 }
 const mapStateToProps=(state:AppstateType):mapStateToPropsType=>{

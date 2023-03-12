@@ -9,7 +9,7 @@ type propsProfilePage = {
     post: propsPostMessege[]
     newTextPost: string
 }
-type PropsType = {
+export type PropsType = {
     profilePage: propsProfilePage
 
     addPost: (messages: string) => void

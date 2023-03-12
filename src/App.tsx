@@ -9,6 +9,7 @@ import Settings from "./components/Settings/Settings";
 import  {DialogsCont} from "./components/Dialogs/DialogsContainer";
 import NavbarConteiner from "./components/Nawbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import {ProfileContainer} from "./components/Profile/ProfileContainer";
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
                 <NavbarConteiner />
 
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/profile'} render={() => <Profile/>}/>
+                    <Route path={'/profile'} render={() => <ProfileContainer />}/>
                     <Route path={'/dialogs'} render={() => <DialogsCont/>}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/users'} render={() =>  <UsersContainer/>}/>

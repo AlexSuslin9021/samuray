@@ -5,7 +5,7 @@ export type propsProfilePage = {
     newTextPost: string
     profile:ProfileType
 }
-type ProfileType={
+export type ProfileType={
 
         "aboutMe": string,
         "contacts": ContactProfileType
@@ -47,7 +47,7 @@ let initialState:propsProfilePage = {
         {id: '1', message: 'It\'s my first post!', likes: 20}],
     newTextPost: '',
     profile:{
-        "aboutMe": "я круто чувак 1001%",
+        "aboutMe": "я крут",
         "contacts": {
             "facebook": "facebook.com",
             "website": null,
@@ -78,7 +78,7 @@ type changeType = {
     newText: string
 }
 
-export const reducerProfile = (state: propsProfilePage = initialState, action: actionPOstType | changeType): propsProfilePage => {
+export const reducerProfile = (state: propsProfilePage = initialState, action: actionPOstType | changeType | changeProfileType ): propsProfilePage => {
 
     switch (action.type) {
         case'ADD-POST':
@@ -88,6 +88,8 @@ export const reducerProfile = (state: propsProfilePage = initialState, action: a
         case 'CHANGE-CALLBASK':
             // state.newTextPost = action.post
             return {...state, newTextPost: action.newText};
+        case "CHANGE-PROFILE":
+            return {...state, profile:action.profile}
         default:
             return state
     }
@@ -105,4 +107,15 @@ export const changeCreator = (title: string):changeType => {
         newText: title
     }
 }
+type changeProfileType={
+    type: 'CHANGE-PROFILE',
+    profile:ProfileType
+}
+export const changeProfileAC = (profile: ProfileType):changeProfileType => {
+    return {
+        type: 'CHANGE-PROFILE',
+        profile
+    }
+}
+
 

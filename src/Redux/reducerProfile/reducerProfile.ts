@@ -3,18 +3,72 @@
 export type propsProfilePage = {
     post: propsPostMessege[]
     newTextPost: string
+    profile:ProfileType
 }
+type ProfileType={
+
+        "aboutMe": string,
+        "contacts": ContactProfileType
+        "lookingForAJob": boolean,
+        "lookingForAJobDescription": "не ищу, а дурачусь",
+        "fullName": "samurai dimych",
+        "userId": number,
+        "photos": PhotoType
+
+}
+type ContactProfileType={
+
+        "facebook": string
+        "website": null | string
+        "vk":string
+        "twitter": string
+        "instagram": string
+        "youtube": null | string
+        "github": string
+        "mainLink": null | string
+
+}
+type PhotoType={
+
+        "small": string
+        "large": string
+
+}
+
+
 export type propsPostMessege = {
     id: string | number
     message: string
     likes: number
 }
-let initialState = {
+let initialState:propsProfilePage = {
     post: [
         {id: '1', message: 'How are you?', likes: 15},
         {id: '1', message: 'It\'s my first post!', likes: 20}],
-    newTextPost: ''
+    newTextPost: '',
+    profile:{
+        "aboutMe": "я круто чувак 1001%",
+        "contacts": {
+            "facebook": "facebook.com",
+            "website": null,
+            "vk": "vk.com/dimych",
+            "twitter": "https://twitter.com/@sdf",
+            "instagram": "instagra.com/sds",
+            "youtube": null,
+            "github": "github.com",
+            "mainLink": null
+        },
+        "lookingForAJob": true,
+        "lookingForAJobDescription": "не ищу, а дурачусь",
+        "fullName": "samurai dimych",
+        "userId": 2,
+        "photos": {
+            "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+            "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+        }
+    }
 }
+
 type actionPOstType = {
     type: 'ADD-POST',
     post: string

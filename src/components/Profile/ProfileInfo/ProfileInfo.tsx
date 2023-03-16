@@ -18,8 +18,9 @@ export function ProfileInfo(props:ProfileTypeInfo) {
                     alt=""/>
             </div>
             <div> {props.profile.aboutMe}</div>
-            <img src={props.profile.photos.small ?props.profile.photos.small :users} alt=""/>
+            <img src={props.profile.photos.small ? props.profile.photos.small :users} alt=""/>
             <div className={a.item}>
+                <div>{props.profile.aboutMe}</div>
                 ava + descript
             </div>
 

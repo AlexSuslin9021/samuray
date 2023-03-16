@@ -9,7 +9,9 @@ import Settings from "./components/Settings/Settings";
 import  {DialogsCont} from "./components/Dialogs/DialogsContainer";
 import NavbarConteiner from "./components/Nawbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import {ProfileBoss} from "./components/Profile/ProfileContainer";
+import {ContainerForProfileContainer} from "./components/Profile/ProfileContainer";
+import {DataHeader} from "./components/Header/ContainerHeader";
+
 
 
 
@@ -17,11 +19,11 @@ function App() {
 
     return (<BrowserRouter>
             <div className="app-wrapper">
-                <Header/>
+                <DataHeader  />
                 <NavbarConteiner />
 
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/profile'} render={() => <ProfileBoss  />}/>
+                    <Route path={'/profile/:userId'} render={() => <ContainerForProfileContainer   />}/>
                     <Route path={'/dialogs'} render={() => <DialogsCont/>}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/users'} render={() =>  <UsersContainer />}/>

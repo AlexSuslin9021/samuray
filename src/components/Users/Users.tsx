@@ -35,7 +35,7 @@ export const Users = (props: PropsUsersType) => {
                                  onClick={() => props.onClickPage(p)}>{p}</span>)}
             {props.users.map(u => <div key={u.id}>
                 <div>
-                    <NavLink to={'/profile'}>
+                    <NavLink to={'/profile/' + u.id}>
                         <img src={u.photos.small !== null ? u.photos.small : usersPhoto} alt=""/>
                     </NavLink>
                     <span> {u.name}</span>

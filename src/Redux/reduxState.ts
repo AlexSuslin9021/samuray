@@ -1,10 +1,10 @@
 import {combineReducers, createStore} from "redux";
-import reducerSidebar from "./reducerSidebar";
+import reducerSidebar from "./reducerSidebar/reducerSidebar";
 
 import reducerDialogs from "./reduserDialogs/reducerDialogs";
-import reducerUsers from "./reducerUsers";
+import reducerUsers from "./reducerUsers/reducerUsers";
 import {reducerProfile} from "./reducerProfile/reducerProfile";
-import {authReducer} from "./authReducer";
+import {authReducer} from "./authReducers/authReducer";
 
 let redusers = combineReducers({
 

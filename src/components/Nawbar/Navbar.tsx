@@ -3,7 +3,7 @@ import s from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
 
 
-import {PropsSidebar} from "../../Redux/reducerSidebar";
+import {PropsSidebar} from "../../Redux/reducerSidebar/reducerSidebar";
 
 type PropsType={
     sidebar:PropsSidebar[]

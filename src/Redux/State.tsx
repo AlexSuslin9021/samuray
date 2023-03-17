@@ -1,6 +1,6 @@
 import  {addPOstAc} from "./reducerProfile/reducerProfile";
 import reducerDialogs, {addNewDialog, changeNewDialogCreator} from "./reduserDialogs/reducerDialogs";
-import reducerSidebar from "./reducerSidebar";
+import reducerSidebar from "./reducerSidebar/reducerSidebar";
 
 export type StoreType={
     _state:PropsState

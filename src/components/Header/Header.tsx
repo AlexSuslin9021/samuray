@@ -2,7 +2,7 @@ import React from "react";
 import s from './Header.module.css'
 import {NavLink} from "react-router-dom";
 import usersPhoto from "../../assets/image/3607444.png";
-import {DataType} from "../../Redux/authReducer";
+import {DataType} from "../../Redux/authReducers/authReducer";
 type PropsHeader={
     data:DataType
     isAuth:boolean

@@ -54,7 +54,7 @@ let initialState= {
 }
 
   export  const reducerUsers = (state:initialStateType=initialState, action:followTupe | unFollow | setUsersAC | setCurrentPageType | setTotalUserType | ToggleFetchingType) :initialStateType => {
-       debugger
+
         switch(action.type) {
             case follow: {
                 return {...state, users:state.users.map(u=>u.id==action.id ?{...u,follow:true }: u) }

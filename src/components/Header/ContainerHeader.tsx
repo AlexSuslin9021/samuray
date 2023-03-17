@@ -7,7 +7,7 @@ import axios from "axios";
 import {GetUsersResponse} from "../Users/UsersContainer";
 import {connect} from "react-redux";
 import {AppstateType} from "../../Redux/reduxState";
-import {DataType, initialStateType, setUserDataAC} from "../../Redux/authReducer";
+import {DataType, initialStateType, setUserDataAC} from "../../Redux/authReducers/authReducer";
 
  type DataStateType={
      data:DataType

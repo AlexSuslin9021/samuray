@@ -24,7 +24,7 @@ data:{id:28028,login:"Alex2190",email:"alexsuslin@inbox.ru"},
 }
 
   export  const authReducer = (state:initialStateType=initialState, action:setUserDataType) :initialStateType => {
-       debugger
+
         switch(action.type) {
             case setUserData: {
                 return {...state, ...action.data, isAuth:true }

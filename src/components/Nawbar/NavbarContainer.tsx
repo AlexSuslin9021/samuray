@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {PropsSidebar} from "../../Redux/reducerSidebar";
+import {PropsSidebar} from "../../Redux/reducerSidebar/reducerSidebar";
 import {AppstateType} from "../../Redux/reduxState";
 import Navbar from "./Navbar";
 

@@ -5,7 +5,7 @@ import s from "./Users.module.css";
 import {usersType} from "../../Redux/reducerUsers/reducerUsers";
 import preloader from '../../assets/image/6.gif'
 import axios from "axios";
-import {GetUsersResponse} from "./UsersContainer";
+// import {GetUsersResponse} from "./UsersContainer";
 
 type PropsUsersType = {
     users: usersType[]

@@ -14,6 +14,7 @@ import {
 import {AppstateType} from "../../Redux/reduxState";
 import axios from "axios";
 import {Users} from "./Users";
+import {apiObg, getUsers} from "../../API/api";
 
 
 export type PropsUsersType = {
@@ -41,9 +42,9 @@ export type GetUsersResponse = {
 class UsersC extends React.Component<PropsUsersType, usersType[]> {
     componentDidMount() {
         this.props.setFetching(true)
-        axios.get<GetUsersResponse>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{withCredentials:true}).then(response => {
-            this.props.setUsers(response.data.items)
-            this.props.setTotalUser(response.data.totalCount)
+        getUsers(this.props.currentPage, this.props.pageSize).then(response => {
+            this.props.setUsers(response.items)
+            this.props.setTotalUser(response.totalCount)
             this.props.setFetching(false)
         })
 
@@ -52,8 +53,8 @@ class UsersC extends React.Component<PropsUsersType, usersType[]> {
     onClickPage = (pageNumber: number) => {
         this.props.setFetching(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get<GetUsersResponse>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials:true}).then(response => {
-            this.props.setUsers(response.data.items)
+        apiObg.getUsers(pageNumber, this.props.pageSize).then(response => {
+            this.props.setUsers(response.items)
             this.props.setFetching(false)
         })
 

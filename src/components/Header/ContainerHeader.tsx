@@ -8,6 +8,7 @@ import {GetUsersResponse} from "../Users/UsersContainer";
 import {connect} from "react-redux";
 import {AppstateType} from "../../Redux/reduxState";
 import {DataType, initialStateType, setUserDataAC} from "../../Redux/authReducers/authReducer";
+import {getAuth} from "../../API/api";
 
  type DataStateType={
      data:DataType
@@ -15,7 +16,7 @@ import {DataType, initialStateType, setUserDataAC} from "../../Redux/authReducer
 
 }
 
-type GetDataResponse={
+export type GetDataResponse={
     data:DataType
     messages:[],
     fieldsErrors:[],
@@ -29,9 +30,9 @@ type ContainerComponentType=mapStateToPropsType & {
 export class ContainerHeader extends React.Component<ContainerComponentType>{
     componentDidMount() {
 
-        axios.get<GetDataResponse>(`https://social-network.samuraijs.com/api/1.0/auth/me`,{withCredentials:true}).then(response=>{
-            if(response.data.resultCode===0)
-            this.props.setUserdata(response.data.data)
+        getAuth().then(response=>{
+            if(response.resultCode===0)
+            this.props.setUserdata(response.data)
         })
     }
 

@@ -5,6 +5,7 @@ import s from "./Users.module.css";
 import {usersType} from "../../Redux/reducerUsers/reducerUsers";
 import preloader from '../../assets/image/6.gif'
 import axios from "axios";
+import {usersApi} from "../../API/api";
 // import {GetUsersResponse} from "./UsersContainer";
 
 type PropsUsersType = {
@@ -20,7 +21,7 @@ type PropsUsersType = {
     setFetching: (fetching: boolean) => void
 }
 
-type PostUsersResponse={ resultCode: number
+export type PostUsersResponse={ resultCode: number
     messages: string[],
     data: object}
 export const Users = (props: PropsUsersType) => {
@@ -50,22 +51,15 @@ export const Users = (props: PropsUsersType) => {
                 </div>
                 {u.follow ? <button onClick={() => {
 
-                    axios.delete<PostUsersResponse>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{withCredentials:true,
-                    headers:{
-                        'API-KEY': "434d1825-24d7-4c1d-8143-2edf92c40e38"
-                    }
-                    }).then(response => {
-                        if(response.data.resultCode===0){
+                    usersApi.gtAuthDelete(u.id).then(response => {
+                        if(response.resultCode===0){
                             props.unFollow(u.id)
                         }
                     })
                 }}> Follow</button> : <button onClick={() => {
 
-                    axios.post<PostUsersResponse>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{},{withCredentials:true,
-                        headers:{
-                            'API-KEY': "434d1825-24d7-4c1d-8143-2edf92c40e38"
-                        }}).then(response => {
-                       if(response.data.resultCode===0){
+                   usersApi.gtAuthPost(u.id).then(response => {
+                       if(response.resultCode===0){
                            props.follow(u.id)
                        }
                     })

@@ -7,8 +7,8 @@ import axios from "axios";
 import {GetUsersResponse} from "../Users/UsersContainer";
 import {connect} from "react-redux";
 import {AppstateType} from "../../Redux/reduxState";
-import {DataType, initialStateType, setUserDataAC} from "../../Redux/authReducers/authReducer";
-import {getAuth} from "../../API/api";
+import {DataType,setUserDataAC} from "../../Redux/authReducers/authReducer";
+import { usersApi} from "../../API/api";
 
  type DataStateType={
      data:DataType
@@ -30,7 +30,7 @@ type ContainerComponentType=mapStateToPropsType & {
 export class ContainerHeader extends React.Component<ContainerComponentType>{
     componentDidMount() {
 
-        getAuth().then(response=>{
+        usersApi.getAuth().then(response=>{
             if(response.resultCode===0)
             this.props.setUserdata(response.data)
         })

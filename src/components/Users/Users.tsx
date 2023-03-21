@@ -19,11 +19,15 @@ type PropsUsersType = {
     onClickPage: (pageNumber: number) => void
     isFetching: boolean
     setFetching: (fetching: boolean) => void
+    toggleIsFetching: (id: number, isFetching: boolean) => void
+    progressIsFetching:number[]
 }
 
-export type PostUsersResponse={ resultCode: number
+export type PostUsersResponse = {
+    resultCode: number
     messages: string[],
-    data: object}
+    data: object
+}
 export const Users = (props: PropsUsersType) => {
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let page = []
@@ -36,8 +40,8 @@ export const Users = (props: PropsUsersType) => {
             {props.isFetching && <div>
                 <img src={preloader} alt=""/>
             </div>}
-            {page.map((p,index) => <span key={index} className={props.currentPage === p ? s.selected : ''}
-                                 onClick={() => props.onClickPage(p)}>{p}</span>)}
+            {page.map((p, index) => <span key={index} className={props.currentPage === p ? s.selected : ''}
+                                          onClick={() => props.onClickPage(p)}>{p}</span>)}
             {props.users.map(u => <div key={u.id}>
                 <div>
                     <NavLink to={'/profile/' + u.id}>
@@ -49,19 +53,23 @@ export const Users = (props: PropsUsersType) => {
                     {/*<span> {'location.city'}</span>*/}
                     {/*<span> {'location.country'}</span>*/}
                 </div>
-                {u.follow ? <button onClick={() => {
-
+                {u.follow ? <button disabled={props.progressIsFetching.some(el=>el===u.id)} onClick={() => {
+                    debugger
+                    props.toggleIsFetching(u.id,true)
                     usersApi.gtAuthDelete(u.id).then(response => {
-                        if(response.resultCode===0){
+                        if (response.resultCode === 0) {
                             props.unFollow(u.id)
                         }
+                        props.toggleIsFetching(u.id,false)
                     })
-                }}> Follow</button> : <button onClick={() => {
-
-                   usersApi.gtAuthPost(u.id).then(response => {
-                       if(response.resultCode===0){
-                           props.follow(u.id)
-                       }
+                }}> Follow</button> : <button disabled={props.progressIsFetching.some(el=>el===u.id)} onClick={() => {
+                    debugger
+                    props.toggleIsFetching(u.id,true)
+                    usersApi.gtAuthPost(u.id).then(response => {
+                        if (response.resultCode === 0) {
+                            props.follow(u.id)
+                        }
+                        props.toggleIsFetching(u.id,false)
                     })
                 }}> UnfOllow</button>}
             </div>)}

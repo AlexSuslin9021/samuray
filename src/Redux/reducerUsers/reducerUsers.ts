@@ -10,6 +10,7 @@ const setUsers='setUsers'
 const setCurrentPage='SET_CURRENT-PAGE'
 const setTotalUser='SET-TOTAL-USER'
 const toggleFetching="TOGGLE-FETCHING"
+const toggleProgress="TOGGLE-PROGRESS-IS-FETCHING"
 type PhotosType={
     small: null | string
     large: null | string
@@ -39,6 +40,7 @@ export type initialStateType={
     pageSize:number
     currentPage:number
     isFetching:boolean
+    progressIsFetching:number[]
 }
 
 let initialState= {
@@ -50,10 +52,11 @@ let initialState= {
     totalUsersCount:20,
     pageSize:5,
     currentPage:1,
-    isFetching:false
+    isFetching:false,
+    progressIsFetching:[]
 }
 
-  export  const reducerUsers = (state:initialStateType=initialState, action:followTupe | unFollow | setUsersAC | setCurrentPageType | setTotalUserType | ToggleFetchingType) :initialStateType => {
+  export  const reducerUsers = (state:initialStateType=initialState, action:followTupe | toggleIsFetchingType | unFollow | setUsersAC | setCurrentPageType | setTotalUserType | ToggleFetchingType) :initialStateType => {
 
         switch(action.type) {
             case follow: {
@@ -73,6 +76,11 @@ let initialState= {
             }
             case toggleFetching : {
                 return {...state, isFetching: action.isFetching }
+            }
+            case toggleProgress : {
+                return {...state, progressIsFetching: action.isFetching ? [...state.progressIsFetching, action.id]
+                        :
+                state.progressIsFetching.filter(el=>el !== action.id)}
             }
             default: return state
         }
@@ -106,5 +114,11 @@ export const unFollowAC=(id:number)=>{return {type: unFollow, id: id }
     user: usersType[]
 }
 export const setUsersAC=(users:usersType[])=>{return {type: setUsers, user: users}}
+type toggleIsFetchingType={
+    type: "TOGGLE-PROGRESS-IS-FETCHING",
+    id:number
+    isFetching:boolean
+}
+export const toggleIsFetchingAC=(id:number, isFetching:boolean)=>{return {type: toggleProgress, id,isFetching}}
 
 export default reducerUsers;

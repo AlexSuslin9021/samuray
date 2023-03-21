@@ -7,7 +7,7 @@ import {
     setCurrentPageAC,
     setTotalUserAC,
     setUsersAC,
-    toggleFetchingAC,
+    toggleFetchingAC, toggleIsFetchingAC,
     unFollowAC,
     usersType
 } from "../../Redux/reducerUsers/reducerUsers";
@@ -29,6 +29,8 @@ export type PropsUsersType = {
     setTotalUser: (totalUser: number) => void
     isFetching:boolean
     setFetching:( fetching:boolean)=>void
+    toggleIsFetching:(id:number, isFetching:boolean)=>void
+    progressIsFetching:number[]
 
 }
 
@@ -71,6 +73,8 @@ class UsersC extends React.Component<PropsUsersType, usersType[]> {
                       setUsers={this.props.setUsers}
                       isFetching={this.props.isFetching}
                       setFetching={this.props.setFetching}
+                      toggleIsFetching={this.props.toggleIsFetching}
+                      progressIsFetching={this.props.progressIsFetching}
         />
     }
 }
@@ -81,6 +85,7 @@ type mapStateToPropsType={
     pageSize:number
     currentPage:number
     isFetching:boolean
+    progressIsFetching:number[]
 
 }
 
@@ -91,7 +96,8 @@ const mapStateToProps = (state: AppstateType) :mapStateToPropsType => {
         totalUsersCount:state.reducerUsers.totalUsersCount,
         pageSize:state.reducerUsers.pageSize,
         currentPage:state.reducerUsers.currentPage,
-        isFetching:state.reducerUsers.isFetching
+        isFetching:state.reducerUsers.isFetching,
+        progressIsFetching:state.reducerUsers.progressIsFetching
     }
 }
 
@@ -103,6 +109,7 @@ const UsersContainer = connect(mapStateToProps, {
     setCurrentPage:setCurrentPageAC,
     setTotalUser:setTotalUserAC,
     setFetching: toggleFetchingAC,
+    toggleIsFetching: toggleIsFetchingAC
 })
 (UsersC)
 //создает контейнерную компоненту UsersContainer для Users

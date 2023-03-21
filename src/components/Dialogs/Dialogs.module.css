@@ -1,19 +1,64 @@
 .dialogsContent{
+ margin-top: 20px;
  display: flex;
+ /*justify-content: space-around;*/
+ width: 100%;
 }
 
 .users{
+ /*text-decoration: none;*/
 
 }
-.user{
-
+.user a{
+ text-decoration: none;
+ color: #242842
+}
+.user a:hover{
+ text-decoration-line: underline;
+ text-decoration-color:#242842 ;
+ color: #242842
 }
 .dialogs{
- margin-left: 100px;
+ /*margin-left: 100px;*/
+ display: flex;
 }
 .dialog{
 
 }
+.window{
+ width: 40%;
+ height: 50px;
+ /*padding: 12px 20px;*/
+ /*box-sizing: border-box;*/
+ border: 2px solid #ccc;
+ border-radius: 4px;
+ /*background-color: #f8f8f8;*/
+ /*font-size: 16px;*/
+ resize: none;
+}
+.window:focus {
+ outline: none !important;
+ border-color: #555555;
+ box-shadow: 0 0 10px #719ECE;
+}
 img{
  width: 20px;
+}
+.button{
+ height: 30px;
+ width: 80px;
+ background-color: white; /* Green */
+ color: #555555;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+ margin: 4px 2px;
+ transition-duration: 0.4s;
+ cursor: pointer;
+ border: 2px solid #555555;
+ border-radius: 5px;
+}
+.button:hover {
+ background-color: #555555;
+ color: white;
 }

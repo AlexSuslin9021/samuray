@@ -26,17 +26,20 @@ function Dialogs(props:propsDoalogs){
     const user= props.dialogs.users.map(u=><DialogsItem id={u.id}    name ={u.name}/>)
     const  dialog=props.dialogs.dialogs.map(d=><Message message={d.name}/>)
     return<div className={s.dialogsContent}>
+
         <div className={s.users}>
             {user}
         </div>
 
+
         <div className={s.dialogs}>
             {dialog}
-        </div>
-        <textarea value={props.dialogs.newDialog}  onChange={onChangeText} > </textarea>
-        <div>
-            <button onClick={add}> ass</button>
-        </div>
+
+        <textarea className={s.window} value={props.dialogs.newDialog}  onChange={onChangeText} > </textarea>
+
+            <button className={s.button} onClick={add}> ass</button>
     </div>
+</div>
+
 }
 export default Dialogs

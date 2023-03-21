@@ -1,23 +1,37 @@
 .nav{
-    background: lightskyblue;
+    background: white;
    max-width: 400px;
     height: 100vh;
+    border: 1px solid lightgrey;
 }
+.item{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    text-align: center;
+ }
 .item a {
-    color: white;
+    color: darkgray;
     text-decoration: none;
 }
+.item a:hover {
+   background: lightgrey;
+    border-radius: 5px ;
+
+}
 .item a.active{
-    color: yellow;
+    color: #242842;
 }
 .friends{
     margin-top: 80px;
    text-align: center;
+
 }
 .friends a{
+    color:darkgray;
 
     font-size: 20px;
-    color: white;
+
     text-decoration: none;
 
 }

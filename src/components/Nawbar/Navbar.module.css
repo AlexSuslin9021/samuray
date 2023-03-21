@@ -1,6 +1,7 @@
 .nav{
     background: lightskyblue;
-    grid-area: n;
+   max-width: 400px;
+    height: 100vh;
 }
 .item a {
     color: white;

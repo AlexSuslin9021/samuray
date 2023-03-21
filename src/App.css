@@ -1,21 +1,17 @@
 
 .app-wrapper{
- width: 100vw;
- height: 600px;
- margin: 0 auto;
- display: grid;
- grid-template-areas:
-'h h'
- 'n c';
- grid-template-rows: 60px 1fr;
- grid-template-columns:2fr 10fr ;
+
+ height: 100vh;
+
+
 
 
 
 }
 .app-wrapper-content{
  background: lightgrey;
- grid-area: c;
+display: flex;
+ width: 100vw;
 }
 
 

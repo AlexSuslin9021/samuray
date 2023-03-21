@@ -11,16 +11,13 @@ import {DataHeader} from "./components/Header/ContainerHeader";
 import UsersContainer from "./components/Users/UsersContainer";
 
 
-
-
 function App() {
 
     return (<BrowserRouter>
             <div className="app-wrapper">
                 <DataHeader  />
-                <NavbarConteiner />
-
                 <div className={'app-wrapper-content'}>
+                <NavbarConteiner />
                     <Route path={'/profile/:userId'} render={() => <ContainerForProfileContainer   />}/>
                     <Route path={'/dialogs'} render={() => <DialogsCont/>}/>
                     <Route path={'/news'} component={News}/>

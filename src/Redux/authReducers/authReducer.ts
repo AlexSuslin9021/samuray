@@ -1,6 +1,7 @@
-
-
 const setUserData='SET_USER_DATA'
+
+//initialState
+
 export type initialStateType={
  data:DataType
     messages:[],
@@ -22,23 +23,25 @@ data:{id:28028,login:"Alex2190",email:"alexsuslin@inbox.ru"},
     resultCode:0,
     isAuth:false
 }
-
-  export  const authReducer = (state:initialStateType=initialState, action:setUserDataType) :initialStateType => {
+// authReducer
+type ActionType=setUserDataType
+  export  const authReducer = (state:initialStateType=initialState, action:ActionType) :initialStateType => {
 
         switch(action.type) {
             case setUserData: {
-                return {...state, ...action.data, isAuth:true }
+                return {...state,data:{ ...action.data}, isAuth:true }
             }
 
             default: return state
         }
     }
+    // Action creator
 
 type setUserDataType={
     type:'SET_USER_DATA'
-    data: initialStateType
+    data: DataType
 }
-export const setUserDataAC=(data:DataType)=>{
+export const setUserDataAC=(data:DataType):setUserDataType=>{
     return{
         type:setUserData,
         data

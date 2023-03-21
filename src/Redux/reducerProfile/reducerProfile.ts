@@ -69,16 +69,10 @@ let initialState:propsProfilePage = {
     }
 }
 
-type actionPOstType = {
-    type: 'ADD-POST',
-    post: string
-}
-type changeType = {
-    type: 'CHANGE-CALLBASK',
-    newText: string
-}
 
-export const reducerProfile = (state: propsProfilePage = initialState, action: actionPOstType | changeType | changeProfileType ): propsProfilePage => {
+
+type ActionType=actionPOstType | changeTitleType | changeProfileType
+export const reducerProfile = (state: propsProfilePage = initialState, action: ActionType ): propsProfilePage => {
 
     switch (action.type) {
         case'ADD-POST':
@@ -94,6 +88,11 @@ export const reducerProfile = (state: propsProfilePage = initialState, action: a
             return state
     }
 }
+
+type actionPOstType = {
+    type: 'ADD-POST',
+    post: string
+}
 export const addPOstAc = (title: string):actionPOstType => {
     return {
         type: 'ADD-POST',
@@ -101,16 +100,27 @@ export const addPOstAc = (title: string):actionPOstType => {
     }
 }
 
-export const changeCreator = (title: string):changeType => {
+type changeTitleType = {
+    type: 'CHANGE-CALLBASK',
+    newText: string
+}
+export const changeTitleAC = (title: string):changeTitleType => {
     return {
         type: 'CHANGE-CALLBASK',
         newText: title
     }
 }
+
+
+
+
 type changeProfileType={
     type: 'CHANGE-PROFILE',
     profile:ProfileType
 }
+
+
+
 export const changeProfileAC = (profile: ProfileType):changeProfileType => {
     return {
         type: 'CHANGE-PROFILE',

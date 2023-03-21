@@ -4,9 +4,8 @@ import usersPhoto from '../../assets/image/3607444.png'
 import s from "./Users.module.css";
 import {usersType} from "../../Redux/reducerUsers/reducerUsers";
 import preloader from '../../assets/image/6.gif'
-import axios from "axios";
 import {usersApi} from "../../API/api";
-// import {GetUsersResponse} from "./UsersContainer";
+
 
 type PropsUsersType = {
     users: usersType[]

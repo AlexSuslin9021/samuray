@@ -24,6 +24,7 @@ data:{id:28028,login:"Alex2190",email:"alexsuslin@inbox.ru"},
     isAuth:false
 }
 // authReducer
+
 type ActionType=setUserDataType
   export  const authReducer = (state:initialStateType=initialState, action:ActionType) :initialStateType => {
 

@@ -1,4 +1,4 @@
-import { propsDialogsType, propsUsersName} from "../State";
+
 
 
 let initialState={
@@ -41,6 +41,11 @@ let initialState={
 
     newDialog:'',
 }
+type propsUsersName = {
+    id: string
+    name: string
+    src: string
+}
 
 type addNewDialogType={
     type: 'NEW-DIALOG',
@@ -50,6 +55,10 @@ type changeNewDialogType={
     type: 'NEW-MESSEGES',
     newText: string
 }
+type propsDialogsType = {
+    id: string
+    name: string
+}
 
 export type propsDialogsPage = {
     users: propsUsersName[]
@@ -57,8 +66,8 @@ export type propsDialogsPage = {
     newDialog: string
 }
 
-
-    const reducerDialogs = (state:propsDialogsPage=initialState, action:addNewDialogType | changeNewDialogType) => {
+type ActionType=addNewDialogType | changeNewDialogType
+    const reducerDialogs = (state:propsDialogsPage=initialState, action:ActionType ) => {
 
         switch(action.type) {
             case 'NEW-MESSEGES': {
@@ -77,7 +86,7 @@ export type propsDialogsPage = {
 
 
 
-export const addNewDialog=(newDialog:string ):addNewDialogType=>{
+export const addNewDialogAC=(newDialog:string ):addNewDialogType=>{
 
     return {
         type: 'NEW-DIALOG',
@@ -85,7 +94,7 @@ export const addNewDialog=(newDialog:string ):addNewDialogType=>{
     }
 }
 
-export const changeNewDialogCreator=(newDialog:string):changeNewDialogType=>{
+export const changeNewDialogCreatorAC=(newDialog:string):changeNewDialogType=>{
     return {
         type: 'NEW-MESSEGES',
         newText: newDialog

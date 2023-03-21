@@ -1,7 +1,5 @@
-
 import React from 'react';
 import {connect} from "react-redux";
-
 import {
     followAC,
     setCurrentPageAC,
@@ -12,7 +10,6 @@ import {
     usersType
 } from "../../Redux/reducerUsers/reducerUsers";
 import {AppstateType} from "../../Redux/reduxState";
-import axios from "axios";
 import {Users} from "./Users";
 import {usersApi} from "../../API/api";
 

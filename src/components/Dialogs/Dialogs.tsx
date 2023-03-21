@@ -6,7 +6,6 @@ import {Message} from "./Message/Message";
 import {propsDialogsPage} from "../../Redux/reduserDialogs/reducerDialogs";
 
 
-
 type propsDoalogs={
     dialogs:propsDialogsPage
     add:(newDialog:string)=>void

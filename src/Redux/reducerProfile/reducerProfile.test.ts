@@ -1,4 +1,4 @@
-import {addPOstAc, changeCreator, propsProfilePage, reducerProfile} from "./reducerProfile";
+import {addPOstAc, changeProfileAC, changeTitleAC, propsProfilePage, reducerProfile} from "./reducerProfile";
 
 let initialState:propsProfilePage
 beforeEach(()=>{
@@ -43,10 +43,41 @@ test('New post should be add in array post',()=>{
 
 test('change text post',()=>{
 
-    let action =changeCreator('addTitle')
+    let action =changeTitleAC('addTitle')
     let newState=reducerProfile(initialState,action )
 
     expect(newState.newTextPost).toBe('addTitle')
     expect(newState.post.length).toBe(2)
+
+})
+
+test('change profile',()=>{
+
+    let action =changeProfileAC({
+        "aboutMe": "Done",
+        "contacts": {
+            "facebook": "facebook.com",
+            "website": 'null',
+            "vk": "vk.com/dimych",
+            "twitter": "https://twitter.com/@sdf",
+            "instagram": "instagra.com/sds",
+            "youtube": "null",
+            "github": "github.com",
+            "mainLink": "null"
+        },
+        "lookingForAJob": false,
+        "lookingForAJobDescription": "не ищу, а дурачусь",
+        "fullName": "samurai dimych",
+        "userId": 2,
+        "photos": {
+            "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+            "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+        }})
+    let newState=reducerProfile(initialState,action )
+
+    expect(newState.profile.aboutMe).toBe("Done")
+    expect(newState.profile.contacts.website).toBe("null")
+    expect(newState.profile.contacts.youtube).toBe("null")
+    expect(newState.profile.lookingForAJob).toBe(false)
 
 })

@@ -16,9 +16,8 @@ export class ProfileContainer extends React.Component <PropsType>{
         let userId=this.props.match.params.userId
         usersApi.getProfile(userId).then(response => {
 
-            // this.props.setUsers(response.data.items)
             this.props.setProfile(response)
-            // this.props.setFetching(false)
+
         })
     }
     render() {

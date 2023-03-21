@@ -11,6 +11,7 @@ const setCurrentPage='SET_CURRENT-PAGE'
 const setTotalUser='SET-TOTAL-USER'
 const toggleFetching="TOGGLE-FETCHING"
 const toggleProgress="TOGGLE-PROGRESS-IS-FETCHING"
+
 type PhotosType={
     small: null | string
     large: null | string
@@ -43,20 +44,17 @@ export type initialStateType={
     progressIsFetching:number[]
 }
 
-let initialState= {
-    users: [
-        // {id: 1, urlFoto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPwtLELR6UBlHi5ZFe04WtAijnDam0G94bMQ&usqp=CAU' , follow: true, name: 'alex', status: 'I am good', location: {city: 'London', country: 'England'}},
-        // {id: 2, urlFoto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPwtLELR6UBlHi5ZFe04WtAijnDam0G94bMQ&usqp=CAU', follow: false, name: 'Sveta', status: 'I am crazy', location: {city: 'Milan', country: 'Italy'}},
-        // {id: 3, urlFoto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPwtLELR6UBlHi5ZFe04WtAijnDam0G94bMQ&usqp=CAU', follow: true, name: 'Dima', status: 'I am smart', location: {city: 'LA', country: 'USA'}}
-    ],
+let initialState:initialStateType= {
+    users: [],
     totalUsersCount:20,
     pageSize:5,
     currentPage:1,
     isFetching:false,
     progressIsFetching:[]
 }
+type ActionType=followTupe | toggleIsFetchingType | unFollow | setUsersAC | setCurrentPageType | setTotalUserType | ToggleFetchingType
 
-  export  const reducerUsers = (state:initialStateType=initialState, action:followTupe | toggleIsFetchingType | unFollow | setUsersAC | setCurrentPageType | setTotalUserType | ToggleFetchingType) :initialStateType => {
+  export  const reducerUsers = (state:initialStateType=initialState, action:ActionType) :initialStateType => {
 
         switch(action.type) {
             case follow: {
@@ -85,40 +83,52 @@ let initialState= {
             default: return state
         }
     }
+    //ACTION CREATOR
 
-export const toggleFetchingAC=( isFetching:boolean)=>{return {type: toggleFetching, isFetching}}
+    //ToggleFetchingType
 type ToggleFetchingType= {type: "TOGGLE-FETCHING" , isFetching:boolean}
-export const setCurrentPageAC=( page:number)=>{return {type: setCurrentPage, page}}
+export const toggleFetchingAC=( isFetching:boolean) : ToggleFetchingType=>{return {type: toggleFetching, isFetching}}
+
+//setCurrentPage
 type setCurrentPageType={
     type:'SET_CURRENT-PAGE'
     page:number }
-export const setTotalUserAC=( totalUser:number)=>{return {type: setTotalUser, totalUser}}
+export const setCurrentPageAC=( page:number):setCurrentPageType=>{return {type: setCurrentPage, page}}
+
+// setTotalUser
 type setTotalUserType={
     type:'SET-TOTAL-USER'
     totalUser:number
 }
+export const setTotalUserAC=( totalUser:number):setTotalUserType=>{return {type: setTotalUser, totalUser}}
 
+//Follow
 type followTupe={
     type:'FOLLOW'
     id:number
 }
-export const followAC=( id:number)=>{return {type: follow, id:id}}
+export const followAC=( id:number): followTupe=>{return {type: follow, id:id}}
+
+//UnFollow
 type unFollow={ type:'UNFOLLOW'
     id:number
 }
-export const unFollowAC=(id:number)=>{return {type: unFollow, id: id }
+export const unFollowAC=(id:number):unFollow=>{return {type: unFollow, id: id }
 
 }
+// setUsersAC
  type setUsersAC={
     type: 'setUsers',
     user: usersType[]
 }
-export const setUsersAC=(users:usersType[])=>{return {type: setUsers, user: users}}
+export const setUsersAC=(users:usersType[]):setUsersAC=>{return {type: setUsers, user: users}}
+
+//toggleIsFetching
 type toggleIsFetchingType={
     type: "TOGGLE-PROGRESS-IS-FETCHING",
     id:number
     isFetching:boolean
 }
-export const toggleIsFetchingAC=(id:number, isFetching:boolean)=>{return {type: toggleProgress, id,isFetching}}
+export const toggleIsFetchingAC=(id:number, isFetching:boolean): toggleIsFetchingType=>{return {type: toggleProgress, id,isFetching}}
 
 export default reducerUsers;

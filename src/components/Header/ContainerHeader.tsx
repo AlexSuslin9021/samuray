@@ -1,20 +1,11 @@
 import React from "react";
-import s from './Header.module.css'
-import {NavLink} from "react-router-dom";
-import usersPhoto from "../../assets/image/3607444.png";
 import {Header} from "./Header";
-import axios from "axios";
-// import {GetUsersResponse} from "../Users/UsersContainer";
 import {connect} from "react-redux";
 import {AppstateType} from "../../Redux/reduxState";
 import {DataType,setUserDataAC} from "../../Redux/authReducers/authReducer";
 import { usersApi} from "../../API/api";
 
- type DataStateType={
-     data:DataType
-     resultCode:number
 
-}
 
 export type GetDataResponse={
     data:DataType

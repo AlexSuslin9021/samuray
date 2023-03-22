@@ -1,0 +1,25 @@
+.button{
+ height: 30px;
+ width: 80px;
+ background-color: white; /* Green */
+ color: #555555;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+ margin: 4px 2px;
+ transition-duration: 0.4s;
+ cursor: pointer;
+ border: 2px solid lightgrey;
+ border-radius: 5px;
+}
+.button:hover {
+
+ border: 2px solid #555555;
+}
+.window{
+ width: 40%;
+ height: 50px;
+ border: 2px solid #ccc;
+ border-radius: 4px;
+ resize: none;
+}

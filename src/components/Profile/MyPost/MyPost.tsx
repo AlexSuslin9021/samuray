@@ -1,5 +1,7 @@
 import React, {ChangeEvent} from "react";
-import a from './MyPost.module.css'
+import s from './MyPost.module.css'
+import style from '../../../common/PartUi.module.css'
+
 import {Post} from './Post/Post'
 import {propsPostMessege} from "../../../Redux/reducerProfile/reducerProfile";
 
@@ -33,12 +35,13 @@ function MyPost(props: PropsType) {
     const post = props.profilePage.post.map(m => <Post message={m.message} value={m.likes}/>)
 
     return (
-        <div className={a.item}>
-            <div>
-                <textarea value={props.profilePage.newTextPost} onChange={onchangePost}/>
+        <div className={s.item}>
+            <h3>My Post</h3>
+            <div >
+                <textarea className={`${style.window} ${s.post}`} value={props.profilePage.newTextPost} onChange={onchangePost}/>
             </div>
             <div>
-                <button onClick={onClickHandler}> Add</button>
+                <button className={style.button} onClick={onClickHandler}> Send</button>
             </div>
 
             {post}

@@ -19,17 +19,6 @@ type PhotosType={
 export type usersType=
     {id:number, photos: PhotosType, follow:boolean, name: string, status: string, location:locationtype}
 
-// {
-//     "name": "Vitaliy16",
-//     "id": 28233,
-//     "uniqueUrlName": null,
-//     "photos": {
-//     "small": null,
-//         "large": null
-// },
-//     "status": null,
-//     "followed": false
-// },
 
 type locationtype={
     city: string

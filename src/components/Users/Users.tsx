@@ -36,13 +36,12 @@ export const Users = (props: PropsUsersType) => {
 
     return (
         <div>
-            {props.isFetching && <div>
-                <img src={preloader} alt=""/>
-            </div>}
+            {props.isFetching && <div><img src={preloader} alt=""/></div>}
+
             {page.map((p, index) => <span key={index} className={props.currentPage === p ? s.selected : ''}
                                           onClick={() => props.onClickPage(p)}>{p}</span>)}
             {props.users.map(u => <div key={u.id}>
-                <div>
+                <div className={s.iconContainer}>
                     <NavLink to={'/profile/' + u.id}>
                         <img src={u.photos.small !== null ? u.photos.small : usersPhoto} alt=""/>
                     </NavLink>
@@ -52,7 +51,7 @@ export const Users = (props: PropsUsersType) => {
                     {/*<span> {'location.city'}</span>*/}
                     {/*<span> {'location.country'}</span>*/}
                 </div>
-                {u.follow ? <button disabled={props.progressIsFetching.some(el=>el===u.id)} onClick={() => {
+                {u.follow ? <button className={`${s.button} ${s.follow}`} disabled={props.progressIsFetching.some(el=>el===u.id)} onClick={() => {
                     debugger
                     props.toggleIsFetching(u.id,true)
                     usersApi.gtAuthDelete(u.id).then(response => {
@@ -61,7 +60,7 @@ export const Users = (props: PropsUsersType) => {
                         }
                         props.toggleIsFetching(u.id,false)
                     })
-                }}> Follow</button> : <button disabled={props.progressIsFetching.some(el=>el===u.id)} onClick={() => {
+                }}> Follow</button> : <button className={s.button} disabled={props.progressIsFetching.some(el=>el===u.id)} onClick={() => {
                     debugger
                     props.toggleIsFetching(u.id,true)
                     usersApi.gtAuthPost(u.id).then(response => {

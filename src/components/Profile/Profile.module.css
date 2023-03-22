@@ -1,4 +1,6 @@
-/*.contains{*/
-/*    background: lightgrey;*/
-/*    grid-area: c;*/
-/*}*/
+.contains{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-left: 20px;
+}

@@ -1,28 +1,31 @@
 import React from "react";
-import a from "../Profile.module.css";
+import s from "../ProfileInfo/ProfileInfo.module.css";
 import {ProfileType} from "../../../Redux/reducerProfile/reducerProfile";
 import users from '../../../assets/image/6.gif'
 
-type ProfileTypeInfo={
-    profile:ProfileType
+type ProfileTypeInfo = {
+    profile: ProfileType
 }
-export function ProfileInfo(props:ProfileTypeInfo) {
+
+export function ProfileInfo(props: ProfileTypeInfo) {
 
     return (
 
-        <div>
+        <div className={s.containProfileInfo}>
+            <div className={s.avatar}>
+                <img src={props.profile.photos.small ? props.profile.photos.small : users} alt=""/>
+            </div>
+            <div className={s.description}>
+                <div className={s.item}></div>
+                {/*<div> {props.profile.aboutMe}</div>*/}
+                <div> {props.profile.fullName}</div>
+                <div> Date of Birth</div>
+                <div> Location</div>
+                <div> Education</div>
+                <div> {props.profile.contacts.website}</div>
 
-            <div className={a.item}>
-                <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlCzLDRdu5WjTxrUB5Sd4bN022QuUH5ofeBf7w02xNYSHIAnkhttKQiqzBxlLpoJKuRTQ&usqp=CAU"
-                    alt=""/>
             </div>
-            <div> {props.profile.aboutMe}</div>
-            <img src={props.profile.photos.small ? props.profile.photos.small :users} alt=""/>
-            <div className={a.item}>
-                <div>{props.profile.aboutMe}</div>
-                ava + descript
-            </div>
+
 
         </div>)
 }

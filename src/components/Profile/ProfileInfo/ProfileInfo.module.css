@@ -1,1 +1,23 @@
+/*.contains{*/
+/*    background: lightgrey;*/
+/*    grid-area: c;*/
+/*}*/
+.containProfileInfo{
+    display: flex;
+    /*margin-top: 50px;*/
+    /*margin-left: 40px;*/
 
+}
+
+.avatar img{
+    width: 70px;
+    height: 100px;
+    margin-right: 20px;
+}
+.description{
+
+}
+.post{
+    width: 250px;
+    height: 70px;
+}

@@ -2,6 +2,7 @@ import React from "react";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostContainer} from "./MyPost/MyPostContainer";
 import {ProfileType} from "../../Redux/reducerProfile/reducerProfile";
+import s from   './Profile.module.css'
 
 type ProfileTypeInfo={
     profile:ProfileType
@@ -9,7 +10,7 @@ type ProfileTypeInfo={
 export function Profile(props:ProfileTypeInfo){
     debugger
     return(
-        <div className='contains'>
+        <div className={s.contains}>
             <ProfileInfo profile={props.profile}  />
             <MyPostContainer />
 

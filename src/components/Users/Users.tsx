@@ -20,6 +20,8 @@ type PropsUsersType = {
     setFetching: (fetching: boolean) => void
     toggleIsFetching: (id: number, isFetching: boolean) => void
     progressIsFetching:number[]
+    followThunkCreator:(id:number)=>void
+    unFollowThunkCreator:(id:number)=>void
 }
 
 export type PostUsersResponse = {
@@ -53,22 +55,10 @@ export const Users = (props: PropsUsersType) => {
                 </div>
                 {u.follow ? <button className={`${s.button} ${s.follow}`} disabled={props.progressIsFetching.some(el=>el===u.id)} onClick={() => {
                     debugger
-                    props.toggleIsFetching(u.id,true)
-                    usersApi.gtAuthDelete(u.id).then(response => {
-                        if (response.resultCode === 0) {
-                            props.unFollow(u.id)
-                        }
-                        props.toggleIsFetching(u.id,false)
-                    })
+                    props.unFollowThunkCreator(u.id)
                 }}> Follow</button> : <button className={s.button} disabled={props.progressIsFetching.some(el=>el===u.id)} onClick={() => {
                     debugger
-                    props.toggleIsFetching(u.id,true)
-                    usersApi.gtAuthPost(u.id).then(response => {
-                        if (response.resultCode === 0) {
-                            props.follow(u.id)
-                        }
-                        props.toggleIsFetching(u.id,false)
-                    })
+                   props.followThunkCreator(u.id)
                 }}> UnfOllow</button>}
             </div>)}
         </div>

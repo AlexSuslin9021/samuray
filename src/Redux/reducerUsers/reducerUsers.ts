@@ -1,7 +1,7 @@
-
-
-
-
+import {usersApi} from "../../API/api";
+import {Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
+import {AppstateType} from "../reduxState";
 
 
 const follow='FOLLOW'
@@ -41,7 +41,7 @@ let initialState:initialStateType= {
     isFetching:false,
     progressIsFetching:[]
 }
-type ActionType=followTupe | toggleIsFetchingType | unFollow | setUsersAC | setCurrentPageType | setTotalUserType | ToggleFetchingType
+export type ActionType=followTupe | toggleIsFetchingType | unFollow | setUsersAC | setCurrentPageType | setTotalUserType | ToggleFetchingType
 
   export  const reducerUsers = (state:initialStateType=initialState, action:ActionType) :initialStateType => {
 
@@ -120,4 +120,40 @@ type toggleIsFetchingType={
 }
 export const toggleIsFetchingAC=(id:number, isFetching:boolean): toggleIsFetchingType=>{return {type: toggleProgress, id,isFetching}}
 
+
+
+export const getUserThunkCreator=(currentPage:number, pageSize:number):ThunkAction<Promise<void>, initialStateType, unknown, ActionType>=>{
+    return async (dispatch:Dispatch<ActionType>)=> {
+      dispatch( toggleFetchingAC(true))
+        usersApi.getUsers(currentPage, pageSize).then(response => {
+            dispatch(   setUsersAC(response.items))
+            dispatch(  setTotalUserAC(response.totalCount))
+            dispatch( toggleFetchingAC(false))
+        })
+    }
+}
+
+export const followThunkCreator=(id:number):ThunkAction<Promise<void>, initialStateType, unknown, ActionType>=> {
+    return async (dispatch: Dispatch<ActionType>) => {
+        dispatch(toggleIsFetchingAC(id,true))
+        usersApi.gtAuthPost(id).then(response => {
+            if (response.resultCode === 0) {
+                dispatch(followAC(id))
+            }
+            dispatch(toggleIsFetchingAC(id,false))
+        })
+    }
+}
+export const unFollowThunkCreator=(id:number):ThunkAction<Promise<void>, initialStateType, unknown, ActionType>=> {
+    return async (dispatch: Dispatch<ActionType>) => {
+        dispatch(toggleIsFetchingAC(id,true))
+        usersApi.gtAuthDelete(id).then(response => {
+
+            if (response.resultCode === 0) {
+                dispatch(unFollowAC(id))
+            }
+            dispatch(toggleIsFetchingAC(id,false))
+        })
+    }
+}
 export default reducerUsers;

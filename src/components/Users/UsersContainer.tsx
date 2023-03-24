@@ -1,17 +1,21 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    followAC,
+
+    followAC, followThunkCreator, getUserThunkCreator,
     setCurrentPageAC,
     setTotalUserAC,
     setUsersAC,
     toggleFetchingAC, toggleIsFetchingAC,
-    unFollowAC,
+    unFollowAC, unFollowThunkCreator,
     usersType
 } from "../../Redux/reducerUsers/reducerUsers";
 import {AppstateType} from "../../Redux/reduxState";
 import {Users} from "./Users";
 import {usersApi} from "../../API/api";
+
+
+
 
 
 export type PropsUsersType = {
@@ -28,6 +32,11 @@ export type PropsUsersType = {
     setFetching:( fetching:boolean)=>void
     toggleIsFetching:(id:number, isFetching:boolean)=>void
     progressIsFetching:number[]
+    getUserThunkCreator:(currentPage:number, pageSize:number)=>void
+    followThunkCreator:(id:number)=>void
+    unFollowThunkCreator:(id:number)=>void
+
+    // getUserThunkCreator:(currentPage:number, pageSize:number)=>(dispatch:Dispatch)=>void
 
 }
 
@@ -40,22 +49,12 @@ export type GetUsersResponse = {
 
 class UsersC extends React.Component<PropsUsersType, usersType[]> {
     componentDidMount() {
-        this.props.setFetching(true)
-        usersApi.getUsers(this.props.currentPage, this.props.pageSize).then(response => {
-            this.props.setUsers(response.items)
-            this.props.setTotalUser(response.totalCount)
-            this.props.setFetching(false)
-        })
+        this.props.getUserThunkCreator(this.props.currentPage,this.props.pageSize)
 
     }
 
     onClickPage = (pageNumber: number) => {
-        this.props.setFetching(true)
-        this.props.setCurrentPage(pageNumber)
-        usersApi.getUsers(pageNumber, this.props.pageSize).then(response => {
-            this.props.setUsers(response.items)
-            this.props.setFetching(false)
-        })
+        this.props.getUserThunkCreator(pageNumber,this.props.pageSize)
 
     }
 
@@ -72,6 +71,8 @@ class UsersC extends React.Component<PropsUsersType, usersType[]> {
                       setFetching={this.props.setFetching}
                       toggleIsFetching={this.props.toggleIsFetching}
                       progressIsFetching={this.props.progressIsFetching}
+                      followThunkCreator={this.props.followThunkCreator}
+                      unFollowThunkCreator={this.props.unFollowThunkCreator}
         />
     }
 }
@@ -106,7 +107,10 @@ const UsersContainer = connect(mapStateToProps, {
     setCurrentPage:setCurrentPageAC,
     setTotalUser:setTotalUserAC,
     setFetching: toggleFetchingAC,
-    toggleIsFetching: toggleIsFetchingAC
+    toggleIsFetching: toggleIsFetchingAC,
+    getUserThunkCreator,
+    followThunkCreator,
+    unFollowThunkCreator,
 })
 (UsersC)
 //создает контейнерную компоненту UsersContainer для Users

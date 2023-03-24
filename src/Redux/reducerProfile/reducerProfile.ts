@@ -1,3 +1,7 @@
+import {Dispatch} from "redux";
+import {usersApi} from "../../API/api";
+import {ThunkAction} from "redux-thunk";
+
 
 
 export type propsProfilePage = {
@@ -128,4 +132,13 @@ export const changeProfileAC = (profile: ProfileType):changeProfileType => {
     }
 }
 
+export const changeProfileThunkCreator=(userId:string):ThunkAction<Promise<void>, propsProfilePage, unknown, changeProfileType>=>{
+    return async (dispatch: Dispatch<ActionType>)=>{
+        usersApi.getProfile(userId).then(response => {
+
+            dispatch(changeProfileAC(response))
+
+        })
+    }
+}
 

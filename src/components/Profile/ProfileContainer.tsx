@@ -2,23 +2,19 @@ import React from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {AppstateType} from "../../Redux/reduxState";
-import {changeProfileAC, ProfileType} from "../../Redux/reducerProfile/reducerProfile";
+import {changeProfileAC, changeProfileThunkCreator, ProfileType} from "../../Redux/reducerProfile/reducerProfile";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import { usersApi} from "../../API/api";
 
 type ProfileContainerType= MapStateToPropsType &{
 
-    setProfile:(profile: ProfileType)=>void
+    setProfile:(userId: string)=>void
 }
 
 export class ProfileContainer extends React.Component <PropsType>{
     componentDidMount(){
         let userId=this.props.match.params.userId
-        usersApi.getProfile(userId).then(response => {
-
-            this.props.setProfile(response)
-
-        })
+      this.props.setProfile(userId)
     }
     render() {
         return <Profile profile={this.props.profile} />
@@ -43,5 +39,5 @@ const mapStateToProps=(state:AppstateType):MapStateToPropsType=>{
 
 let withRouterForProfile= withRouter(ProfileContainer)
 export const ContainerForProfileContainer= connect(mapStateToProps, {
-    setProfile:changeProfileAC
+    setProfile:changeProfileThunkCreator
 })(withRouterForProfile)

@@ -4,13 +4,11 @@ import usersPhoto from '../../assets/image/3607444.png'
 import s from "./Users.module.css";
 import {usersType} from "../../Redux/reducerUsers/reducerUsers";
 import preloader from '../../assets/image/6.gif'
-import {usersApi} from "../../API/api";
+
 
 
 type PropsUsersType = {
     users: usersType[]
-    follow: (id: number) => void
-    unFollow: (id: number) => void
     setUsers: (users: usersType[]) => void
     totalUsersCount: number
     pageSize: number
@@ -18,7 +16,7 @@ type PropsUsersType = {
     onClickPage: (pageNumber: number) => void
     isFetching: boolean
     setFetching: (fetching: boolean) => void
-    toggleIsFetching: (id: number, isFetching: boolean) => void
+
     progressIsFetching:number[]
     followThunkCreator:(id:number)=>void
     unFollowThunkCreator:(id:number)=>void
@@ -59,7 +57,7 @@ export const Users = (props: PropsUsersType) => {
                 }}> Follow</button> : <button className={s.button} disabled={props.progressIsFetching.some(el=>el===u.id)} onClick={() => {
                     debugger
                    props.followThunkCreator(u.id)
-                }}> UnfOllow</button>}
+                }}> UnFollow</button>}
             </div>)}
         </div>
     );

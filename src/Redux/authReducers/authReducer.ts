@@ -1,3 +1,8 @@
+import {usersApi} from "../../API/api";
+import {Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
+import {propsProfilePage} from "../reducerProfile/reducerProfile";
+
 const setUserData='SET_USER_DATA'
 
 //initialState
@@ -46,5 +51,14 @@ export const setUserDataAC=(data:DataType):setUserDataType=>{
     return{
         type:setUserData,
         data
+    }
+}
+
+export const setUserThunkCreator=():ThunkAction<Promise<void>, initialStateType, unknown, ActionType>=>{
+    return async (dispatch:Dispatch<setUserDataType>)=>{
+        usersApi.getAuth().then(response=>{
+            if(response.resultCode===0)
+              dispatch(setUserDataAC(response.data))
+        })
     }
 }

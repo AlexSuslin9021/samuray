@@ -2,7 +2,7 @@ import React from "react";
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import {AppstateType} from "../../Redux/reduxState";
-import {DataType,setUserDataAC} from "../../Redux/authReducers/authReducer";
+import {DataType, setUserThunkCreator} from "../../Redux/authReducers/authReducer";
 import { usersApi} from "../../API/api";
 
 
@@ -15,16 +15,13 @@ export type GetDataResponse={
 
 }
 type ContainerComponentType=mapStateToPropsType & {
-   setUserdata:(data:DataType)=>void
+   setUserdata:()=>void
 
 }
 export class ContainerHeader extends React.Component<ContainerComponentType>{
     componentDidMount() {
 
-        usersApi.getAuth().then(response=>{
-            if(response.resultCode===0)
-            this.props.setUserdata(response.data)
-        })
+        this.props.setUserdata()
     }
 
     render() {
@@ -47,4 +44,4 @@ const mapStateToProps=(state:AppstateType):mapStateToPropsType=>{
 }
 export const DataHeader=connect(mapStateToProps,{
 
-    setUserdata: setUserDataAC})(ContainerHeader)
+    setUserdata: setUserThunkCreator})(ContainerHeader)

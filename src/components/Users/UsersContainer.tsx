@@ -7,7 +7,7 @@ import {
     setTotalUserAC,
     setUsersAC,
     toggleFetchingAC, toggleIsFetchingAC,
-    unFollowAC, unFollowThunkCreator,
+     unFollowThunkCreator,
     usersType
 } from "../../Redux/reducerUsers/reducerUsers";
 import {AppstateType} from "../../Redux/reduxState";
@@ -20,8 +20,7 @@ import {usersApi} from "../../API/api";
 
 export type PropsUsersType = {
     users: usersType[]
-    follow: (id: number) => void
-    unFollow: (id: number) => void
+
     setUsers: (users: usersType[]) => void
     totalUsersCount: number
     pageSize: number
@@ -30,7 +29,7 @@ export type PropsUsersType = {
     setTotalUser: (totalUser: number) => void
     isFetching:boolean
     setFetching:( fetching:boolean)=>void
-    toggleIsFetching:(id:number, isFetching:boolean)=>void
+
     progressIsFetching:number[]
     getUserThunkCreator:(currentPage:number, pageSize:number)=>void
     followThunkCreator:(id:number)=>void
@@ -60,8 +59,7 @@ class UsersC extends React.Component<PropsUsersType, usersType[]> {
 
     render() {
         return <Users users={this.props.users}
-                      unFollow={this.props.unFollow}
-                      follow={this.props.follow}
+
                       totalUsersCount={this.props.totalUsersCount}
                       pageSize={this.props.pageSize}
                       currentPage={this.props.currentPage}
@@ -69,7 +67,7 @@ class UsersC extends React.Component<PropsUsersType, usersType[]> {
                       setUsers={this.props.setUsers}
                       isFetching={this.props.isFetching}
                       setFetching={this.props.setFetching}
-                      toggleIsFetching={this.props.toggleIsFetching}
+                      // toggleIsFetching={this.props.toggleIsFetching}
                       progressIsFetching={this.props.progressIsFetching}
                       followThunkCreator={this.props.followThunkCreator}
                       unFollowThunkCreator={this.props.unFollowThunkCreator}
@@ -101,13 +99,12 @@ const mapStateToProps = (state: AppstateType) :mapStateToPropsType => {
 
 
 const UsersContainer = connect(mapStateToProps, {
-    follow: followAC,
-    unFollow:unFollowAC,
+
     setUsers:setUsersAC,
     setCurrentPage:setCurrentPageAC,
     setTotalUser:setTotalUserAC,
     setFetching: toggleFetchingAC,
-    toggleIsFetching: toggleIsFetchingAC,
+
     getUserThunkCreator,
     followThunkCreator,
     unFollowThunkCreator,

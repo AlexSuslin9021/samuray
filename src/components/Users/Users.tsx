@@ -33,7 +33,7 @@ export const Users = (props: PropsUsersType) => {
     for (let i = 1; i <= pageCount; i++) {
         page.push(i)
     }
-
+debugger
     return (
         <div>
             {props.isFetching && <div><img src={preloader} alt=""/></div>}

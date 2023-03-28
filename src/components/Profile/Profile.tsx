@@ -4,11 +4,14 @@ import {MyPostContainer} from "./MyPost/MyPostContainer";
 import {ProfileType} from "../../Redux/reducerProfile/reducerProfile";
 import s from   './Profile.module.css'
 
+
 type ProfileTypeInfo={
     profile:ProfileType
+
 }
 export function Profile(props:ProfileTypeInfo){
-    debugger
+
+
     return(
         <div className={s.contains}>
             <ProfileInfo profile={props.profile}  />

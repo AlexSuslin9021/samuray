@@ -26,7 +26,7 @@ function MyPost(props: PropsType) {
 
     }
     const onchangePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        debugger
+
         props.onChangeText(e.currentTarget.value)
 
 

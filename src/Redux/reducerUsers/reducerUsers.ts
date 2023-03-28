@@ -38,7 +38,7 @@ let initialState:initialStateType= {
     totalUsersCount:20,
     pageSize:5,
     currentPage:1,
-    isFetching:false,
+    isFetching:true,
     progressIsFetching:[]
 }
 export type ActionType=followTupe | toggleIsFetchingType | unFollow | setUsersAC | setCurrentPageType | setTotalUserType | ToggleFetchingType

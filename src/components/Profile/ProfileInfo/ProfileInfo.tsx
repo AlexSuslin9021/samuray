@@ -17,7 +17,7 @@ export function ProfileInfo(props: ProfileTypeInfo) {
             </div>
             <div className={s.description}>
                 <div className={s.item}></div>
-                {/*<div> {props.profile.aboutMe}</div>*/}
+                <div> {props.profile.aboutMe}</div>
                 <div> {props.profile.fullName}</div>
                 <div> Date of Birth</div>
                 <div> Location</div>

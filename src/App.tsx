@@ -9,6 +9,7 @@ import NavbarConteiner from "./components/Nawbar/NavbarContainer";
 import {ContainerForProfileContainer} from "./components/Profile/ProfileContainer";
 import {DataHeader} from "./components/Header/ContainerHeader";
 import UsersContainer from "./components/Users/UsersContainer";
+import Login from "./components/Login/Login";
 
 
 function App() {
@@ -18,12 +19,13 @@ function App() {
                 <DataHeader  />
                 <div className={'app-wrapper-content'}>
                 <NavbarConteiner />
-                    <Route path={'/profile/:userId'} render={() => <ContainerForProfileContainer   />}/>
+                    <Route path={'/profile/:userId?'} render={() => <ContainerForProfileContainer   />}/>
                     <Route path={'/dialogs'} render={() => <DialogsCont/>}/>
                     <Route path={'/news'} component={News}/>
                     <Route path={'/users'} render={() =>  <UsersContainer />}/>
                     <Route path={'/music'} component={Music}/>
                     <Route path={'/settings'} component={Settings}/>
+                    <Route path={'/login'} component={Login}/>
 
                 </div>
             </div>

@@ -42,7 +42,7 @@ type PhotoType={
 
 export type propsPostMessege = {
     id: string | number
-    message: string
+    message?: string
     likes: number
 }
 let initialState:propsProfilePage = {

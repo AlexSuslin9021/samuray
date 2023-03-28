@@ -4,12 +4,14 @@ import s from './Dialogs.module.css'
 import {DialogsItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {propsDialogsPage} from "../../Redux/reduserDialogs/reducerDialogs";
+import {Redirect} from "react-router-dom";
 
 
 type propsDoalogs={
     dialogs:propsDialogsPage
     add:(newDialog:string)=>void
     onChangeText:(e:string)=>void
+    // isAuth:boolean
 }
 
 
@@ -25,6 +27,8 @@ function Dialogs(props:propsDoalogs){
     }
     const user= props.dialogs.users.map(u=><DialogsItem id={u.id}    name ={u.name}/>)
     const  dialog=props.dialogs.dialogs.map(d=><Message message={d.name}/>)
+
+    // if(!props.isAuth) return <Redirect to={'/login'}/>
     return<div className={s.dialogsContent}>
 
         <div className={s.users}>

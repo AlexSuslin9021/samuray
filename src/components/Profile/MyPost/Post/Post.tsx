@@ -1,13 +1,15 @@
 import React from "react";
 import s from './Post.module.css'
+import userPost from'../../../../common/256-512.png'
 type PostPropsType={
     message?:string
     value:number
+
 }
 export function Post(props:PostPropsType){
-    return (<div className={s.item}>
+    return (<div  className={s.item}>
 <div className={s.likeIcon}>
-        <img  src="https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png" alt=""/>
+        <img  src={userPost} alt=""/>
        <span> {props.value}</span>
 </div>
         <div>

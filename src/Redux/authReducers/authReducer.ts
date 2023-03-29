@@ -1,7 +1,7 @@
 import {usersApi} from "../../API/api";
 import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
-import {propsProfilePage} from "../reducerProfile/reducerProfile";
+// import {propsProfilePage} from "../reducerProfile/reducerProfile";
 
 const setUserData='SET_USER_DATA'
 
@@ -35,7 +35,8 @@ type ActionType=setUserDataType
 
         switch(action.type) {
             case setUserData: {
-                return {...state,data:{ ...action.data}, isAuth:true }
+
+                return {...state, data:{ ...action.data}, isAuth:true }
             }
 
             default: return state

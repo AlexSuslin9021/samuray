@@ -32,7 +32,7 @@ function MyPost(props: PropsType) {
 
     }
 
-    const post = props.profilePage.post.map(m => <Post message={m.message} value={m.likes}/>)
+    const post = props.profilePage.post.map(m => <Post key={+m.id}  message={m.message} value={m.likes}/>)
 
     return (
         <div className={s.item}>

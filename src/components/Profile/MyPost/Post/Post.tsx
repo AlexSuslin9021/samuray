@@ -5,6 +5,8 @@ type PostPropsType={
     message?:string
     value:number
 
+
+
 }
 export function Post(props:PostPropsType){
     return (<div  className={s.item}>

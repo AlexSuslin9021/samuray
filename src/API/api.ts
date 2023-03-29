@@ -23,6 +23,7 @@ export const usersApi = {
         })
     },
     getProfile: (userId: string) => {
+        if(!userId) userId='28028'
 
         return instance.get<ProfileType>(api + `profile/` + userId).then(response => {
             return response.data

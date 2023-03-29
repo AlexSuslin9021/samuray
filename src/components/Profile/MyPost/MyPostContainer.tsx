@@ -14,4 +14,4 @@ const mapStateToProps=(state:AppstateType):mapStateToPropsType=>{
     }
 }
 
-export const MyPostContainer=connect(mapStateToProps, {addPost:addPOstAc,onChangeText:changeTitleAC})(MyPost)
+export const  MyPostContainer=connect(mapStateToProps, {addPost:addPOstAc,onChangeText:changeTitleAC})(MyPost)

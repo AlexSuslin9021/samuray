@@ -25,8 +25,8 @@ function Dialogs(props:propsDoalogs){
     const onChangeText=(e:ChangeEvent<HTMLTextAreaElement>)=>{
         props.onChangeText(e.currentTarget.value)
     }
-    const user= props.dialogs.users.map(u=><DialogsItem id={u.id}    name ={u.name}/>)
-    const  dialog=props.dialogs.dialogs.map(d=><Message message={d.name}/>)
+    const user= props.dialogs.users.map(u=><DialogsItem  key={u.id} id={u.id}  name ={u.name}/>)
+    const  dialog=props.dialogs.dialogs.map(d=><Message key={d.id} message={d.name}/>)
 
     // if(!props.isAuth) return <Redirect to={'/login'}/>
     return<div className={s.dialogsContent}>

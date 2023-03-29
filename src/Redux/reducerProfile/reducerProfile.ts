@@ -48,7 +48,7 @@ export type propsPostMessege = {
 let initialState:propsProfilePage = {
     post: [
         {id: '1', message: 'How are you?', likes: 15},
-        {id: '1', message: 'It\'s my first post!', likes: 20}],
+        {id: '2', message: 'It\'s my first post!', likes: 20}],
     newTextPost: '',
     profile:{
         "aboutMe": "я крут",
@@ -132,7 +132,7 @@ export const changeProfileAC = (profile: ProfileType):changeProfileType => {
     }
 }
 
-export const changeProfileThunkCreator=(userId:string):ThunkAction<Promise<void>, propsProfilePage, unknown, changeProfileType>=>{
+export const changeProfileThunkCreator=(userId:any):ThunkAction<Promise<void>, propsProfilePage, unknown, changeProfileType>=>{
     return async (dispatch: Dispatch<ActionType>)=>{
         usersApi.getProfile(userId).then(response => {
 

@@ -27,7 +27,8 @@ beforeEach(()=>{
                 "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
                 "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
             }
-        }
+        },
+        status:'status'
     }
 })
 test('New post should be add in array post',()=>{

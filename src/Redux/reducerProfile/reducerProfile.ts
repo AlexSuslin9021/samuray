@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {usersApi} from "../../API/api";
+import {profileApi, usersApi} from "../../API/api";
 import {ThunkAction} from "redux-thunk";
 
 
@@ -8,6 +8,7 @@ export type propsProfilePage = {
     post: propsPostMessege[]
     newTextPost: string
     profile:ProfileType
+    status:string
 }
 export type ProfileType={
 
@@ -18,6 +19,7 @@ export type ProfileType={
         "fullName": "samurai dimych",
         "userId": number,
         "photos": PhotoType
+
 
 }
 type ContactProfileType={
@@ -70,12 +72,13 @@ let initialState:propsProfilePage = {
             "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
             "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
         }
-    }
+    },
+    status:'status'
 }
 
 
 
-type ActionType=actionPOstType | changeTitleType | changeProfileType
+type ActionType=actionPOstType | changeTitleType | changeProfileType | getStatusType
 export const reducerProfile = (state: propsProfilePage = initialState, action: ActionType ): propsProfilePage => {
 
     switch (action.type) {
@@ -87,7 +90,9 @@ export const reducerProfile = (state: propsProfilePage = initialState, action: A
             // state.newTextPost = action.post
             return {...state, newTextPost: action.newText};
         case "CHANGE-PROFILE":
-            return {...state, profile:action.profile}
+            return {...state, profile:action.profile};
+        case "GET-STATUS":
+            return {...state, status:action.status}
         default:
             return state
     }
@@ -132,12 +137,46 @@ export const changeProfileAC = (profile: ProfileType):changeProfileType => {
     }
 }
 
+
+type changeStatusType={
+    type: 'CHANGE-STATUS',
+    status: string
+}
+
+export const changeStatusAC = (status: string) => {
+    return {
+        type: 'CHANGE-STATUS',
+        status
+    }
+}
+
+type getStatusType={
+    type: 'GET-STATUS',
+    status: string
+}
+
+export const getStatusAC = (status: string): getStatusType => {
+    return {
+        type: 'GET-STATUS',
+        status
+    }
+}
+
 export const changeProfileThunkCreator=(userId:any):ThunkAction<Promise<void>, propsProfilePage, unknown, changeProfileType>=>{
     return async (dispatch: Dispatch<ActionType>)=>{
         usersApi.getProfile(userId).then(response => {
 
             dispatch(changeProfileAC(response))
 
+        })
+    }
+}
+
+export const getProfileStatusTC=(userId:any):ThunkAction<Promise<void>, propsProfilePage, unknown, getStatusType>=>{
+    return async (dispatch: Dispatch<ActionType>)=>{
+        debugger
+        profileApi.getStatus('28028').then(response=>{
+            dispatch(getStatusAC(response.data))
         })
     }
 }

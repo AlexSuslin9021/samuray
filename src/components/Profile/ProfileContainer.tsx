@@ -2,7 +2,12 @@ import React, {ComponentType} from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {AppstateType} from "../../Redux/reduxState";
-import {changeProfileThunkCreator, getProfileStatusTC, ProfileType} from "../../Redux/reducerProfile/reducerProfile";
+import {
+    changeProfileThunkCreator,
+    getProfileStatusTC,
+    ProfileType,
+    updateProfileStatusTC
+} from "../../Redux/reducerProfile/reducerProfile";
 import { RouteComponentProps, withRouter} from "react-router-dom";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -13,11 +18,12 @@ type ProfileContainerType = MapStateToPropsType & {
     setProfile: (userId: any) => void
     status:string
     getProfileStatus:(userId:string)=>void
+    updateProfileStatus:(status:string)=>void
 }
 
 export class ProfileContainer extends React.Component <PropsType> {
     componentDidMount() {
-        debugger
+
         let userId = this.props.match.params.userId
         if(!userId) {
             userId='28028'}
@@ -29,7 +35,8 @@ export class ProfileContainer extends React.Component <PropsType> {
 
 
         return <Profile {...this.props} profile={this.props.profile} status={this.props.status}
-                        getProfileStatus={this.props.getProfileStatus} />
+                        updateProfileStatus={this.props.updateProfileStatus}
+                        />
     }
 
 }
@@ -58,7 +65,8 @@ export const ContainerForProfileContainer= compose<ComponentType>(
     withAuthRedirect,
     connect(mapStateToProps, {
         setProfile: changeProfileThunkCreator,
-        getProfileStatus: getProfileStatusTC
+        getProfileStatus: getProfileStatusTC,
+        updateProfileStatus:updateProfileStatusTC
     }),
     withRouter
 )(ProfileContainer)

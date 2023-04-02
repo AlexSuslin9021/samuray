@@ -7,7 +7,8 @@ import ProfileStatus from "./ProfileStatus";
 type ProfileTypeInfo = {
     profile: ProfileType
     status:string
-    getProfileStatus:(status:string)=>void
+    updateProfileStatus:(status:string)=>void
+
 }
 
 export function ProfileInfo(props: ProfileTypeInfo) {
@@ -19,7 +20,7 @@ export function ProfileInfo(props: ProfileTypeInfo) {
                 <img src={props.profile.photos.small ? props.profile.photos.small : users} alt=""/>
             </div>
             <div className={s.description}>
-                <ProfileStatus status={props.status}     getProfileStatus={props.getProfileStatus}/>
+                <ProfileStatus status={props.status}  updateProfileStatus={props.updateProfileStatus}    />
                 <div className={s.item}></div>
                 <div> {props.profile.aboutMe}</div>
                 <div> {props.profile.fullName}</div>

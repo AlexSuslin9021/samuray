@@ -52,6 +52,13 @@ export const usersApi = {
     }
 }
 
+type ApiProfilePutType=
+{
+    resultCode: number
+    messages: string[],
+        data: {}
+}
+
 export const profileApi = {
     getProfile: (userId: string) => {
         if(!userId) userId='28028'
@@ -61,15 +68,13 @@ export const profileApi = {
         })
     },
     getStatus(userId:string){
-        debugger
+
         // if(!userId) userId='28028'
         return instance.get(api +`profile/status/${userId}`)
     },
     updateStatus(status:string){
-        return instance.put(api +`status`,{status:status}).then(response=>{
 
-            return response.data
-        })
+        return instance.put<ApiProfilePutType>(api +`profile/status`,{status:status})
     },
 }
 // export const getUsers = (currentPage: number, pageSize: number) => {

@@ -174,10 +174,20 @@ export const changeProfileThunkCreator=(userId:any):ThunkAction<Promise<void>, p
 
 export const getProfileStatusTC=(userId:any):ThunkAction<Promise<void>, propsProfilePage, unknown, getStatusType>=>{
     return async (dispatch: Dispatch<ActionType>)=>{
-        debugger
-        profileApi.getStatus('28028').then(response=>{
+
+        profileApi.getStatus(userId).then(response=>{
+
             dispatch(getStatusAC(response.data))
         })
     }
 }
 
+export const updateProfileStatusTC=(status:string):ThunkAction<Promise<void>, propsProfilePage, unknown, getStatusType>=>{
+    return async (dispatch: Dispatch<ActionType>)=>{
+
+        profileApi.updateStatus(status).then(response=>{
+if (response.data.resultCode===0)
+            dispatch(getStatusAC(status))
+        })
+    }
+}

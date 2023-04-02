@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 
 type ProfileStatusType={
     status:string
-    getProfileStatus:(status:string)=>void
+    updateProfileStatus:(status:string)=>void
+
 }
 class ProfileStatus extends React.Component<ProfileStatusType>{
 
@@ -10,17 +11,24 @@ class ProfileStatus extends React.Component<ProfileStatusType>{
         editMode:false,
         status:this.props.status
     }
-    onClickHandler=()=>{
-        this.setState( {editMode:!this.state.editMode})
+    activateMode=()=>{
+        this.setState( {editMode:true})
+        this.props.updateProfileStatus(this.state.status)
+    }
+    desActivatedMode=()=>{
+        this.setState( {editMode:false})
+    }
+    onChangeStatus=(e:ChangeEvent<HTMLInputElement>)=>{
+        this.setState( {status: e.currentTarget.value})
     }
 
 render() {
-debugger
+
     return <div>
         { this.state.editMode ?
-        <span> <input autoFocus={true} onBlur={this.onClickHandler}/></span>
+        <span> <input onChange={this.onChangeStatus} value={this.state.status} autoFocus={true} onBlur={this.desActivatedMode}/></span>
             :
-        <span onDoubleClick={this.onClickHandler}> {this.props.status}</span>
+        <span onDoubleClick={this.activateMode}> {this.state.status || 'Hello friend'}</span>
         }
     </div>;
 }

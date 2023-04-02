@@ -8,7 +8,8 @@ import s from   './Profile.module.css'
 type ProfileTypeInfo={
     profile:ProfileType
     status:string
-    getProfileStatus:(status:string)=>void
+    updateProfileStatus:(status:string)=>void
+
 
 }
 export function Profile(props:ProfileTypeInfo){
@@ -16,7 +17,7 @@ export function Profile(props:ProfileTypeInfo){
 
     return(
         <div className={s.contains}>
-            <ProfileInfo profile={props.profile} status={props.status}  getProfileStatus={props.getProfileStatus}/>
+            <ProfileInfo profile={props.profile} status={props.status}  updateProfileStatus={props.updateProfileStatus}   />
             <MyPostContainer />
 
         </div>

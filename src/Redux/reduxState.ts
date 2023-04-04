@@ -5,6 +5,7 @@ import reducerUsers from "./reducerUsers/reducerUsers";
 import {reducerProfile} from "./reducerProfile/reducerProfile";
 import {authReducer} from "./authReducers/authReducer";
 import thunk from 'redux-thunk'
+import {reducer as formReducer} from 'redux-form'
 
 let redusers = combineReducers({
 
@@ -12,7 +13,8 @@ let redusers = combineReducers({
         reducerProfile,
         reducerDialogs,
         reducerUsers,
-        authReducer
+        authReducer,
+        form: formReducer
     }
 )
 export type AppstateType = ReturnType<typeof redusers>

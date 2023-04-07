@@ -70,12 +70,12 @@ type ActionType=addNewDialogType | changeNewDialogType
     const reducerDialogs = (state:propsDialogsPage=initialState, action:ActionType ) => {
 
         switch(action.type) {
-            case 'NEW-MESSEGES': {
-                return {...state, newDialog :action.newText}
-            }
+            // case 'NEW-MESSEGES': {
+            //     return {...state, newDialog :action.newText}
+            // }
             case 'NEW-DIALOG': {
                 let newPost = {id: '7', name: action.newText}
-                state.newDialog=''
+                // state.newDialog=''
                 return {...state, dialogs:[...state.dialogs,newPost]}
             }
             default: return state
@@ -94,11 +94,11 @@ export const addNewDialogAC=(newDialog:string ):addNewDialogType=>{
     }
 }
 
-export const changeNewDialogCreatorAC=(newDialog:string):changeNewDialogType=>{
-    return {
-        type: 'NEW-MESSEGES',
-        newText: newDialog
-    }
+// export const changeNewDialogCreatorAC=(newDialog:string):changeNewDialogType=>{
+//     return {
+//         type: 'NEW-MESSEGES',
+//         newText: newDialog
+//     }
 
-}
+// }
 export default reducerDialogs;

@@ -9,7 +9,7 @@ type PostPropsType={
 
 }
 export function Post(props:PostPropsType){
-    return (<div  className={s.item}>
+    return <div  className={s.item}>
 <div className={s.likeIcon}>
         <img  src={userPost} alt=""/>
        <span> {props.value}</span>
@@ -17,5 +17,5 @@ export function Post(props:PostPropsType){
         <div>
            <span>    {props.message}</span>
        </div>
-    </div>)
+    </div>
 }

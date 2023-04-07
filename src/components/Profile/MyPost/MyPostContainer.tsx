@@ -1,5 +1,5 @@
 import React from "react";
-import {addPOstAc, changeTitleAC, propsProfilePage} from "../../../Redux/reducerProfile/reducerProfile";
+import {addPOstAc,  propsProfilePage} from "../../../Redux/reducerProfile/reducerProfile";
 import MyPost from "./MyPost";
 import {connect} from "react-redux";
 import {AppstateType} from "../../../Redux/reduxState";
@@ -14,4 +14,6 @@ const mapStateToProps=(state:AppstateType):mapStateToPropsType=>{
     }
 }
 
-export const  MyPostContainer=connect(mapStateToProps, {addPost:addPOstAc,onChangeText:changeTitleAC})(MyPost)
+export const   MyPostContainer=connect(mapStateToProps, {addPost:addPOstAc,
+    // onChangeText:changeTitleAC
+})(MyPost)

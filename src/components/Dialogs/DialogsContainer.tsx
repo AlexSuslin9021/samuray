@@ -1,5 +1,5 @@
 import React, {ComponentType} from "react";
-import {addNewDialogAC, changeNewDialogCreatorAC, propsDialogsPage} from "../../Redux/reduserDialogs/reducerDialogs";
+import {addNewDialogAC,  propsDialogsPage} from "../../Redux/reduserDialogs/reducerDialogs";
 import Dialogs from "./Dialogs";
 import {AppstateType} from "../../Redux/reduxState";
 import {connect} from "react-redux";
@@ -19,7 +19,9 @@ const mapStateProps=(state:AppstateType):mapStatePropsType =>{
     }
 }
  export const DialogsCont= compose<ComponentType>( withAuthRedirect,connect(mapStateProps,
-     {add:addNewDialogAC,onChangeText:changeNewDialogCreatorAC}
+     {add:addNewDialogAC,
+         // onChangeText:changeNewDialogCreatorAC
+     }
    ))(Dialogs)
 
 // export const DialogsCont= withAuthRedirect( connect(mapStateProps,

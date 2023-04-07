@@ -1,4 +1,4 @@
-import reducerDialogs, {addNewDialogAC, changeNewDialogCreatorAC, propsDialogsPage} from "./reducerDialogs";
+import reducerDialogs, {addNewDialogAC, propsDialogsPage} from "./reducerDialogs";
 
 
 let initialState:propsDialogsPage;
@@ -56,11 +56,11 @@ expect(newState.dialogs[2].name).toBe('I am good!')
 
 })
 
-test('change new dialog',()=>{
-
-    let action=changeNewDialogCreatorAC('test')
-    let newState=reducerDialogs(initialState,action)
-    expect(newState.newDialog).toBe('test')
-    expect(newState).not.toBe('')
-    expect(newState.dialogs.length).toBe(3)
-})
+// test('change new dialog',()=>{
+//
+//     let action=changeNewDialogCreatorAC('test')
+//     let newState=reducerDialogs(initialState,action)
+//     expect(newState.newDialog).toBe('test')
+//     expect(newState).not.toBe('')
+//     expect(newState.dialogs.length).toBe(3)
+// })

@@ -2,7 +2,7 @@ import React from "react";
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import {AppstateType} from "../../Redux/reduxState";
-import {DataType, setUserThunkCreator} from "../../Redux/authReducers/authReducer";
+import {DataType, getAuthThunkCreator, setUserThunkCreator} from "../../Redux/authReducers/authReducer";
 import { usersApi} from "../../API/api";
 
 
@@ -44,4 +44,4 @@ const mapStateToProps=(state:AppstateType):mapStateToPropsType=>{
 }
 export const DataHeader=connect(mapStateToProps,{
 
-    setUserdata: setUserThunkCreator})(ContainerHeader)
+    setUserdata: getAuthThunkCreator})(ContainerHeader)

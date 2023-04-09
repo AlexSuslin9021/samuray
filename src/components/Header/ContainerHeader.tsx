@@ -2,7 +2,12 @@ import React from "react";
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import {AppstateType} from "../../Redux/reduxState";
-import {DataType, getAuthThunkCreator, setUserThunkCreator} from "../../Redux/authReducers/authReducer";
+import {
+    DataType,
+    getAuthThunkCreator,
+    loginOutThunkCreator,
+    setUserThunkCreator
+} from "../../Redux/authReducers/authReducer";
 import { usersApi} from "../../API/api";
 
 
@@ -13,9 +18,11 @@ export type GetDataResponse={
     fieldsErrors:[],
     resultCode:number
 
+
 }
 type ContainerComponentType=mapStateToPropsType & {
    setUserdata:()=>void
+    loginOut:()=>void
 
 }
 export class ContainerHeader extends React.Component<ContainerComponentType>{
@@ -25,7 +32,7 @@ export class ContainerHeader extends React.Component<ContainerComponentType>{
     }
 
     render() {
-      return <Header data={this.props.data} isAuth={this.props.isAuth}/>;
+      return <Header data={this.props.data} isAuth={this.props.isAuth} loginOut={this.props.loginOut}/>;
   }
 
 }
@@ -44,4 +51,7 @@ const mapStateToProps=(state:AppstateType):mapStateToPropsType=>{
 }
 export const DataHeader=connect(mapStateToProps,{
 
-    setUserdata: getAuthThunkCreator})(ContainerHeader)
+    setUserdata: getAuthThunkCreator,
+    loginOut: loginOutThunkCreator
+
+})(ContainerHeader)

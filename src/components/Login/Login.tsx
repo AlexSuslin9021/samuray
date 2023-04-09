@@ -31,6 +31,7 @@ export const LoginForm :FC<InjectedFormProps<FormDataType>> = (props)=>{
 
             /> </div>
             <div> <button className={style.button}>Login</button></div>
+            {props.error&& <div className={style.error}> {props.error}</div>}
         </form>
     )
 }
@@ -43,11 +44,12 @@ type LoginType={
         props.login(formData.email,formData.password,formData.rememberMeme)
     }
     if(props.isAuth) return <Redirect to={'./profile'}/>
+    // if(props.isAuth) return <Redirect to={'./login'}/>
 
     return(
 
      <div>
-    <h1>Login</h1>
+    <h1 >Login</h1>
         <LoginReduxForm onSubmit={onSubmit} />
     </div>
     )

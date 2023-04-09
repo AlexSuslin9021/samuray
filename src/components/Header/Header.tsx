@@ -2,13 +2,16 @@ import React from "react";
 import s from './Header.module.css'
 import {NavLink} from "react-router-dom";
 import {DataType} from "../../Redux/authReducers/authReducer";
+import style from '../../common/PartUi.module.css'
 
 type PropsHeader = {
     data: DataType
     isAuth: boolean
+    loginOut:()=>void
 }
 
 export function Header(props: PropsHeader) {
+    debugger
     return <header className={s.header}>
 
         <div className={s.icon}>
@@ -18,9 +21,12 @@ export function Header(props: PropsHeader) {
         </div>
 
         <div className={s.login}>
-            {props.isAuth ? props.data.login
+
+            {props.isAuth ?
+                <div> {props.data.login} <button onClick={props.loginOut} className={style.button}> Log Out</button> </div>
                 :
-                <NavLink to={'/login'}>Login</NavLink>}
+                <div> <NavLink to={'/login'}>Login </NavLink></div>
+            }
 
         </div>
     </header>

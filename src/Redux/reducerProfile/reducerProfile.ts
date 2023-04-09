@@ -162,7 +162,7 @@ export const getStatusAC = (status: string): getStatusType => {
     }
 }
 
-export const changeProfileThunkCreator=(userId:any):ThunkAction<Promise<void>, propsProfilePage, unknown, changeProfileType>=>{
+export const changeProfileThunkCreator=(userId:string):ThunkAction<Promise<void>, propsProfilePage, unknown, changeProfileType>=>{
     return async (dispatch: Dispatch<ActionType>)=>{
         usersApi.getProfile(userId).then(response => {
 
@@ -172,7 +172,7 @@ export const changeProfileThunkCreator=(userId:any):ThunkAction<Promise<void>, p
     }
 }
 
-export const getProfileStatusTC=(userId:any):ThunkAction<Promise<void>, propsProfilePage, unknown, getStatusType>=>{
+export const getProfileStatusTC=(userId:string):ThunkAction<Promise<void>, propsProfilePage, unknown, getStatusType>=>{
     return async (dispatch: Dispatch<ActionType>)=>{
 
         profileApi.getStatus(userId).then(response=>{

@@ -10,31 +10,43 @@ import {ContainerForProfileContainer} from "./components/Profile/ProfileContaine
 import {DataHeader} from "./components/Header/ContainerHeader";
 import UsersContainer from "./components/Users/UsersContainer";
 import Login from "./components/Login/Login";
+import {connect} from "react-redux";
+import {AppstateType} from "./Redux/reduxState";
+import {getAuthThunkCreator} from "./Redux/authReducers/authReducer";
 
+type AppType={
+    getAuth:()=>void
+}
+class App extends React.Component<AppType>{
 
+    componentDidMount() {
 
+        this.props.getAuth()
+    }
+    render() {
 
-function App() {
+        return (<BrowserRouter>
+                <div className="app-wrapper">
+                    <DataHeader/>
+                    <div className={'app-wrapper-content'}>
+                        <NavbarConteiner/>
+                        <Route path={'/profile/:userId?'} render={() => <ContainerForProfileContainer/>}/>
+                        <Route path={'/dialogs'} render={() => <DialogsCont/>}/>
+                        <Route path={'/news'} component={News}/>
+                        <Route path={'/users'} render={() => <UsersContainer/>}/>
+                        <Route path={'/music'} component={Music}/>
+                        <Route path={'/settings'} component={Settings}/>
+                        <Route path={'/login'} component={Login}/>
 
-    return (<BrowserRouter>
-            <div className="app-wrapper">
-                <DataHeader  />
-                <div className={'app-wrapper-content'}>
-                <NavbarConteiner />
-                    <Route path={'/profile/:userId?'} render={() => <ContainerForProfileContainer   />}/>
-                    <Route path={'/dialogs'} render={() => <DialogsCont/>}/>
-                    <Route path={'/news'} component={News}/>
-                    <Route path={'/users'} render={() =>  <UsersContainer />}/>
-                    <Route path={'/music'} component={Music}/>
-                    <Route path={'/settings'} component={Settings}/>
-                    <Route path={'/login'} component={Login}/>
-
+                    </div>
                 </div>
-            </div>
-        </BrowserRouter>
-    );
+            </BrowserRouter>
+        );
 
+    }
 }
 
+const mapStateToProps=(state:AppstateType)=>{
 
-export default App;
+}
+export default  connect(mapStateToProps,{ getAuth: getAuthThunkCreator})(App);

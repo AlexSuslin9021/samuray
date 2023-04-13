@@ -15,7 +15,7 @@ const mapStateProps=(state:AppstateType):mapStatePropsType =>{
 
     return{
         dialogs:state.reducerDialogs,
-        // isAuth:state.authReducer.isAuth
+        // isAuth:state.appReducer.isAuth
     }
 }
  export const DialogsCont= compose<ComponentType>( withAuthRedirect,connect(mapStateProps,

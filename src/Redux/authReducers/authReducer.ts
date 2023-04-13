@@ -31,7 +31,7 @@ let initialState: initialStateType = {
     resultCode: 0,
     isAuth: false
 }
-// authReducer
+// appReducer
 
 type ActionType = setUserDataType
 export const authReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {

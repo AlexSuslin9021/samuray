@@ -21,15 +21,11 @@ export type GetDataResponse={
 
 }
 type ContainerComponentType=mapStateToPropsType & {
-   setUserdata:()=>void
     loginOut:()=>void
 
 }
 export class ContainerHeader extends React.Component<ContainerComponentType>{
-    componentDidMount() {
 
-        this.props.setUserdata()
-    }
 
     render() {
       return <Header data={this.props.data} isAuth={this.props.isAuth} loginOut={this.props.loginOut}/>;
@@ -51,7 +47,6 @@ const mapStateToProps=(state:AppstateType):mapStateToPropsType=>{
 }
 export const DataHeader=connect(mapStateToProps,{
 
-    setUserdata: getAuthThunkCreator,
     loginOut: loginOutThunkCreator
 
 })(ContainerHeader)

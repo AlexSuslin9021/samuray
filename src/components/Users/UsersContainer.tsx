@@ -13,6 +13,13 @@ import {
 import {AppstateType} from "../../Redux/reduxState";
 import {Users} from "./Users";
 import {usersApi} from "../../API/api";
+import {
+    getCurrentPage,
+    getIsFetching,
+    getPageSize,
+    getProgressIsFetching, getTotalUsersCount,
+    getUsers
+} from "../../Redux/Selector/user-selector";
 
 
 
@@ -88,12 +95,12 @@ type mapStateToPropsType={
 const mapStateToProps = (state: AppstateType) :mapStateToPropsType => {
 
     return {
-        users: state.reducerUsers.users,
-        totalUsersCount:state.reducerUsers.totalUsersCount,
-        pageSize:state.reducerUsers.pageSize,
-        currentPage:state.reducerUsers.currentPage,
-        isFetching:state.reducerUsers.isFetching,
-        progressIsFetching:state.reducerUsers.progressIsFetching
+        users: getUsers(state),
+        totalUsersCount:getTotalUsersCount(state),
+        pageSize:getPageSize(state),
+        currentPage:getCurrentPage(state),
+        isFetching:getIsFetching(state),
+        progressIsFetching:getProgressIsFetching(state)
     }
 }
 

@@ -74,7 +74,7 @@ test(' should to set currentPage', () => {
 
     expect(newState.currentPage).toBe(2)
     expect(newState.pageSize).toBe(5)
-    expect(newState.currentPage).toBe(1)
+    expect(newState.currentPage).toBe(2)
 })
 
 test(' should to set total user', () => {

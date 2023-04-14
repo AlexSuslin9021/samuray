@@ -27,10 +27,14 @@ export class ProfileContainer extends React.Component <PropsType> {
         let userId = this.props.match.params.userId
         if(!userId) {
             userId=this.props.authorisedUserId
-            this.props.setProfile(userId)
-            this.props.getProfileStatus(userId)}
-        // this.props.setProfile(userId)
-        // this.props.getProfileStatus(userId)
+            if(!userId){
+                this.props.history.push('login')
+            }
+        }
+        this.props.setProfile(userId)
+        this.props.getProfileStatus(userId)
+        //80 выпуск 32 минута, возможно дописать
+      //
     }
 
     render() {
@@ -43,6 +47,11 @@ export class ProfileContainer extends React.Component <PropsType> {
     }
 
 }
+
+
+
+
+
 
 type PathParamsType = {
     userId: any,

@@ -44,7 +44,7 @@ export const authReducer = (state: initialStateType = initialState, action: Acti
 }
 // Action creator
 
-type setUserDataType = {
+export type setUserDataType = {
     type: 'SET_USER_DATA'
     data: DataType
 }
@@ -63,15 +63,16 @@ export const setUserThunkCreator = (id: string | null , email: string | null, lo
     // }
 }) as const
 export const getAuthThunkCreator = (): ThunkAction<Promise<void>, initialStateType, unknown, ActionType> => {
-    return async (dispatch: Dispatch<ActionType>) => {
-        authApi.me().then(response => {
+   return   async (dispatch: Dispatch<ActionType>) => {
+       const response=await authApi.me()
             if (response.data.resultCode === 0) {
                 let {id, login, email} = response.data.data
                 dispatch(setUserThunkCreator(id, email, login, true))
             }
             // dispatch(setUserDataAC(response.data))
-        })
+
     }
+
 }
 
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean = false): ThunkAction<Promise<void>, initialStateType, unknown, ActionType> => {

@@ -1,12 +1,4 @@
-
-
-
-export type PropsSidebar = {
-    id: string
-    title: string
-    to: string
-}
-let initialState=[
+let initialState: PropsSidebar[]=[
     {id: '1', title: 'Profile', to: '/profile'},
     {id: '2', title: 'Messages', to: '/dialogs'},
     {id: '3', title: 'News', to: '/news'},
@@ -17,7 +9,7 @@ let initialState=[
 ]
 const reducerSidebar = (state:PropsSidebar[]=initialState, action:any) => {
     return state
-
 };
-
+//Types
+export type PropsSidebar = { id: string, title: string, to: string }
 export default reducerSidebar;

@@ -1,4 +1,4 @@
-import React, {ComponentType} from 'react';
+import React from 'react';
 import './App.css';
 import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
@@ -12,16 +12,12 @@ import UsersContainer from "./components/Users/UsersContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {AppstateType} from "./Redux/reduxState";
-import {getAuthThunkCreator} from "./Redux/authReducers/authReducer";
 import preloader from './assets/image/6.gif'
-import {initializedApp} from "./Redux/appReducers/appReducer";
-// import {compose} from "redux";
-// import withAuthRedirect from "./hoc/withAuthRedirect";
-// import {addNewDialogAC} from "./Redux/reduserDialogs/reducerDialogs";
-// import Dialogs from "./components/Dialogs/Dialogs";
+import {initializedAppTC} from "./Redux/appReducers/appReducer";
+
 
 type AppType={
-    initializedApp:()=>void
+    initializedAppTC:()=>void
     initialized:boolean
 
 }
@@ -29,7 +25,7 @@ class App extends React.Component<AppType>{
 
     componentDidMount() {
 
-        this.props.initializedApp()
+        this.props.initializedAppTC()
     }
     render() {
 
@@ -60,11 +56,7 @@ if(!this.props.initialized) return <div><img src={preloader} alt=""/></div>
     initialized:state.appReducer.initialized
      }
 }
-export const App1= connect(mapStateToProps,{ initializedApp})(App);
+export const App1= connect(mapStateToProps,{ initializedAppTC})(App);
 export default   App1
 
-// export const DialogsCont= compose<ComponentType>( withAuthRedirect,connect(mapStateProps,
-//     {add:addNewDialogAC,
-//         // onChangeText:changeNewDialogCreatorAC
-//     }
-// ))(Dialogs)
+

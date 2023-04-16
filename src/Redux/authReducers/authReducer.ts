@@ -1,27 +1,9 @@
 import {authApi, usersApi} from "../../API/api";
 import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
-
-// import {propsProfilePage} from "../reducerProfile/reducerProfile";
 import {stopSubmit} from 'redux-form'
-import {Redirect} from "react-router-dom";
-
-const setUserData = 'SET_USER_DATA'
 
 //initialState
-
-export type initialStateType = {
-    data: DataType
-    messages: [],
-    fieldsErrors: [],
-    resultCode: number
-    isAuth: boolean
-}
-export type DataType = {
-    id: string | null
-    email: string | null,
-    login: string | null
-}
 
 let initialState: initialStateType = {
 
@@ -31,9 +13,6 @@ let initialState: initialStateType = {
     resultCode: 0,
     isAuth: false
 }
-// appReducer
-
-type ActionType = setUserDataType
 export const authReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
 
     switch (action.type) {
@@ -42,16 +21,11 @@ export const authReducer = (state: initialStateType = initialState, action: Acti
             return state
     }
 }
+
 // Action creator
+export const setUserDataAC = (data: DataType) => {return {type: setUserData, data} as const}
 
-export type setUserDataType = {
-    type: 'SET_USER_DATA'
-    data: DataType
-}
-export const setUserDataAC = (data: DataType): setUserDataType => {
-    return {type: setUserData, data}
-}
-
+//Thunk creator
 export const setUserThunkCreator = (id: string | null , email: string | null, login: string | null, isAuth:boolean) => ({
     // :ThunkAction<Promise<void>, initialStateType, unknown, ActionType>
     type: 'SET_USER_DATA', data: {id, email, login, isAuth}
@@ -74,7 +48,6 @@ export const getAuthThunkCreator = (): ThunkAction<Promise<void>, initialStateTy
     }
 
 }
-
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean = false): ThunkAction<Promise<void>, initialStateType, unknown, ActionType> => {
 
     return async (dispatch: any) => {
@@ -97,3 +70,20 @@ export const loginOutThunkCreator = (): ThunkAction<Promise<void>, initialStateT
         })
     }
 }
+
+//Name type
+const setUserData = 'SET_USER_DATA'
+//Types
+export type initialStateType = {
+    data: DataType
+    messages: [],
+    fieldsErrors: [],
+    resultCode: number
+    isAuth: boolean
+}
+export type DataType = {
+    id: string | null
+    email: string | null,
+    login: string | null
+}
+type ActionType = ReturnType<typeof setUserDataAC>

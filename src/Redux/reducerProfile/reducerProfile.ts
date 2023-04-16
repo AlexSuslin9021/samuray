@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {profileApi, usersApi} from "../../API/api";
 import {ThunkAction} from "redux-thunk";
+import {initialStateType, toggleIsFetchingAC, unFollowAC} from "../reducerUsers/reducerUsers";
 
 
 
@@ -181,6 +182,7 @@ export const getProfileStatusTC=(userId:string):ThunkAction<Promise<void>, props
         })
     }
 }
+
 
 export const updateProfileStatusTC=(status:string):ThunkAction<Promise<void>, propsProfilePage, unknown, getStatusType>=>{
     return async (dispatch: Dispatch<ActionType>)=>{

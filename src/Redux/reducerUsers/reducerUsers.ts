@@ -125,6 +125,7 @@ export const toggleIsFetchingAC=(id:number, isFetching:boolean): toggleIsFetchin
 export const getUserThunkCreator=(currentPage:number, pageSize:number):ThunkAction<Promise<void>, initialStateType, unknown, ActionType>=>{
     return async (dispatch:Dispatch<ActionType>)=> {
       dispatch( toggleFetchingAC(true))
+        dispatch(setCurrentPageAC(currentPage))
         usersApi.getUsers(currentPage, pageSize).then(response => {
             dispatch(   setUsersAC(response.items))
             dispatch(  setTotalUserAC(response.totalCount))

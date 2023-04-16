@@ -1,6 +1,3 @@
-
-
-
 let initialState={
     users: [
         {
@@ -41,64 +38,44 @@ let initialState={
 
     newDialog:'',
 }
+
+const reducerDialogs = (state:propsDialogsPage=initialState, action:ActionType ) => {
+        switch(action.type) {
+
+            case 'NEW-MESSAGES': {
+                return {...state, newDialog :action.newText}
+            }
+            case 'NEW-DIALOG': {
+
+                let newPost = {id: '7', name: action.newText}
+                return {...state, dialogs:[...state.dialogs,newPost]}
+            }
+            default: return state
+        }
+    }
+
+export const addNewDialogAC=(newDialog:string )=>{return {type: 'NEW-DIALOG', newText: newDialog} as const}
+
+//Types
 type propsUsersName = {
     id: string
     name: string
     src: string
 }
-
-type addNewDialogType={
-    type: 'NEW-DIALOG',
-    newText: string
-}
+type addNewDialogType=ReturnType<typeof addNewDialogAC>
 type changeNewDialogType={
-    type: 'NEW-MESSEGES',
+    type: 'NEW-MESSAGES',
     newText: string
 }
+type ActionType=addNewDialogType | changeNewDialogType
 type propsDialogsType = {
     id: string
     name: string
 }
-
 export type propsDialogsPage = {
     users: propsUsersName[]
     dialogs: propsDialogsType[]
     newDialog: string
 }
 
-type ActionType=addNewDialogType | changeNewDialogType
-    const reducerDialogs = (state:propsDialogsPage=initialState, action:ActionType ) => {
-
-        switch(action.type) {
-            // case 'NEW-MESSEGES': {
-            //     return {...state, newDialog :action.newText}
-            // }
-            case 'NEW-DIALOG': {
-                let newPost = {id: '7', name: action.newText}
-                // state.newDialog=''
-                return {...state, dialogs:[...state.dialogs,newPost]}
-            }
-            default: return state
-
-        }
-
-    }
-
-
-
-export const addNewDialogAC=(newDialog:string ):addNewDialogType=>{
-
-    return {
-        type: 'NEW-DIALOG',
-        newText: newDialog
-    }
-}
-
-// export const changeNewDialogCreatorAC=(newDialog:string):changeNewDialogType=>{
-//     return {
-//         type: 'NEW-MESSEGES',
-//         newText: newDialog
-//     }
-
-// }
 export default reducerDialogs;

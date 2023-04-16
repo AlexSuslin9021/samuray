@@ -33,7 +33,7 @@ export const Users = (props: PropsUsersType) => {
     for (let i = 1; i <= pageCount; i++) {
         page.push(i)
     }
-debugger
+
     return (
         <div>
             {props.isFetching && <div><img src={preloader} alt=""/></div>}
@@ -52,10 +52,10 @@ debugger
                     {/*<span> {'location.country'}</span>*/}
                 </div>
                 {u.follow ? <button className={`${s.button} ${s.follow}`} disabled={props.progressIsFetching.some(el=>el===u.id)} onClick={() => {
-                    debugger
+
                     props.unFollowThunkCreator(u.id)
                 }}> Follow</button> : <button className={s.button} disabled={props.progressIsFetching.some(el=>el===u.id)} onClick={() => {
-                    debugger
+
                    props.followThunkCreator(u.id)
                 }}> UnFollow</button>}
             </div>)}

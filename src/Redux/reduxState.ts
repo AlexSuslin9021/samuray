@@ -22,7 +22,7 @@ let redusers = combineReducers({
 )
 export type AppstateType = ReturnType<typeof redusers>
 type ThunkDispatchType=ThunkDispatch<any, any, AnyAction>
-debugger
+
 export const useAppDispatch = () =>  useDispatch<ThunkDispatchType>()
 export type AppStateType=ReturnType<typeof redusers>
 

@@ -11,7 +11,7 @@ type PropsHeader = {
 }
 
 export function Header(props: PropsHeader) {
-    debugger
+
     return <header className={s.header}>
 
         <div className={s.icon}>

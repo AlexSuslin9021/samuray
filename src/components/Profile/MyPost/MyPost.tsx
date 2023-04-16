@@ -62,7 +62,7 @@ function MyPost(props: PropsType) {
 }
 const maxValueLength10=maxLength(10)
 const AddPostForm :FC<InjectedFormProps<FormDataType>> =(props)=>{
-    debugger
+
 
     return  <form onSubmit={props.handleSubmit} >
         <div >

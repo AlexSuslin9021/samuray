@@ -1,53 +1,9 @@
 import {Dispatch} from "redux";
 import {profileApi, usersApi} from "../../API/api";
 import {ThunkAction} from "redux-thunk";
-import {initialStateType, toggleIsFetchingAC, unFollowAC} from "../reducerUsers/reducerUsers";
 
 
-
-export type propsProfilePage = {
-    post: propsPostMessege[]
-    newTextPost: string
-    profile:ProfileType
-    status:string
-}
-export type ProfileType={
-
-        "aboutMe": string,
-        "contacts": ContactProfileType
-        "lookingForAJob": boolean,
-        "lookingForAJobDescription": "не ищу, а дурачусь",
-        "fullName": "samurai dimych",
-        "userId": number,
-        "photos": PhotoType
-
-
-}
-type ContactProfileType={
-
-        "facebook": string
-        "website": null | string
-        "vk":string
-        "twitter": string
-        "instagram": string
-        "youtube": null | string
-        "github": string
-        "mainLink": null | string
-
-}
-type PhotoType={
-
-        "small": string
-        "large": string
-
-}
-
-
-export type propsPostMessege = {
-    id: string | number
-    message?: string
-    likes: number
-}
+//initialState
 let initialState:propsProfilePage = {
     post: [
         {id: '1', message: 'How are you?', likes: 15},
@@ -76,10 +32,6 @@ let initialState:propsProfilePage = {
     },
     status:'status'
 }
-
-
-
-type ActionType=actionPOstType  | changeProfileType | getStatusType
 export const reducerProfile = (state: propsProfilePage = initialState, action: ActionType ): propsProfilePage => {
 
     switch (action.type) {
@@ -99,17 +51,107 @@ export const reducerProfile = (state: propsProfilePage = initialState, action: A
     }
 }
 
-type actionPOstType = {
-    type: 'ADD-POST',
-    post: string
-}
+//Action Creator
 export const addPOstAc = (title: string):actionPOstType => {
     return {
         type: 'ADD-POST',
         post: title
     }
 }
+export const changeProfileAC = (profile: ProfileType) => {return {type: 'CHANGE-PROFILE', profile} as const}
+export const getStatusAC = (status: string) => {return {type: 'GET-STATUS', status} as const}
 
+//Thunk Creator
+export const changeProfileThunkCreator=(userId:string):ThunkAction<Promise<void>, propsProfilePage, unknown, changeProfileType>=>{
+    return async (dispatch: Dispatch<ActionType>)=>{
+        usersApi.getProfile(userId).then(response => {
+
+            dispatch(changeProfileAC(response))
+
+        })
+    }
+}
+export const getProfileStatusTC=(userId:string):ThunkAction<Promise<void>, propsProfilePage, unknown, getStatusType>=>{
+    return async (dispatch: Dispatch<ActionType>)=>{
+
+        profileApi.getStatus(userId).then(response=>{
+
+            dispatch(getStatusAC(response.data))
+        })
+    }
+}
+export const updateProfileStatusTC=(status:string):ThunkAction<Promise<void>, propsProfilePage, unknown, getStatusType>=>{
+    return async (dispatch: Dispatch<ActionType>)=>{
+
+        profileApi.updateStatus(status).then(response=>{
+if (response.data.resultCode===0)
+            dispatch(getStatusAC(status))
+        })
+    }
+}
+
+//Types
+type getStatusType=ReturnType<typeof getStatusAC>
+type changeProfileType=ReturnType<typeof changeProfileAC>
+export type propsProfilePage = {
+    post: propsPostMessege[]
+    newTextPost: string
+    profile:ProfileType
+    status:string
+}
+export type ProfileType={
+
+    "aboutMe": string,
+    "contacts": ContactProfileType
+    "lookingForAJob": boolean,
+    "lookingForAJobDescription": "не ищу, а дурачусь",
+    "fullName": "samurai dimych",
+    "userId": number,
+    "photos": PhotoType
+
+
+}
+type ContactProfileType={
+
+    "facebook": string
+    "website": null | string
+    "vk":string
+    "twitter": string
+    "instagram": string
+    "youtube": null | string
+    "github": string
+    "mainLink": null | string
+
+}
+type PhotoType={
+
+    "small": string
+    "large": string
+
+}
+export type propsPostMessege = {
+    id: string | number
+    message?: string
+    likes: number
+}
+type actionPOstType = {
+    type: 'ADD-POST',
+    post: string
+}
+type ActionType=actionPOstType  | changeProfileType | getStatusType
+
+//
+// type changeStatusType={
+//     type: 'CHANGE-STATUS',
+//     status: string
+// }
+//
+// export const changeStatusAC = (status: string) => {
+//     return {
+//         type: 'CHANGE-STATUS',
+//         status
+//     }
+// }
 // type changeTitleType = {
 //     type: 'CHANGE-CALLBASK',
 //     newText: string
@@ -120,76 +162,3 @@ export const addPOstAc = (title: string):actionPOstType => {
 //         newText: title
 //     }
 // }
-
-
-
-
-type changeProfileType={
-    type: 'CHANGE-PROFILE',
-    profile:ProfileType
-}
-
-
-
-export const changeProfileAC = (profile: ProfileType):changeProfileType => {
-    return {
-        type: 'CHANGE-PROFILE',
-        profile
-    }
-}
-
-
-type changeStatusType={
-    type: 'CHANGE-STATUS',
-    status: string
-}
-
-export const changeStatusAC = (status: string) => {
-    return {
-        type: 'CHANGE-STATUS',
-        status
-    }
-}
-
-type getStatusType={
-    type: 'GET-STATUS',
-    status: string
-}
-
-export const getStatusAC = (status: string): getStatusType => {
-    return {
-        type: 'GET-STATUS',
-        status
-    }
-}
-
-export const changeProfileThunkCreator=(userId:string):ThunkAction<Promise<void>, propsProfilePage, unknown, changeProfileType>=>{
-    return async (dispatch: Dispatch<ActionType>)=>{
-        usersApi.getProfile(userId).then(response => {
-
-            dispatch(changeProfileAC(response))
-
-        })
-    }
-}
-
-export const getProfileStatusTC=(userId:string):ThunkAction<Promise<void>, propsProfilePage, unknown, getStatusType>=>{
-    return async (dispatch: Dispatch<ActionType>)=>{
-
-        profileApi.getStatus(userId).then(response=>{
-
-            dispatch(getStatusAC(response.data))
-        })
-    }
-}
-
-
-export const updateProfileStatusTC=(status:string):ThunkAction<Promise<void>, propsProfilePage, unknown, getStatusType>=>{
-    return async (dispatch: Dispatch<ActionType>)=>{
-
-        profileApi.updateStatus(status).then(response=>{
-if (response.data.resultCode===0)
-            dispatch(getStatusAC(status))
-        })
-    }
-}

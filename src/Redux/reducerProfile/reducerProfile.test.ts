@@ -1,4 +1,4 @@
-import {addPOstAc, changeProfileAC, propsProfilePage, reducerProfile} from "./reducerProfile";
+import {addPOstAc, changeProfileAC, getStatusAC, propsProfilePage, reducerProfile} from "./reducerProfile";
 
 let initialState:propsProfilePage
 beforeEach(()=>{
@@ -80,5 +80,15 @@ test('change profile',()=>{
     expect(newState.profile.contacts.website).toBe("null")
     expect(newState.profile.contacts.youtube).toBe("null")
     expect(newState.profile.lookingForAJob).toBe(false)
+
+})
+test('status should be change',()=>{
+
+    let action =getStatusAC('New')
+    let newState=reducerProfile(initialState,action )
+
+    expect(newState.status).toBe("New")
+    expect(newState.newTextPost).toBe("")
+
 
 })

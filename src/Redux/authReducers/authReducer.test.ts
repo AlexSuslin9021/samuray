@@ -14,6 +14,6 @@ test('it should be add new login',()=>{
     const action=setUserDataAC({id:'2',login:"Alex",email:"mail.ru"} )
     const newState=authReducer(initialState,action )
     expect(newState.isAuth).toBe(true)
-    expect(newState.data.id).toBe(2)
+    expect(newState.data.id).toBe(`2`)
     expect(newState.data.login).toBe("Alex")
 })

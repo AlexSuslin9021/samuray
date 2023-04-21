@@ -21,32 +21,6 @@ import {
     getUsers
 } from "../../Redux/Selector/user-selector";
 
-
-
-
-
-export type PropsUsersType = {
-    users: usersType[]
-
-    setUsers: (users: usersType[]) => void
-    totalUsersCount: number
-    pageSize: number
-    currentPage: number
-    setCurrentPage: (page: number) => void
-    setTotalUser: (totalUser: number) => void
-    isFetching:boolean
-    setFetching:( fetching:boolean)=>void
-
-    progressIsFetching:number[]
-    getUserThunkCreator:(currentPage:number, pageSize:number)=>void
-    followThunkCreator:(id:number)=>void
-    unFollowThunkCreator:(id:number)=>void
-
-    // getUserThunkCreator:(currentPage:number, pageSize:number)=>(dispatch:Dispatch)=>void
-
-}
-
-
 export type GetUsersResponse = {
     items: usersType[]
     totalCount: number
@@ -91,7 +65,6 @@ type mapStateToPropsType={
     progressIsFetching:number[]
 
 }
-
 const mapStateToProps = (state: AppstateType) :mapStateToPropsType => {
 
     return {
@@ -103,7 +76,6 @@ const mapStateToProps = (state: AppstateType) :mapStateToPropsType => {
         progressIsFetching:getProgressIsFetching(state)
     }
 }
-
 
 const UsersContainer = connect(mapStateToProps, {
 
@@ -117,6 +89,29 @@ const UsersContainer = connect(mapStateToProps, {
     unFollowThunkCreator,
 })
 (UsersC)
+
+//types
+export type PropsUsersType = {
+    users: usersType[]
+
+    setUsers: (users: usersType[]) => void
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    setCurrentPage: (page: number) => void
+    setTotalUser: (totalUser: number) => void
+    isFetching:boolean
+    setFetching:( fetching:boolean)=>void
+
+    progressIsFetching:number[]
+    getUserThunkCreator:(currentPage:number, pageSize:number)=>void
+    followThunkCreator:(id:number)=>void
+    unFollowThunkCreator:(id:number)=>void
+
+    // getUserThunkCreator:(currentPage:number, pageSize:number)=>(dispatch:Dispatch)=>void
+
+}
+
 //создает контейнерную компоненту UsersContainer для Users
 // mapStateToProps, mapDispatchToProps- функции которые возвращают пропсы
 export default UsersContainer

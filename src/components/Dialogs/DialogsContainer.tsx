@@ -6,23 +6,9 @@ import {connect} from "react-redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
-
-type mapStatePropsType={
-    dialogs:propsDialogsPage
-    // isAuth:boolean
-}
-const mapStateProps=(state:AppstateType):mapStatePropsType =>{
-
-    return{
-        dialogs:state.reducerDialogs,
-        // isAuth:state.appReducer.isAuth
-    }
-}
- export const DialogsCont= compose<ComponentType>( withAuthRedirect,connect(mapStateProps,
-     {add:addNewDialogAC,
-         // onChangeText:changeNewDialogCreatorAC
-     }
+type mapStatePropsType={ dialogs:propsDialogsPage }
+const mapStateProps=(state:AppstateType):mapStatePropsType =>{return{dialogs:state.reducerDialogs}}
+ export const DialogsCont= compose<ComponentType>( withAuthRedirect,connect(mapStateProps, {add:addNewDialogAC,}
    ))(Dialogs)
 
-// export const DialogsCont= withAuthRedirect( connect(mapStateProps,
-//     {add:addNewDialogAC,onChangeText:changeNewDialogCreatorAC} )(Dialogs))
+

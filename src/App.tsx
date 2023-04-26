@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Redirect, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -9,16 +9,18 @@ import NavbarConteiner from "./components/Nawbar/NavbarContainer";
 import {ContainerForProfileContainer} from "./components/Profile/ProfileContainer";
 import {DataHeader} from "./components/Header/ContainerHeader";
 import UsersContainer from "./components/Users/UsersContainer";
-import Login from "./components/Login/Login";
+
 import {connect} from "react-redux";
 import {AppstateType} from "./Redux/reduxState";
 import preloader from './assets/image/6.gif'
 import {initializedAppTC} from "./Redux/appReducers/appReducer";
+import Login2 from "./components/Login/Login2";
 
 
 type AppType={
     initializedAppTC:()=>void
     initialized:boolean
+    // isAuth:boolean
 
 }
 class App extends React.Component<AppType>{
@@ -30,6 +32,7 @@ class App extends React.Component<AppType>{
     render() {
 
 if(!this.props.initialized) return <div><img src={preloader} alt=""/></div>
+
         return (<BrowserRouter>
                 <div className="app-wrapper">
                     <DataHeader/>
@@ -41,7 +44,7 @@ if(!this.props.initialized) return <div><img src={preloader} alt=""/></div>
                         <Route path={'/users'} render={() => <UsersContainer/>}/>
                         <Route path={'/music'} component={Music}/>
                         <Route path={'/settings'} component={Settings}/>
-                        <Route path={'/login'} component={Login}/>
+                        <Route path={'/login'} component={Login2}/>
 
                     </div>
                 </div>
@@ -53,7 +56,8 @@ if(!this.props.initialized) return <div><img src={preloader} alt=""/></div>
 
  const mapStateToProps=(state:AppstateType)=>{
     return{
-    initialized:state.appReducer.initialized
+    initialized:state.appReducer.initialized,
+        // isAuth:state.authReducer.isAuth
      }
 }
 export const App1= connect(mapStateToProps,{ initializedAppTC})(App);

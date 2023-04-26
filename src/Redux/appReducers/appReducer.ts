@@ -5,7 +5,7 @@ import {AppStateType, useAppDispatch} from "../reduxState";
 
 //initialState
 let initialState: initialStateType = {initialized:false}
- const appReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
+export const appReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
         case initialized_Success: {return {...state,initialized:true }}
         default:
@@ -29,4 +29,3 @@ type ActionType = ReturnType<typeof initializedSuccess>
 type AppThunkType<ReturnType = void >=ThunkAction<ReturnType, AppStateType, unknown, any>
 type ThunkDispatchType=ThunkDispatch<AppStateType, any, AnyAction>
 
-export default appReducer

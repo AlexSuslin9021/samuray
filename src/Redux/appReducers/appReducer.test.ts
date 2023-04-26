@@ -1,5 +1,5 @@
 import {addPOstAc, propsProfilePage, reducerProfile} from "../reducerProfile/reducerProfile";
-import appReducer, { initializedSuccess, initialStateType} from "./appReducer";
+import {appReducer, initializedSuccess, initialStateType} from "./appReducer";
 
 let initialState:initialStateType
 beforeEach(()=>{
@@ -9,8 +9,8 @@ beforeEach(()=>{
 })
 test('change initialized for true',()=>{
 
-    const action =initializedSuccess()
-    const newState=appReducer(initialState, action)
+    const action = initializedSuccess()
+    const newState = appReducer(initialState, action)
 
     expect(newState.initialized).toBe(true)
 

@@ -7,10 +7,9 @@ import {authReducer} from "./authReducers/authReducer";
 import thunk, { ThunkDispatch} from 'redux-thunk'
 import {reducer as formReducer} from 'redux-form'
 import {useDispatch} from "react-redux";
-import appReducer from "./appReducers/appReducer";
+import {appReducer} from "./appReducers/appReducer";
 
-
-let redusers =combineReducers({
+const redusers = combineReducers({
         reducerSidebar,
         reducerProfile,
         reducerDialogs,

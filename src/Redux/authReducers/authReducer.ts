@@ -16,7 +16,8 @@ let initialState: initialStateType = {
 export const authReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
 
     switch (action.type) {
-        case setUserData: {return {...state, data: {...action.data}, isAuth: true}}
+        case setUserData:
+        return {...state, data: {...action.data}}
         default:
             return state
     }
@@ -62,7 +63,7 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
 }
 export const loginOutThunkCreator = (): ThunkAction<Promise<void>, initialStateType, unknown, ActionType> => {
     return async (dispatch: any) => {
-        authApi.loginDelete().then(response => {
+       await authApi.loginDelete().then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(setUserThunkCreator(null, null, null, false))
             }

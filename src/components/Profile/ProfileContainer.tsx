@@ -38,20 +38,17 @@ export class ProfileContainer extends React.Component <PropsType> {
     }
 
     render() {
-        { return this.props.isAuth ?
-         <Profile {...this.props}
+
+            // return this.props.isAuth ?
+     return    <Profile {...this.props}
                         profile={this.props.profile}
                         status={this.props.status}
                         updateProfileStatus={this.props.updateProfileStatus}
-                        /> : <Redirect to={'/login'}/>}
+                        />
+        // : <Redirect to={'/login'}/>}
     }
 
 }
-
-
-
-
-
 
 type PathParamsType = {
     userId: any,
@@ -78,13 +75,14 @@ const mapStateToProps = (state: AppstateType): MapStateToPropsType => {
     }
 }
 export const ContainerForProfileContainer= compose<ComponentType>(
-    withAuthRedirect,
+
     connect(mapStateToProps, {
         setProfile: changeProfileThunkCreator,
         getProfileStatus: getProfileStatusTC,
         updateProfileStatus:updateProfileStatusTC
     }),
-    withRouter
+    withRouter,
+    withAuthRedirect,
 )(ProfileContainer)
 // let withRouterForProfile = withRouter(ProfileContainer)
 // export const ContainerForProfileContainer = withAuthRedirect(connect(mapStateToProps, {

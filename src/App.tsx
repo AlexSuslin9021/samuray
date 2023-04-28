@@ -15,20 +15,23 @@ import {AppstateType} from "./Redux/reduxState";
 import preloader from './assets/image/6.gif'
 import {initializedAppTC} from "./Redux/appReducers/appReducer";
 import Login2 from "./components/Login/Login2";
+import {compose} from "redux";
+import withAuthRedirect from "./hoc/withAuthRedirect";
 
 
 type AppType={
     initializedAppTC:()=>void
     initialized:boolean
-    // isAuth:boolean
+    isAuth:boolean
 
 }
 class App extends React.Component<AppType>{
 
     componentDidMount() {
-
         this.props.initializedAppTC()
+
     }
+
     render() {
 
 if(!this.props.initialized) return <div><img src={preloader} alt=""/></div>
@@ -57,7 +60,7 @@ if(!this.props.initialized) return <div><img src={preloader} alt=""/></div>
  const mapStateToProps=(state:AppstateType)=>{
     return{
     initialized:state.appReducer.initialized,
-        // isAuth:state.authReducer.isAuth
+        isAuth:state.authReducer.isAuth
      }
 }
 export const App1= connect(mapStateToProps,{ initializedAppTC})(App);

@@ -8,7 +8,7 @@ import {compose} from "redux";
 
 type mapStatePropsType={ dialogs:propsDialogsPage }
 const mapStateProps=(state:AppstateType):mapStatePropsType =>{return{dialogs:state.reducerDialogs}}
- export const DialogsCont= compose<ComponentType>( withAuthRedirect,connect(mapStateProps, {add:addNewDialogAC,}
-   ))(Dialogs)
+ export const DialogsCont= compose<ComponentType>( connect(mapStateProps, {add:addNewDialogAC,}
+   ), withAuthRedirect)(Dialogs)
 
 

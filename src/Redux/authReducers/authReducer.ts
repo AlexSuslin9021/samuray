@@ -7,7 +7,7 @@ import {stopSubmit} from 'redux-form'
 
 let initialState: initialStateType = {
 
-    data: {id: '28028', login: "Alex2190", email: "alexsuslin@inbox.ru"},
+    data: {id: '', login: "", email: "@inbox.ru"},
     messages: [],
     fieldsErrors: [],
     resultCode: 0,
@@ -18,6 +18,8 @@ export const authReducer = (state: initialStateType = initialState, action: Acti
     switch (action.type) {
         case setUserData:
         return {...state, data: {...action.data}}
+        case "CHANGE_ISAUTH":
+            return {...state, isAuth:action.isAuth}
         default:
             return state
     }
@@ -25,11 +27,12 @@ export const authReducer = (state: initialStateType = initialState, action: Acti
 
 // Action creator
 export const setUserDataAC = (data: DataType) => {return {type: setUserData, data} as const}
+export const isAuthAC = (isAuth: boolean) => {return {type: 'CHANGE_ISAUTH', isAuth} as const}
 
 //Thunk creator
-export const setUserThunkCreator = (id: string | null , email: string | null, login: string | null, isAuth:boolean) => ({
+export const setUserThunkCreator = (id: string | null , email: string | null, login: string | null) => ({
     // :ThunkAction<Promise<void>, initialStateType, unknown, ActionType>
-    type: 'SET_USER_DATA', data: {id, email, login, isAuth}
+    type: 'SET_USER_DATA', data: {id, email, login}
     // return async (dispatch:Dispatch<setUserDataType>)=>{
     //     usersApi.getAuth().then(response=>{
     //         if(response.resultCode===0)
@@ -42,7 +45,8 @@ export const getAuthThunkCreator = (): ThunkAction<Promise<void>, initialStateTy
        const response=await authApi.me()
             if (response.data.resultCode === 0) {
                 let {id, login, email} = response.data.data
-                dispatch(setUserThunkCreator(id, email, login, true))
+                dispatch(setUserDataAC({id, email, login}))
+                dispatch(isAuthAC(true))
             }
             // dispatch(setUserDataAC(response.data))
 
@@ -55,6 +59,8 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
         authApi.loginCreate(email, password, rememberMe).then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getAuthThunkCreator())
+                // dispatch(isAuthAC(true))
+
             }
             let message=response.data.messages.length>0 ? response.data.messages[0]:"Some error"
             dispatch(stopSubmit("Login",{_error:message}))
@@ -65,7 +71,8 @@ export const loginOutThunkCreator = (): ThunkAction<Promise<void>, initialStateT
     return async (dispatch: any) => {
        await authApi.loginDelete().then(response => {
             if (response.data.resultCode === 0) {
-                dispatch(setUserThunkCreator(null, null, null, false))
+                dispatch(setUserThunkCreator(null, null, null, ))
+                dispatch(isAuthAC(false))
             }
             // dispatch(setUserDataAC(response.data))
         })
@@ -87,4 +94,4 @@ export type DataType = {
     email: string | null,
     login: string | null
 }
-type ActionType = ReturnType<typeof setUserDataAC>
+type ActionType = ReturnType<typeof setUserDataAC> | ReturnType<typeof isAuthAC>

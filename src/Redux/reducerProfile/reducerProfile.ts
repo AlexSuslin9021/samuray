@@ -4,12 +4,12 @@ import {ThunkAction} from "redux-thunk";
 
 
 //initialState
-let initialState:propsProfilePage = {
+let initialState: propsProfilePage = {
     post: [
         {id: '1', message: 'How are you?', likes: 15},
         {id: '2', message: 'It\'s my first post!', likes: 20}],
     newTextPost: '',
-    profile:{
+    profile: {
         "aboutMe": "я крут",
         "contacts": {
             "facebook": "facebook.com",
@@ -30,58 +30,57 @@ let initialState:propsProfilePage = {
             "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
         }
     },
-    status:'status'
+    status: 'status'
 }
-export const reducerProfile = (state: propsProfilePage = initialState, action: ActionType ): propsProfilePage => {
+export const reducerProfile = (state: propsProfilePage = initialState, action: ActionType): propsProfilePage => {
 
     switch (action.type) {
         case'ADD-POST':
             let newPOst: propsPostMessege = {id: new Date().getTime(), message: action.post, likes: 15};
-            state.newTextPost=''
+            state.newTextPost = ''
             return {...state, post: [...state.post, newPOst]};
         // case 'CHANGE-CALLBASK':
         //     // state.newTextPost = action.post
         //     return {...state, newTextPost: action.newText};
         case "CHANGE-PROFILE":
-            return {...state, profile:action.profile};
+            return {...state, profile: action.profile};
         case "GET-STATUS":
-            return {...state, status:action.status}
+            return {...state, status: action.status}
         default:
             return state
     }
 }
 
 //Action Creator
-export const addPOstAc = (title: string) => {return {type: 'ADD-POST', post: title} as const}
-export const changeProfileAC = (profile: ProfileType) => {return {type: 'CHANGE-PROFILE', profile} as const}
-export const getStatusAC = (status: string) => {return {type: 'GET-STATUS', status} as const}
+export const addPOstAc = (title: string) => {
+    return {type: 'ADD-POST', post: title} as const
+}
+export const changeProfileAC = (profile: ProfileType) => {
+    return {type: 'CHANGE-PROFILE', profile} as const
+}
+export const getStatusAC = (status: string) => {
+    return {type: 'GET-STATUS', status} as const
+}
 
 //Thunk Creator
-export const changeProfileThunkCreator=(userId:string):ThunkAction<Promise<void>, propsProfilePage, unknown, ActionType>=>{
-    return async (dispatch: Dispatch<ActionType>)=>{
-        usersApi.getProfile(userId).then(response => {
-
-            dispatch(changeProfileAC(response))
-
-        })
+export const changeProfileThunkCreator = (userId: string): ThunkAction<Promise<void>, propsProfilePage, unknown, ActionType> => {
+    return async (dispatch: Dispatch<ActionType>) => {
+        let response = await usersApi.getProfile(userId)
+        dispatch(changeProfileAC(response))
     }
 }
-export const getProfileStatusTC=(userId:string):ThunkAction<Promise<void>, propsProfilePage, unknown, ActionType>=>{
-    return async (dispatch: Dispatch<ActionType>)=>{
-
-        profileApi.getStatus(userId).then(response=>{
-
-            dispatch(getStatusAC(response.data))
-        })
+export const getProfileStatusTC = (userId: string): ThunkAction<Promise<void>, propsProfilePage, unknown, ActionType> => {
+    return async (dispatch: Dispatch<ActionType>) => {
+        let response = await profileApi.getStatus(userId)
+        dispatch(getStatusAC(response.data))
     }
 }
-export const updateProfileStatusTC=(status:string):ThunkAction<Promise<void>, propsProfilePage, unknown, ActionType>=>{
-    return async (dispatch: Dispatch<ActionType>)=>{
+export const updateProfileStatusTC = (status: string): ThunkAction<Promise<void>, propsProfilePage, unknown, ActionType> => {
+    return async (dispatch: Dispatch<ActionType>) => {
 
-        profileApi.updateStatus(status).then(response=>{
-if (response.data.resultCode===0)
+        let response = await profileApi.updateStatus(status)
+        if (response.data.resultCode === 0)
             dispatch(getStatusAC(status))
-        })
     }
 }
 
@@ -90,10 +89,10 @@ if (response.data.resultCode===0)
 export type propsProfilePage = {
     post: propsPostMessege[]
     newTextPost: string
-    profile:ProfileType
-    status:string
+    profile: ProfileType
+    status: string
 }
-export type ProfileType={
+export type ProfileType = {
 
     "aboutMe": string,
     "contacts": ContactProfileType
@@ -105,11 +104,11 @@ export type ProfileType={
 
 
 }
-type ContactProfileType={
+type ContactProfileType = {
 
     "facebook": string
     "website": null | string
-    "vk":string
+    "vk": string
     "twitter": string
     "instagram": string
     "youtube": null | string
@@ -117,7 +116,7 @@ type ContactProfileType={
     "mainLink": null | string
 
 }
-type PhotoType={
+type PhotoType = {
 
     "small": string
     "large": string
@@ -128,7 +127,7 @@ export type propsPostMessege = {
     message?: string
     likes: number
 }
-type ActionType=ReturnType<typeof addPOstAc>  | ReturnType<typeof changeProfileAC> | ReturnType<typeof getStatusAC>
+type ActionType = ReturnType<typeof addPOstAc> | ReturnType<typeof changeProfileAC> | ReturnType<typeof getStatusAC>
 
 //
 // type changeStatusType={

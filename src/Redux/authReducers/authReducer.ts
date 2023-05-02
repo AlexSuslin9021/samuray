@@ -56,15 +56,13 @@ export const getAuthThunkCreator = (): ThunkAction<Promise<void>, initialStateTy
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean = false): ThunkAction<Promise<void>, initialStateType, unknown, ActionType> => {
 
     return async (dispatch: any) => {
-        authApi.loginCreate(email, password, rememberMe).then(response => {
+      let response=await  authApi.loginCreate(email, password, rememberMe)
             if (response.data.resultCode === 0) {
                 dispatch(getAuthThunkCreator())
                 // dispatch(isAuthAC(true))
-
             }
             let message=response.data.messages.length>0 ? response.data.messages[0]:"Some error"
             dispatch(stopSubmit("Login",{_error:message}))
-        })
     }
 }
 export const loginOutThunkCreator = (): ThunkAction<Promise<void>, initialStateType, unknown, ActionType> => {

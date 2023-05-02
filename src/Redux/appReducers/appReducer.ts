@@ -15,7 +15,7 @@ export const appReducer = (state: initialStateType = initialState, action: Actio
 // Action creator
 export const initializedSuccess = () => {return {type: initialized_Success} as const}
 // Thunk creator
-export const initializedAppTC =():AppThunkType=>(dispatch=useAppDispatch())=>{
+export const initializedAppTC =():AppThunkType=>  (dispatch=useAppDispatch())=>{
      let promise= dispatch(getAuthThunkCreator())
    Promise.all([promise]).then(()=>{
        dispatch(initializedSuccess())

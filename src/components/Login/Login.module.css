@@ -35,7 +35,7 @@ h2{
     background-color: #807d7d;
 
 }
-input:focus {
+.inputText input:focus {
     outline: none !important;
     border-color: gray;
     box-shadow: 0 0 10px #719ECE;

@@ -45,12 +45,12 @@ const portionSize=10;
     return (
         <div>
             {props.isFetching && <div><img src={preloader} alt=""/></div>}
-            {portionNumber > 1 && <button onClick={()=>setPortionNumber(portionNumber-1)}>Back</button>}
+            {portionNumber > 1 && <button onClick={()=>setPortionNumber(portionNumber-1)}>{'<'}</button>}
             {page
                 .filter(p=>p >= leftPortionPageNumber && p<= rightPortionPageNumber)
                 .map((p, index) => <span key={index} className={props.currentPage === p ? s.selected : ''}
                                           onClick={() => props.onClickPage(p)}>{p} </span>)}
-            {portionCount > portionNumber && <button onClick={()=>setPortionNumber(portionNumber+1)}>next</button>}
+            {portionCount > portionNumber && <button onClick={()=>setPortionNumber(portionNumber+1)}>{'>'}</button>}
             {props.users.map(u => <div key={u.id}>
                 <div className={s.iconContainer}>
                     <NavLink to={'/profile/' + u.id}>

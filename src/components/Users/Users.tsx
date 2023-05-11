@@ -16,7 +16,6 @@ type PropsUsersType = {
     onClickPage: (pageNumber: number) => void
     isFetching: boolean
     setFetching: (fetching: boolean) => void
-
     progressIsFetching:number[]
     followThunkCreator:(id:number)=>void
     unFollowThunkCreator:(id:number)=>void
@@ -28,6 +27,7 @@ export type PostUsersResponse = {
     data: object
 }
 export const Users = (props: PropsUsersType) => {
+
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let page = []
     for (let i = 1; i <= pageCount; i++) {

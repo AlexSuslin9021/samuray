@@ -4,6 +4,7 @@ import React from "react";
 import {AppstateType} from "../../Redux/reduxState";
 import {connect} from "react-redux";
 import {loginThunkCreator} from "../../Redux/authReducers/authReducer";
+import s from './Login.module.css'
 
 type Inputs = {
     email:string
@@ -25,11 +26,12 @@ type LoginType={
 
 
 
-    return (<>
+    return (<div className={s.loginBlock}>
+        <div className={s.loginForm}>
         <h2>Login</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
             {/* первый параметр имя, */}
-            <div >
+            <div className={s.inputText}>
             <input placeholder={'Email'}  {...register("email", { required: 'Обязательно',
             minLength:{
                 value:5,
@@ -37,19 +39,20 @@ type LoginType={
             }})} />
                 {errors?.email && <span>{errors?.email?.message ||'Email'}</span>}
             </div>
-            {/* include validation with required or other standard HTML validation rules */}
-            <div >
+            <div className={s.inputText} >
             <input placeholder={'Password'} {...register("password", { required: true })} />
-            {/* errors will return when field validation fails  */}
             {errors.password && <span>This field is required</span>}
         </div>
-            <div> Remember me
-                <input type="checkbox"  {...register("rememberMe")}/>
+            <div className={s.inputCheckbox}>
+                <input id="first" type="checkbox"  {...register("rememberMe")}/>
+                <label htmlFor="first"> Remember me</label>
             </div>
-            <input type="submit" />
-
+            <div className={s.buttonContainer}>
+            <input className={s.button} type="submit" />
+            </div>
         </form>
-    </> );
+        </div>
+    </div> );
 }
 
 type mapStateToPropsType={

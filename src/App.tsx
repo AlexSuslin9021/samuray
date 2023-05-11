@@ -9,14 +9,12 @@ import NavbarConteiner from "./components/Nawbar/NavbarContainer";
 import {ContainerForProfileContainer} from "./components/Profile/ProfileContainer";
 import {DataHeader} from "./components/Header/ContainerHeader";
 import UsersContainer from "./components/Users/UsersContainer";
-
 import {connect} from "react-redux";
 import {AppstateType} from "./Redux/reduxState";
 import preloader from './assets/image/6.gif'
 import {initializedAppTC} from "./Redux/appReducers/appReducer";
 import Login2 from "./components/Login/Login2";
-import {compose} from "redux";
-import withAuthRedirect from "./hoc/withAuthRedirect";
+
 
 
 type AppType={

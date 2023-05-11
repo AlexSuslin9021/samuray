@@ -3,7 +3,7 @@ import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {stopSubmit} from 'redux-form'
 
-//initialState
+
 
 let initialState: initialStateType = {
 
@@ -31,14 +31,8 @@ export const isAuthAC = (isAuth: boolean) => {return {type: 'CHANGE_ISAUTH', isA
 
 //Thunk creator
 export const setUserThunkCreator = (id: string | null , email: string | null, login: string | null) => ({
-    // :ThunkAction<Promise<void>, initialStateType, unknown, ActionType>
     type: 'SET_USER_DATA', data: {id, email, login}
-    // return async (dispatch:Dispatch<setUserDataType>)=>{
-    //     usersApi.getAuth().then(response=>{
-    //         if(response.resultCode===0)
-    //           dispatch(setUserDataAC(response.data))
-    //     })
-    // }
+
 }) as const
 export const getAuthThunkCreator = (): ThunkAction<Promise<void>, initialStateType, unknown, ActionType> => {
    return   async (dispatch: Dispatch<ActionType>) => {

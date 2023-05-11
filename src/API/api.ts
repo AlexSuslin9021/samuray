@@ -29,17 +29,8 @@ export const usersApi = {
             return response.data
         })
     },
-    getAuth: () => {
-
-        return instance.get<GetDataResponse>(api + `auth/me`).then(response => {
-
-            return response.data
-        })
-    },
     gtAuthPost: (id: number) => {
-
         return instance.post<PostUsersResponse>(`https://social-network.samuraijs.com/api/1.0/follow/${id}`).then(response => {
-
             return response.data
         })
     },

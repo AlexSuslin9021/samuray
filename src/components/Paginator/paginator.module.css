@@ -1,0 +1,24 @@
+.activePage{
+color:#242842;
+    font-weight: bold;
+    margin-right: 5px;
+}
+.page{
+    border-radius: 50%;
+    color:#242842;
+    margin-right: 5px;
+}
+.page:hover{
+  color:gray;
+    cursor:pointer;
+
+}
+.button{
+    border: none;
+    background: none;
+    color:#242842
+}
+.button:hover{
+    background: lightgrey;
+    border-radius: 50%;
+}

@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {NavLink} from "react-router-dom";
 import usersPhoto from '../../assets/image/3607444.png'
 import s from "./Users.module.css";
 import {usersType} from "../../Redux/reducerUsers/reducerUsers";
-import preloader from '../../assets/image/6.gif'
+
 import Paginator from "../Paginator/Paginator";
 
 

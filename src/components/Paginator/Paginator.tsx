@@ -1,18 +1,8 @@
 import React, {useState} from 'react';
 import preloader from "../../assets/image/6.gif";
-import s from "../Users/Users.module.css";
-import {usersType} from "../../Redux/reducerUsers/reducerUsers";
-
-type PaginatorType={
-
-    totalUsersCount: number
-    pageSize: number
-    currentPage: number
-    onClickPage: (pageNumber: number) => void
-    isFetching: boolean
+import s from "./paginator.module.css";
 
 
-}
 const Paginator = (props:PaginatorType) => {
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let page = []
@@ -27,14 +17,26 @@ const Paginator = (props:PaginatorType) => {
     return (
         <div>
             {props.isFetching && <div><img src={preloader} alt=""/></div>}
-            {portionNumber > 1 && <button onClick={()=>setPortionNumber(portionNumber-1)}>{'<'}</button>}
+            {portionNumber > 1 && <button className={s.button} onClick={()=>setPortionNumber(portionNumber-1)}>{'<'}</button>}
             {page
                 .filter(p=>p >= leftPortionPageNumber && p<= rightPortionPageNumber)
-                .map((p, index) => <span key={index} className={props.currentPage === p ? s.selected : ''}
-                                         onClick={() => props.onClickPage(p)}>{p} </span>)}
-            {portionCount > portionNumber && <button onClick={()=>setPortionNumber(portionNumber+1)}>{'>'}</button>}
+                .map((p, index) => <span key={index} className={props.currentPage === p ? s.activePage : s.page}
+                                         onClick={() => props.onClickPage(p)}>{p}</span>)}
+            {portionCount > portionNumber && <button className={s.button} onClick={()=>setPortionNumber(portionNumber+1)}>{'>'}</button>}
         </div>
     );
 };
 
 export default Paginator;
+
+
+type PaginatorType={
+
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    onClickPage: (pageNumber: number) => void
+    isFetching: boolean
+
+
+}

@@ -4,7 +4,7 @@ import usersPhoto from '../../assets/image/3607444.png'
 import s from "./Users.module.css";
 import {usersType} from "../../Redux/reducerUsers/reducerUsers";
 import preloader from '../../assets/image/6.gif'
-
+import Paginator from "../Paginator/Paginator";
 
 
 type PropsUsersType = {
@@ -16,9 +16,9 @@ type PropsUsersType = {
     onClickPage: (pageNumber: number) => void
     isFetching: boolean
     setFetching: (fetching: boolean) => void
-    progressIsFetching:number[]
-    followThunkCreator:(id:number)=>void
-    unFollowThunkCreator:(id:number)=>void
+    progressIsFetching: number[]
+    followThunkCreator: (id: number) => void
+    unFollowThunkCreator: (id: number) => void
 }
 
 export type PostUsersResponse = {
@@ -28,29 +28,16 @@ export type PostUsersResponse = {
 }
 export const Users = (props: PropsUsersType) => {
 
-    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    let page = []
-    for (let i = 1; i <= pageCount; i++) {
-        page.push(i)
-    }
-const portionSize=10;
-    const portionCount=Math.ceil(props.totalUsersCount /portionSize) //сколько порций всего
-    let[portionNumber, setPortionNumber]=useState(1);
-    let leftPortionPageNumber=(portionNumber-1)*portionSize+1;
-    let rightPortionPageNumber=portionNumber*portionSize
-
-
-
 
     return (
         <div>
-            {props.isFetching && <div><img src={preloader} alt=""/></div>}
-            {portionNumber > 1 && <button onClick={()=>setPortionNumber(portionNumber-1)}>{'<'}</button>}
-            {page
-                .filter(p=>p >= leftPortionPageNumber && p<= rightPortionPageNumber)
-                .map((p, index) => <span key={index} className={props.currentPage === p ? s.selected : ''}
-                                          onClick={() => props.onClickPage(p)}>{p} </span>)}
-            {portionCount > portionNumber && <button onClick={()=>setPortionNumber(portionNumber+1)}>{'>'}</button>}
+            <Paginator
+                totalUsersCount={props.totalUsersCount}
+                currentPage={props.currentPage}
+                onClickPage={props.onClickPage}
+                isFetching={props.isFetching}
+                pageSize={props.pageSize}
+            />
             {props.users.map(u => <div key={u.id}>
                 <div className={s.iconContainer}>
                     <NavLink to={'/profile/' + u.id}>
@@ -62,13 +49,16 @@ const portionSize=10;
                     {/*<span> {'location.city'}</span>*/}
                     {/*<span> {'location.country'}</span>*/}
                 </div>
-                {u.follow ? <button className={`${s.button} ${s.follow}`} disabled={props.progressIsFetching.some(el=>el===u.id)} onClick={() => {
+                {u.follow ? <button className={`${s.button} ${s.follow}`}
+                                    disabled={props.progressIsFetching.some(el => el === u.id)} onClick={() => {
 
-                    props.unFollowThunkCreator(u.id)
-                }}> Follow</button> : <button className={s.button} disabled={props.progressIsFetching.some(el=>el===u.id)} onClick={() => {
+                        props.unFollowThunkCreator(u.id)
+                    }}> Follow</button> :
+                    <button className={s.button} disabled={props.progressIsFetching.some(el => el === u.id)}
+                            onClick={() => {
 
-                   props.followThunkCreator(u.id)
-                }}> UnFollow</button>}
+                                props.followThunkCreator(u.id)
+                            }}> UnFollow</button>}
             </div>)}
         </div>
     );

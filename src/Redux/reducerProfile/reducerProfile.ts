@@ -24,13 +24,14 @@ let initialState: propsProfilePage = {
         "lookingForAJob": true,
         "lookingForAJobDescription": "не ищу, а дурачусь",
         "fullName": "samurai dimych",
-        "userId": 2,
+        "userId": 28028,
         "photos": {
             "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
             "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
         }
     },
-    status: 'status'
+    status: 'status',
+    isOwner:false
 }
 export const reducerProfile = (state: propsProfilePage = initialState, action: ActionType): propsProfilePage => {
 
@@ -46,6 +47,9 @@ export const reducerProfile = (state: propsProfilePage = initialState, action: A
             return {...state, profile: action.profile};
         case "GET-STATUS":
             return {...state, status: action.status}
+        case "SAVE-PHOTO":
+            debugger
+            return {...state, profile: {...state.profile, photos:action.photos}}
         default:
             return state
     }
@@ -54,6 +58,9 @@ export const reducerProfile = (state: propsProfilePage = initialState, action: A
 //Action Creator
 export const addPOstAc = (title: string) => {
     return {type: 'ADD-POST', post: title} as const
+}
+export const savePhotoAC = (photos:{small:string, large:string}) =>{
+    return{type: 'SAVE-PHOTO', photos} as const
 }
 export const changeProfileAC = (profile: ProfileType) => {
     return {type: 'CHANGE-PROFILE', profile} as const
@@ -83,6 +90,14 @@ export const updateProfileStatusTC = (status: string): ThunkAction<Promise<void>
             dispatch(getStatusAC(status))
     }
 }
+export const savePhotoTC=(photo:any):  ThunkAction<Promise<void>, propsProfilePage, unknown, ActionType> => {
+    debugger
+    return async (dispatch: Dispatch<ActionType>) => {
+        let res =await profileApi.updatePhoto(photo)
+        if(res.data.resultCode===0)
+            dispatch(savePhotoAC(res.data.data.photos))
+    }
+}
 
 //Types
 
@@ -91,6 +106,7 @@ export type propsProfilePage = {
     newTextPost: string
     profile: ProfileType
     status: string
+    isOwner:boolean
 }
 export type ProfileType = {
 
@@ -127,7 +143,7 @@ export type propsPostMessege = {
     message?: string
     likes: number
 }
-type ActionType = ReturnType<typeof addPOstAc> | ReturnType<typeof changeProfileAC> | ReturnType<typeof getStatusAC>
+type ActionType = ReturnType<typeof addPOstAc> | ReturnType<typeof changeProfileAC> | ReturnType<typeof getStatusAC> | ReturnType<typeof savePhotoAC>
 
 //
 // type changeStatusType={

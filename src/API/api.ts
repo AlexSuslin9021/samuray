@@ -43,11 +43,11 @@ export const usersApi = {
     }
 }
 
-type ApiProfilePutType =
+type ApiProfilePutType<D={}> =
     {
         resultCode: number
         messages: string[],
-        data: {}
+        data: D
     }
 
 export const profileApi = {
@@ -67,6 +67,16 @@ export const profileApi = {
 
         return instance.put<ApiProfilePutType>(api + `profile/status`, {status: status})
     },
+    updatePhoto(photoFile:any){
+        const formData=new FormData()
+        formData.append('image',photoFile)
+
+        return instance.put<ApiProfilePutType<{photos:{ small:string, large:string}}>>(`/profile/photo`,formData,{
+            headers:{
+                "Content-Type":'multipart/form-data'
+            }
+        })
+    }
 }
 
 type AuthGet = {

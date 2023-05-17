@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
 import s from "../ProfileInfo/ProfileInfo.module.css";
-import {ContactProfileType, ProfileType} from "../../../Redux/reducerProfile/reducerProfile";
+import { ProfileType} from "../../../Redux/reducerProfile/reducerProfile";
 import users from '../../../assets/image/3607444.png'
 import ProfileStatus from "./ProfileStatus";
 import {ProfileContact} from "./Profilecontact";
@@ -44,7 +44,6 @@ const onClickEdit=()=>{
 
 
 const ProfileFormData=()=>{
-
     return <div>
         form</div>
 }

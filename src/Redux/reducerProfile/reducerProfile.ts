@@ -73,7 +73,7 @@ export const getStatusAC = (status: string) => {
 export const changeProfileThunkCreator = (userId: string): ThunkAction<Promise<void>, propsProfilePage, unknown, ActionType> => {
     return async (dispatch: Dispatch<ActionType>) => {
         let response = await usersApi.getProfile(userId)
-        dispatch(changeProfileAC(response))
+        dispatch(changeProfileAC(response.data))
     }
 }
 export const getProfileStatusTC = (userId: string): ThunkAction<Promise<void>, propsProfilePage, unknown, ActionType> => {
@@ -144,26 +144,3 @@ export type propsPostMessege = {
     likes: number
 }
 type ActionType = ReturnType<typeof addPOstAc> | ReturnType<typeof changeProfileAC> | ReturnType<typeof getStatusAC> | ReturnType<typeof savePhotoAC>
-
-//
-// type changeStatusType={
-//     type: 'CHANGE-STATUS',
-//     status: string
-// }
-//
-// export const changeStatusAC = (status: string) => {
-//     return {
-//         type: 'CHANGE-STATUS',
-//         status
-//     }
-// }
-// type changeTitleType = {
-//     type: 'CHANGE-CALLBASK',
-//     newText: string
-// }
-// export const changeTitleAC = (title: string):changeTitleType => {
-//     return {
-//         type: 'CHANGE-CALLBASK',
-//         newText: title
-//     }
-// }

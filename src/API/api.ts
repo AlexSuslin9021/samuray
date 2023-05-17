@@ -4,10 +4,10 @@ import {ProfileType} from "../Redux/reducerProfile/reducerProfile";
 import {GetDataResponse} from "../components/Header/ContainerHeader";
 import {PostUsersResponse} from "../components/Users/Users";
 
-const api = 'https://social-network.samuraijs.com/api/1.0/'
+
 const instance = axios.create({
     withCredentials: true,
-    baseURL: api,
+    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
         "API-KEY": "434d1825-24d7-4c1d-8143-2edf92c40e38"
     }
@@ -17,30 +17,52 @@ const instance = axios.create({
 
 export const usersApi = {
     getUsers: (currentPage: number, pageSize: number) => {
-
-        return instance.get<GetUsersResponse>(api + `users?page=${currentPage}&count=${pageSize}`).then(response => {
-            return response.data
-        })
+        return instance.get<GetUsersResponse>( `users?page=${currentPage}&count=${pageSize}`)
     },
-    getProfile: (userId: string) => {
-        // if (!userId) userId = '28028'
-
-        return instance.get<ProfileType>(api + `profile/` + userId).then(response => {
-            return response.data
-        })
+    getProfile: (userId: string) => {return instance.get<ProfileType>( `profile/` + userId)
     },
     gtAuthPost: (id: number) => {
-        return instance.post<PostUsersResponse>(`https://social-network.samuraijs.com/api/1.0/follow/${id}`).then(response => {
-            return response.data
-        })
+        return instance.post<PostUsersResponse>(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
     },
     gtAuthDelete: (id: number) => {
 
-        return instance.delete<PostUsersResponse>(`https://social-network.samuraijs.com/api/1.0/follow/${id}`).then(response => {
+        return instance.delete<PostUsersResponse>(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
+    }
+}
 
-            return response.data
+
+
+export const profileApi = {
+    getProfile: (userId: string) => {return instance.get<ProfileType>( `profile/` )
+    },
+    getStatus(userId: string) {return instance.get( `profile/status/${userId}`)
+    },
+    updateStatus(status: string) {return instance.put<ApiProfilePutType>( `profile/status`, {status: status})
+    },
+    updatePhoto(photoFile:any){
+        const formData=new FormData()
+        formData.append('image',photoFile)
+        return instance.put<ApiProfilePutType<{photos:{ small:string, large:string}}>>(`/profile/photo`,formData,{
+            headers:{"Content-Type":'multipart/form-data'}
         })
     }
+}
+
+
+
+
+export const authApi = {
+    me: () => {return instance.get<AuthType<{ id: string, email: string, login: string }>>( '/auth/me')},
+    loginCreate: (email: string, password: string, rememberMe: boolean = false) => {return instance.post<AuthType<{ userId: number }>>( '/auth/login',
+        {email, password, rememberMe})
+    },
+    loginDelete: () => {return instance.delete<AuthType<{}>>( '/auth/login')}
+}
+
+export type AuthType<D> = {
+    resultCode: number
+    messages: string[],
+    data: D
 }
 
 type ApiProfilePutType<D={}> =
@@ -49,97 +71,3 @@ type ApiProfilePutType<D={}> =
         messages: string[],
         data: D
     }
-
-export const profileApi = {
-    getProfile: (userId: string) => {
-        // if (!userId) userId = '28028'
-
-        return instance.get<ProfileType>(api + `profile/` + userId).then(response => {
-            return response.data
-        })
-    },
-    getStatus(userId: string) {
-
-        // if(!userId) userId='28028'
-        return instance.get(api + `profile/status/${userId}`)
-    },
-    updateStatus(status: string) {
-
-        return instance.put<ApiProfilePutType>(api + `profile/status`, {status: status})
-    },
-    updatePhoto(photoFile:any){
-        const formData=new FormData()
-        formData.append('image',photoFile)
-
-        return instance.put<ApiProfilePutType<{photos:{ small:string, large:string}}>>(`/profile/photo`,formData,{
-            headers:{
-                "Content-Type":'multipart/form-data'
-            }
-        })
-    }
-}
-
-type AuthGet = {
-    resultCode: number
-    messages: [],
-    data: {
-        id: number,
-        email: string,
-        login: string
-    }
-}
-
-type LoginPost = {
-    resultCode: number
-    messages: [],
-    data: {
-        userId: number
-    }
-}
-
-type DeleteType = {
-    resultCode: 1
-    messages: ['Something wrong'],
-    data: {}
-}
-export type AuthType<D> = {
-    resultCode: number
-    messages: string[],
-    data: D
-}
-export const authApi = {
-    me: () => {
-        return instance.get<AuthType<{
-            id: string,
-            email: string,
-            login: string
-        }>>(api + '/auth/me')
-    },
-    loginCreate: (email: string, password: string, rememberMe: boolean = false) => {
-        return instance.post<AuthType<{ userId: number }>>(api + '/auth/login', {email, password, rememberMe})
-    },
-    loginDelete: () => {
-        return instance.delete<AuthType<{}>>(api + '/auth/login')
-    }
-}
-// export const getUsers = (currentPage: number, pageSize: number) => {
-//
-//     return axios.get<GetUsersResponse>(api + `users?page=${currentPage}&count=${pageSize}`, {withCredentials: true}).then(response => {
-//         return response.data
-//     })
-// }
-
-// export const getProfile = (userId: string) => {
-//
-//     return axios.get<ProfileType>(api + `profile/` + userId).then(response => {
-//         return response.data
-//     })
-// }
-
-// export const getAuth = () => {
-//
-//     return axios.get<GetDataResponse>(api + `auth/me`, {withCredentials: true}).then(response => {
-//
-//         return response.data
-//     })
-// }

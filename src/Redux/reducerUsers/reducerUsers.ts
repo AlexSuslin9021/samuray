@@ -61,8 +61,8 @@ export const getUserThunkCreator = (currentPage: number, pageSize: number): Thun
         dispatch(toggleFetchingAC(true))
         dispatch(setCurrentPageAC(currentPage))
         let response= await usersApi.getUsers(currentPage, pageSize)
-            dispatch(setUsersAC(response.items))
-            dispatch(setTotalUserAC(response.totalCount))
+            dispatch(setUsersAC(response.data.items))
+            dispatch(setTotalUserAC(response.data.totalCount))
             dispatch(toggleFetchingAC(false))
 
     }
@@ -71,7 +71,7 @@ export const followThunkCreator = (id: number): ThunkAction<Promise<void>, initi
     return async (dispatch: Dispatch<ActionType>) => {
         dispatch(toggleIsFetchingAC(id, true))
         let response= await usersApi.gtAuthPost(id)
-            if (response.resultCode === 0) {
+            if (response.data.resultCode === 0) {
                 dispatch(followAC(id))
             }
             dispatch(toggleIsFetchingAC(id, false))
@@ -81,7 +81,7 @@ export const unFollowThunkCreator = (id: number): ThunkAction<Promise<void>, ini
     return async (dispatch: Dispatch<ActionType>) => {
         dispatch(toggleIsFetchingAC(id, true))
         let response=  await usersApi.gtAuthDelete(id)
-            if (response.resultCode === 0) {
+            if (response.data.resultCode === 0) {
                 dispatch(unFollowAC(id))
             }
             dispatch(toggleIsFetchingAC(id, false))

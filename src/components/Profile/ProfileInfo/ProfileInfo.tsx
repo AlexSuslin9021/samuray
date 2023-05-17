@@ -1,8 +1,9 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useState} from "react";
 import s from "../ProfileInfo/ProfileInfo.module.css";
-import {ProfileType} from "../../../Redux/reducerProfile/reducerProfile";
+import {ContactProfileType, ProfileType} from "../../../Redux/reducerProfile/reducerProfile";
 import users from '../../../assets/image/3607444.png'
 import ProfileStatus from "./ProfileStatus";
+import {ProfileContact} from "./Profilecontact";
 
 type ProfileTypeInfo = {
     profile: ProfileType
@@ -15,31 +16,35 @@ type ProfileTypeInfo = {
 
 
 export function ProfileInfo(props: ProfileTypeInfo) {
+    const [edit,setEdit]=useState(true)
+const onClickEdit=()=>{
+    setEdit(false)
+}
+    const onClickSave=()=>{
+        setEdit(true)
+    }
 
     const onChangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
-        debugger
-        if(e.target.files)
-            props.savePhoto(e.target.files[0])
-    }
-        return (
 
+        if(e.target.files) props.savePhoto(e.target.files[0])}
+        return (
         <div className={s.containProfileInfo}>
             <div className={s.avatar}>
                 <img src={props.profile.photos.small ? props.profile.photos.small : users} alt=""/>
                 {props.isOwner && <input type={'file'} onChange={onChangeHandler}/>}
             </div>
             <div className={s.description}>
+                {props.isOwner && edit ? <button onClick={onClickEdit} >edit</button> :<button onClick={onClickSave} >save</button>}
+
                 <ProfileStatus status={props.status}  updateProfileStatus={props.updateProfileStatus}    />
-                <div className={s.item}></div>
-                <div> <b>About me:</b> {props.profile.aboutMe}</div>
-                <div> <b>Full name:</b> {props.profile.fullName}</div>
-                <div> <b> Date of Birth:</b></div>
-                <div><b> Location:</b></div>
-                <div> <b> Education:</b></div>
-                <div> {Object.keys(props.profile.contacts).map(c=><ul><li><b>{c}:</b></li></ul>) }</div>
-
+                {edit ? <ProfileContact profile={props.profile} /> : <ProfileFormData/>}
             </div>
-
-
         </div>)
+}
+
+
+const ProfileFormData=()=>{
+
+    return <div>
+        form</div>
 }

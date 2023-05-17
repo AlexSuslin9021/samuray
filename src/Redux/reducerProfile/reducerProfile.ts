@@ -120,7 +120,7 @@ export type ProfileType = {
 
 
 }
-type ContactProfileType = {
+export type ContactProfileType = {
 
     "facebook": string
     "website": null | string

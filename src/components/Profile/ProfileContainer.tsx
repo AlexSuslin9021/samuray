@@ -5,12 +5,13 @@ import {AppstateType} from "../../Redux/reduxState";
 import {
     changeProfileThunkCreator,
     getProfileStatusTC,
-    ProfileType, savePhotoTC,
+    ProfileType, savePhotoTC,saveProfileDataTC,
     updateProfileStatusTC
 } from "../../Redux/reducerProfile/reducerProfile";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {saveDataProfileType} from "../../API/api";
 
 
 type ProfileContainerType = MapStateToPropsType & {
@@ -20,6 +21,7 @@ type ProfileContainerType = MapStateToPropsType & {
     getProfileStatus:(userId:string)=>void
     updateProfileStatus:(status:string)=>void
     savePhoto:(photo:any)=>void
+    saveProfileData:(profile:saveDataProfileType)=>void
 }
 
 export class ProfileContainer extends React.Component <PropsType> {
@@ -54,6 +56,7 @@ export class ProfileContainer extends React.Component <PropsType> {
                         status={this.props.status}
                         updateProfileStatus={this.props.updateProfileStatus}
                         isOwner={!this.props.match.params.userId}
+                        saveProfileData={this.props.saveProfileData}
                         />
         // : <Redirect to={'/login'}/>}
     }
@@ -92,7 +95,8 @@ export const ContainerForProfileContainer= compose<ComponentType>(
         setProfile: changeProfileThunkCreator,
         getProfileStatus: getProfileStatusTC,
         updateProfileStatus:updateProfileStatusTC,
-        savePhoto: savePhotoTC
+        savePhoto: savePhotoTC,
+        saveProfileData:saveProfileDataTC
     }),
     withRouter,
     withAuthRedirect,

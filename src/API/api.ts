@@ -1,6 +1,6 @@
 import axios from "axios";
 import {GetUsersResponse} from "../components/Users/UsersContainer";
-import {ProfileType} from "../Redux/reducerProfile/reducerProfile";
+import {ContactProfileType, ProfileType} from "../Redux/reducerProfile/reducerProfile";
 import {GetDataResponse} from "../components/Header/ContainerHeader";
 import {PostUsersResponse} from "../components/Users/Users";
 
@@ -33,7 +33,7 @@ export const usersApi = {
 
 
 export const profileApi = {
-    getProfile: (userId: string) => {return instance.get<ProfileType>( `profile/` )
+    saveDataProfile: (profile: saveDataProfileType) => {return instance.put<ApiProfilePutType<saveDataProfileType>>( `profile/`,profile )
     },
     getStatus(userId: string) {return instance.get( `profile/status/${userId}`)
     },
@@ -70,4 +70,14 @@ type ApiProfilePutType<D={}> =
         resultCode: number
         messages: string[],
         data: D
+    }
+
+    export type saveDataProfileType={
+        "aboutMe": string,
+        "contacts": ContactProfileType
+        "lookingForAJob": boolean,
+        "lookingForAJobDescription": string,
+        "fullName": string,
+        "userId": number,
+
     }

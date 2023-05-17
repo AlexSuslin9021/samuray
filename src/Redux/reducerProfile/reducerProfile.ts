@@ -1,6 +1,8 @@
 import {Dispatch} from "redux";
-import {profileApi, usersApi} from "../../API/api";
+import {profileApi, saveDataProfileType, usersApi} from "../../API/api";
 import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "../reduxState";
+import {getUsers} from "../Selector/user-selector";
 
 
 //initialState
@@ -76,26 +78,37 @@ export const changeProfileThunkCreator = (userId: string): ThunkAction<Promise<v
         dispatch(changeProfileAC(response.data))
     }
 }
-export const getProfileStatusTC = (userId: string): ThunkAction<Promise<void>, propsProfilePage, unknown, ActionType> => {
+export const getProfileStatusTC = (userId: string): ThunkAction<Promise<void>, AppStateType, unknown, ActionType> => {
     return async (dispatch: Dispatch<ActionType>) => {
         let response = await profileApi.getStatus(userId)
         dispatch(getStatusAC(response.data))
     }
 }
-export const updateProfileStatusTC = (status: string): ThunkAction<Promise<void>, propsProfilePage, unknown, ActionType> => {
+export const updateProfileStatusTC = (status: string): ThunkAction<Promise<void>, AppStateType, unknown, ActionType> => {
     return async (dispatch: Dispatch<ActionType>) => {
-
         let response = await profileApi.updateStatus(status)
         if (response.data.resultCode === 0)
             dispatch(getStatusAC(status))
     }
 }
-export const savePhotoTC=(photo:any):  ThunkAction<Promise<void>, propsProfilePage, unknown, ActionType> => {
+export const savePhotoTC=(photo:any):  ThunkAction<Promise<void>, AppStateType, unknown, ActionType> => {
     debugger
     return async (dispatch: Dispatch<ActionType>) => {
         let res =await profileApi.updatePhoto(photo)
         if(res.data.resultCode===0)
             dispatch(savePhotoAC(res.data.data.photos))
+    }
+}
+export const saveProfileDataTC=(profile:saveDataProfileType): ThunkAction<Promise<void>, any, unknown, ActionType> => {
+
+    return async (dispatch, getState) => {
+     let res= await profileApi.saveDataProfile(profile)
+const userId= getState().authReducer.data.id
+        if(res.data.resultCode===0){
+            debugger
+        return   dispatch(changeProfileThunkCreator(userId.toString()))
+        }
+
     }
 }
 

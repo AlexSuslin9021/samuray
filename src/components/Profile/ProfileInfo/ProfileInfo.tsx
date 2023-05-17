@@ -4,6 +4,9 @@ import { ProfileType} from "../../../Redux/reducerProfile/reducerProfile";
 import users from '../../../assets/image/3607444.png'
 import ProfileStatus from "./ProfileStatus";
 import {ProfileContact} from "./Profilecontact";
+import {saveDataProfileType} from "../../../API/api";
+import {ProfileFormData} from "./ProfileDataForm";
+import {useAppDispatch} from "../../../Redux/reduxState";
 
 type ProfileTypeInfo = {
     profile: ProfileType
@@ -11,16 +14,19 @@ type ProfileTypeInfo = {
     updateProfileStatus:(status:string)=>void
     isOwner: boolean
     savePhoto:(photo:any)=>void
+    saveProfileData:(profile:saveDataProfileType)=>void
 
 }
 
 
 export function ProfileInfo(props: ProfileTypeInfo) {
+    const dispatch=useAppDispatch()
     const [edit,setEdit]=useState(true)
 const onClickEdit=()=>{
     setEdit(false)
 }
-    const onClickSave=()=>{
+    const onClickSave=(profile:saveDataProfileType)=>{
+        props.saveProfileData(profile)
         setEdit(true)
     }
 
@@ -34,16 +40,12 @@ const onClickEdit=()=>{
                 {props.isOwner && <input type={'file'} onChange={onChangeHandler}/>}
             </div>
             <div className={s.description}>
-                {props.isOwner && edit ? <button onClick={onClickEdit} >edit</button> :<button onClick={onClickSave} >save</button>}
+                {props.isOwner && edit && <button onClick={onClickEdit} >edit</button>}
 
                 <ProfileStatus status={props.status}  updateProfileStatus={props.updateProfileStatus}    />
-                {edit ? <ProfileContact profile={props.profile} /> : <ProfileFormData/>}
+                {edit ? <ProfileContact profile={props.profile} /> : <ProfileFormData callback={onClickSave}/>}
             </div>
         </div>)
 }
 
 
-const ProfileFormData=()=>{
-    return <div>
-        form</div>
-}

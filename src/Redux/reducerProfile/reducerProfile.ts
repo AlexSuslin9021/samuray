@@ -135,14 +135,14 @@ export type ProfileType = {
 }
 export type ContactProfileType = {
 
-    "facebook": string
-    "website": null | string
-    "vk": string
-    "twitter": string
-    "instagram": string
-    "youtube": null | string
-    "github": string
-    "mainLink": null | string
+    "facebook": any
+    "website": any
+    "vk": any
+    "twitter": any
+    "instagram": any
+    "youtube":any
+    "github": any
+    "mainLink": any
 
 }
 type PhotoType = {

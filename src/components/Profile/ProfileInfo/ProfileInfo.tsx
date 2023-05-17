@@ -20,7 +20,7 @@ type ProfileTypeInfo = {
 
 
 export function ProfileInfo(props: ProfileTypeInfo) {
-    const dispatch=useAppDispatch()
+
     const [edit,setEdit]=useState(true)
 const onClickEdit=()=>{
     setEdit(false)
@@ -28,6 +28,7 @@ const onClickEdit=()=>{
     const onClickSave=(profile:saveDataProfileType)=>{
         props.saveProfileData(profile)
         setEdit(true)
+
     }
 
     const onChangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
@@ -43,7 +44,7 @@ const onClickEdit=()=>{
                 {props.isOwner && edit && <button onClick={onClickEdit} >edit</button>}
 
                 <ProfileStatus status={props.status}  updateProfileStatus={props.updateProfileStatus}    />
-                {edit ? <ProfileContact profile={props.profile} /> : <ProfileFormData callback={onClickSave}/>}
+                {edit ? <ProfileContact profile={props.profile} /> : <ProfileFormData profile={props.profile} callback={onClickSave}/>}
             </div>
         </div>)
 }

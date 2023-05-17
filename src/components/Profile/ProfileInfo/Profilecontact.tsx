@@ -11,6 +11,7 @@ export const ProfileContact=(props:ProfileContactType)=>{
         <div> <b> Date of Birth:</b></div>
         <div><b> Location:</b></div>
         <div> <b> Education:</b></div>
+        <div> <b>FaceBook:</b> {props.profile.contacts.facebook }</div>
         <div> <b>Contact</b> {Object.keys(props.profile.contacts).map((key)=>
             <Contact key={key} titleValue={key} fieldValue={props.profile.contacts[key as keyof ContactProfileType]}/>) }</div>
     </>

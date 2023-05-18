@@ -44,16 +44,6 @@ export const ProfileFormData = (props:ProfileFormDataType) => {
             <div>  {Object.keys(props.profile.contacts).map((key)=>
                 <div key={key} ><b>{key}</b>:<input defaultValue={props.profile.contacts[key as keyof ContactProfileType]}  {...register(`contacts.${key as keyof ContactProfileType}`)} /></div>) }</div>
 
-            {/*<div><b>Facebook</b>:<input defaultValue={props.profile.contacts.facebook} {...register("facebook")} /></div>*/}
-            {/*<div><b>website</b>:<input defaultValue={props.profile.contacts.facebook} {...register("website", {required: true})} /></div>*/}
-            {/*<div><b>vk</b>:<input {...register("vk", {required: true})} /></div>*/}
-            {/*<div><b>instagram</b>:<input {...register("instagram", {required: true})} /></div>*/}
-            {/*<div><b>twitter</b>:<input {...register("twitter", {required: true})} /></div>*/}
-            {/*<div><b>youtube</b>:<input {...register("youtube", {required: true})} /></div>*/}
-            {/*<div><b>github</b>:<input {...register("github", {required: true})} /></div>*/}
-            {/*<div><b>mainLink</b>:<input {...register("mainLink", {required: true})} /></div>*/}
-
-
         </form>
     );
 }

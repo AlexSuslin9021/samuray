@@ -10,16 +10,18 @@ type Inputs = {
     email:string
     password:string
     rememberMe:boolean
+    captcha?:null |string
 };
 type LoginType={
-    login:(email: string, password: string, rememberMe: boolean)=>void
+    login:(email: string, password: string, rememberMe: boolean, captcha?:string |null)=>void
     isAuth:boolean
+    captcha:null |string
 }
 
  function Login2(props:LoginType) {
     const { register, handleSubmit,reset, formState: { errors } } = useForm<Inputs>(); //метод, возвращает объект
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        props.login(data.email,data.password,data.rememberMe)
+        props.login(data.email,data.password,data.rememberMe, data.captcha)
         reset();
     }
      if(props.isAuth) return <Redirect to={'./profile'}/>
@@ -47,20 +49,28 @@ type LoginType={
                 <input id="first" type="checkbox"  {...register("rememberMe")}/>
                 <label htmlFor="first"> Remember me</label>
             </div>
+            <div className={s.inputText}>
+                {props.captcha && <img style={{width:'200px',height:'100px', margin: '20px'}} src={props.captcha} alt=""/>}
+                {props.captcha && <input   {...register("captcha")}/>}
+            </div>
             <div className={s.buttonContainer}>
             <input className={s.button} type="submit" />
             </div>
+
         </form>
+
         </div>
     </div> );
 }
 
 type mapStateToPropsType={
     isAuth:boolean
+    captcha: null |string
 }
 const mapStateToProps=(state:AppstateType):mapStateToPropsType=>{
     return{
-        isAuth:state.authReducer.isAuth
+        isAuth:state.authReducer.isAuth,
+        captcha:state.authReducer.captcha
     }
 }
 export default connect(mapStateToProps, {login:loginThunkCreator})(Login2)

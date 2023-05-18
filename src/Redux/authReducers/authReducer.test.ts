@@ -8,10 +8,11 @@ test('it should be add new login',()=>{
         messages:[],
         fieldsErrors:[],
         resultCode:0,
-        isAuth:false
+        isAuth:false,
+        captcha:null
     }
 
-    const action=setUserDataAC({id:'2',login:"Alex",email:"mail.ru"} )
+    const action=setUserDataAC({id:'2',login:"Alex",email:"mail.ru", captcha:null} )
     const newState=authReducer(initialState,action )
     expect(newState.isAuth).toBe(true)
     expect(newState.data.id).toBe(`2`)

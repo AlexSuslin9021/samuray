@@ -33,16 +33,16 @@ export const usersApi = {
 
 
 export const profileApi = {
-    saveDataProfile: (profile: saveDataProfileType) => {return instance.put<ApiProfilePutType<saveDataProfileType>>( `profile/`,profile )
+    saveDataProfile: (profile: saveDataProfileType) => {return instance.put<ResponseType<saveDataProfileType>>( `profile/`,profile )
     },
     getStatus(userId: string) {return instance.get( `profile/status/${userId}`)
     },
-    updateStatus(status: string) {return instance.put<ApiProfilePutType>( `profile/status`, {status: status})
+    updateStatus(status: string) {return instance.put<ResponseType>( `profile/status`, {status: status})
     },
     updatePhoto(photoFile:any){
         const formData=new FormData()
         formData.append('image',photoFile)
-        return instance.put<ApiProfilePutType<{photos:{ small:string, large:string}}>>(`/profile/photo`,formData,{
+        return instance.put<ResponseType<{photos:{ small:string, large:string}}>>(`/profile/photo`,formData,{
             headers:{"Content-Type":'multipart/form-data'}
         })
     }
@@ -52,25 +52,25 @@ export const profileApi = {
 
 
 export const authApi = {
-    me: () => {return instance.get<AuthType<{ id: string, email: string, login: string }>>( '/auth/me')},
-    loginCreate: (email: string, password: string, rememberMe: boolean = false) => {return instance.post<AuthType<{ userId: number }>>( '/auth/login',
-        {email, password, rememberMe})
+    me: () => {return instance.get<ResponseType<{ id: string, email: string, login: string }>>( '/auth/me')},
+    loginCreate: (email: string, password: string, rememberMe: boolean = false, captcha?:string |null) => {return instance.post<ResponseType<{ userId: number }>>( '/auth/login',
+        {email, password, rememberMe, captcha})
     },
-    loginDelete: () => {return instance.delete<AuthType<{}>>( '/auth/login')}
+    loginDelete: () => {return instance.delete<ResponseType>( '/auth/login')}
+}
+export const captchaApi = {
+
+    getCaptcha(){
+        debugger
+        return instance.get<{url:string}>('/security/get-captcha-url')
+    }
 }
 
-export type AuthType<D> = {
+export type ResponseType<D={}> = {
     resultCode: number
     messages: string[],
     data: D
 }
-
-type ApiProfilePutType<D={}> =
-    {
-        resultCode: number
-        messages: string[],
-        data: D
-    }
 
     export type saveDataProfileType={
         "aboutMe": string,

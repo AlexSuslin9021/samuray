@@ -36,7 +36,6 @@ let initialState: propsProfilePage = {
     isOwner: false
 }
 export const reducerProfile = (state: propsProfilePage = initialState, action: ActionType): propsProfilePage => {
-
     switch (action.type) {
         case'ADD-POST':
             let newPOst: propsPostMessege = {id: new Date().getTime(), message: action.post, likes: 15};
@@ -54,18 +53,10 @@ export const reducerProfile = (state: propsProfilePage = initialState, action: A
     }
 }
 
-export const addPOstAc = (title: string) => {
-    return {type: 'ADD-POST', post: title} as const
-}
-export const savePhotoAC = (photos: { small: string, large: string }) => {
-    return {type: 'SAVE-PHOTO', photos} as const
-}
-export const changeProfileAC = (profile: ProfileType) => {
-    return {type: 'CHANGE-PROFILE', profile} as const
-}
-export const getStatusAC = (status: string) => {
-    return {type: 'GET-STATUS', status} as const
-}
+export const addPOstAc = (title: string) => {return {type: 'ADD-POST', post: title} as const}
+export const savePhotoAC = (photos: { small: string, large: string }) => {return {type: 'SAVE-PHOTO', photos} as const}
+export const changeProfileAC = (profile: ProfileType) => {return {type: 'CHANGE-PROFILE', profile} as const}
+export const getStatusAC = (status: string) => {return {type: 'GET-STATUS', status} as const}
 
 export const changeProfileThunkCreator = (userId: string): ThunkAction<Promise<void>, propsProfilePage, unknown, ActionType> => {
     return async (dispatch: Dispatch<ActionType>) => {
@@ -78,7 +69,6 @@ export const changeProfileThunkCreator = (userId: string): ThunkAction<Promise<v
         }
     }
 }
-
 export const getProfileStatusTC = (userId: string): ThunkAction<Promise<void>, AppStateType, unknown, ActionType> => {
     return async (dispatch: Dispatch<ActionType>) => {
         try {
@@ -90,7 +80,6 @@ export const getProfileStatusTC = (userId: string): ThunkAction<Promise<void>, A
         }
     }
 }
-
 export const updateProfileStatusTC = (status: string): ThunkAction<Promise<void>, AppStateType, unknown, ActionType> => {
     return async (dispatch: Dispatch) => {
         try {
@@ -106,7 +95,6 @@ export const updateProfileStatusTC = (status: string): ThunkAction<Promise<void>
         }
     }
 }
-
 export const savePhotoTC = (photo: any): ThunkAction<Promise<void>, AppStateType, unknown, ActionType> => {
     return async (dispatch: Dispatch) => {
         try {
@@ -122,7 +110,6 @@ export const savePhotoTC = (photo: any): ThunkAction<Promise<void>, AppStateType
         }
     }
 }
-
 export const saveProfileDataTC = (profile: saveDataProfileType): ThunkAction<Promise<void>, any, unknown, ActionType> => {
     return async (dispatch, getState) => {
         try {

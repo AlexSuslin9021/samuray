@@ -56,7 +56,6 @@ const reducerDialogs = (state:propsDialogsPage=initialState, action:ActionType )
 
 export const addNewDialogAC=(newDialog:string )=>{return {type: 'NEW-DIALOG', newText: newDialog} as const}
 
-//Types
 type propsUsersName = {
     id: string
     name: string

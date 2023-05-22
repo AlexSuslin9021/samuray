@@ -27,7 +27,6 @@ export const authReducer = (state: initialStateType = initialState, action: Acti
             return state
     }
 }
-
 export const setUserDataAC = (data: DataType) => {return {type: setUserData, data} as const}
 export const isAuthAC = (isAuth: boolean) => {return {type: 'CHANGE_ISAUTH', isAuth} as const}
 export const getCaptchaAC = (captcha: string) => {return {type: 'GET-CAPTCHA', captcha} as const}
@@ -95,9 +94,8 @@ export const getCaptchaTC = (): ThunkAction<Promise<void>, initialStateType, unk
     }
 }
 
-//Name type
+
 const setUserData = 'SET_USER_DATA'
-//Types
 export type initialStateType = {
     data: DataType
     messages: [],

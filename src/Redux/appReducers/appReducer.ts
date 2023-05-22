@@ -6,7 +6,7 @@ import {AppStateType, useAppDispatch} from "../reduxState";
 
 let initialState: initialStateType = {
     initialized: false,
-    error: 'null'
+    error: null
 }
 export const appReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
     switch (action.type) {

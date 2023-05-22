@@ -3,9 +3,9 @@ import {profileApi, saveDataProfileType, usersApi} from "../../API/api";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "../reduxState";
 import {getUsers} from "../Selector/user-selector";
+import {handleServerAppError, handleServerNetworkError} from "../../common/error-utils/error-utils";
+import axios from "axios";
 
-
-//initialState
 let initialState: propsProfilePage = {
     post: [
         {id: '1', message: 'How are you?', likes: 15},
@@ -33,7 +33,7 @@ let initialState: propsProfilePage = {
         }
     },
     status: 'status',
-    isOwner:false
+    isOwner: false
 }
 export const reducerProfile = (state: propsProfilePage = initialState, action: ActionType): propsProfilePage => {
 
@@ -42,27 +42,23 @@ export const reducerProfile = (state: propsProfilePage = initialState, action: A
             let newPOst: propsPostMessege = {id: new Date().getTime(), message: action.post, likes: 15};
             state.newTextPost = ''
             return {...state, post: [...state.post, newPOst]};
-        // case 'CHANGE-CALLBASK':
-        //     // state.newTextPost = action.post
-        //     return {...state, newTextPost: action.newText};
         case "CHANGE-PROFILE":
             return {...state, profile: action.profile};
         case "GET-STATUS":
             return {...state, status: action.status}
         case "SAVE-PHOTO":
             debugger
-            return {...state, profile: {...state.profile, photos:action.photos}}
+            return {...state, profile: {...state.profile, photos: action.photos}}
         default:
             return state
     }
 }
 
-//Action Creator
 export const addPOstAc = (title: string) => {
     return {type: 'ADD-POST', post: title} as const
 }
-export const savePhotoAC = (photos:{small:string, large:string}) =>{
-    return{type: 'SAVE-PHOTO', photos} as const
+export const savePhotoAC = (photos: { small: string, large: string }) => {
+    return {type: 'SAVE-PHOTO', photos} as const
 }
 export const changeProfileAC = (profile: ProfileType) => {
     return {type: 'CHANGE-PROFILE', profile} as const
@@ -71,56 +67,85 @@ export const getStatusAC = (status: string) => {
     return {type: 'GET-STATUS', status} as const
 }
 
-//Thunk Creator
 export const changeProfileThunkCreator = (userId: string): ThunkAction<Promise<void>, propsProfilePage, unknown, ActionType> => {
     return async (dispatch: Dispatch<ActionType>) => {
-
-        let response = await usersApi.getProfile(userId)
-        dispatch(changeProfileAC(response.data))
+        try {
+            let response = await usersApi.getProfile(userId)
+            dispatch(changeProfileAC(response.data))
+        } catch (e) {
+            if (axios.isAxiosError(e))
+                handleServerNetworkError(e, dispatch)
+        }
     }
 }
+
 export const getProfileStatusTC = (userId: string): ThunkAction<Promise<void>, AppStateType, unknown, ActionType> => {
     return async (dispatch: Dispatch<ActionType>) => {
-        let response = await profileApi.getStatus(userId)
-        dispatch(getStatusAC(response.data))
-    }
-}
-export const updateProfileStatusTC = (status: string): ThunkAction<Promise<void>, AppStateType, unknown, ActionType> => {
-    return async (dispatch: Dispatch<ActionType>) => {
-        let response = await profileApi.updateStatus(status)
-        if (response.data.resultCode === 0)
-            dispatch(getStatusAC(status))
-    }
-}
-export const savePhotoTC=(photo:any):  ThunkAction<Promise<void>, AppStateType, unknown, ActionType> => {
-    debugger
-    return async (dispatch: Dispatch<ActionType>) => {
-        let res =await profileApi.updatePhoto(photo)
-        if(res.data.resultCode===0)
-            dispatch(savePhotoAC(res.data.data.photos))
-    }
-}
-export const saveProfileDataTC=(profile:saveDataProfileType): ThunkAction<Promise<void>, any, unknown, ActionType> => {
-
-    return async (dispatch, getState) => {
-     let res= await profileApi.saveDataProfile(profile)
-const userId= getState().authReducer.data.id
-        if(res.data.resultCode===0){
-            debugger
-        return   dispatch(changeProfileThunkCreator(userId.toString()))
+        try {
+            let response = await profileApi.getStatus(userId)
+            dispatch(getStatusAC(response.data))
+        } catch (e) {
+            if (axios.isAxiosError(e))
+                handleServerNetworkError(e, dispatch)
         }
-
     }
 }
 
-//Types
+export const updateProfileStatusTC = (status: string): ThunkAction<Promise<void>, AppStateType, unknown, ActionType> => {
+    return async (dispatch: Dispatch) => {
+        try {
+            let response = await profileApi.updateStatus(status)
+            if (response.data.resultCode === 0) {
+                dispatch(getStatusAC(status))
+            } else {
+                handleServerAppError(response.data, dispatch)
+            }
+        } catch (e) {
+            if (axios.isAxiosError(e))
+                handleServerNetworkError(e, dispatch)
+        }
+    }
+}
+
+export const savePhotoTC = (photo: any): ThunkAction<Promise<void>, AppStateType, unknown, ActionType> => {
+    return async (dispatch: Dispatch) => {
+        try {
+            let res = await profileApi.updatePhoto(photo)
+            if (res.data.resultCode === 0) {
+                dispatch(savePhotoAC(res.data.data.photos))
+            } else {
+                handleServerAppError(res.data, dispatch)
+            }
+        } catch (e) {
+            if (axios.isAxiosError(e))
+                handleServerNetworkError(e, dispatch)
+        }
+    }
+}
+
+export const saveProfileDataTC = (profile: saveDataProfileType): ThunkAction<Promise<void>, any, unknown, ActionType> => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await profileApi.saveDataProfile(profile)
+            const userId = getState().authReducer.data.id
+            if (res.data.resultCode === 0) {
+                return dispatch(changeProfileThunkCreator(userId.toString()))
+            } else {
+                handleServerAppError(res.data, dispatch)
+            }
+        } catch (e) {
+            if (axios.isAxiosError(e))
+                handleServerNetworkError(e, dispatch)
+        }
+    }
+}
 
 export type propsProfilePage = {
     post: propsPostMessege[]
     newTextPost: string
     profile: ProfileType
     status: string
-    isOwner:boolean
+    isOwner: boolean
 }
 export type ProfileType = {
 
@@ -141,7 +166,7 @@ export type ContactProfileType = {
     "vk": any
     "twitter": any
     "instagram": any
-    "youtube":any
+    "youtube": any
     "github": any
     "mainLink": any
 
@@ -157,4 +182,8 @@ export type propsPostMessege = {
     message?: string
     likes: number
 }
-type ActionType = ReturnType<typeof addPOstAc> | ReturnType<typeof changeProfileAC> | ReturnType<typeof getStatusAC> | ReturnType<typeof savePhotoAC>
+type ActionType =
+    ReturnType<typeof addPOstAc>
+    | ReturnType<typeof changeProfileAC>
+    | ReturnType<typeof getStatusAC>
+    | ReturnType<typeof savePhotoAC>

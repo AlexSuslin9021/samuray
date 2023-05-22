@@ -1,6 +1,6 @@
 import React from "react";
 import s from './Post.module.css'
-import userPost from'../../../../common/256-512.png'
+import userPost from '../../../../common/user.png'
 type PostPropsType={
     message?:string
     value:number

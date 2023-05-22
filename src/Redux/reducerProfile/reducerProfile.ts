@@ -74,6 +74,7 @@ export const getStatusAC = (status: string) => {
 //Thunk Creator
 export const changeProfileThunkCreator = (userId: string): ThunkAction<Promise<void>, propsProfilePage, unknown, ActionType> => {
     return async (dispatch: Dispatch<ActionType>) => {
+
         let response = await usersApi.getProfile(userId)
         dispatch(changeProfileAC(response.data))
     }

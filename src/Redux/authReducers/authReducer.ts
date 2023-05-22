@@ -2,11 +2,10 @@ import {authApi, captchaApi, usersApi} from "../../API/api";
 import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {stopSubmit} from 'redux-form'
-
-
+import {handleServerNetworkError} from "../../common/error-utils/error-utils";
+import {AxiosResponse} from "axios";
 
 let initialState: initialStateType = {
-
     data: {id: '', login: "", email: "@inbox.ru"},
     messages: [],
     fieldsErrors: [],
@@ -14,8 +13,8 @@ let initialState: initialStateType = {
     isAuth: false,
     captcha:null
 }
-export const authReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
 
+export const authReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
         case setUserData:
         return {...state, data: {...action.data}}
@@ -29,24 +28,26 @@ export const authReducer = (state: initialStateType = initialState, action: Acti
     }
 }
 
-// Action creator
 export const setUserDataAC = (data: DataType) => {return {type: setUserData, data} as const}
 export const isAuthAC = (isAuth: boolean) => {return {type: 'CHANGE_ISAUTH', isAuth} as const}
 export const getCaptchaAC=(captcha:string) =>{return{type:'GET-CAPTCHA', captcha} as const }
-
-//Thunk creator
 export const setUserThunkCreator = (id: string | null , email: string | null, login: string | null) => ({
     type: 'SET_USER_DATA', data: {id, email, login}
-
 }) as const
+
 export const getAuthThunkCreator = (): ThunkAction<Promise<void>, initialStateType, unknown, ActionType> => {
    return   async (dispatch: Dispatch<ActionType>) => {
-       const response=await authApi.me()
-            if (response.data.resultCode === 0) {
-                let {id, login, email} = response.data.data
-                dispatch(setUserDataAC({id, email, login}))
-                dispatch(isAuthAC(true))
-            }
+       try {
+           const response=await authApi.me()
+           if (response.data.resultCode === 0) {
+               let {id, login, email} = response.data.data
+               dispatch(setUserDataAC({id, email, login}))
+               dispatch(isAuthAC(true))
+           }
+       } catch (e:any){
+           handleServerNetworkError(e.message,dispatch)
+       }
+
             // dispatch(setUserDataAC(response.data))
 
     }

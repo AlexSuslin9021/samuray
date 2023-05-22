@@ -8,7 +8,7 @@ import {
     ProfileType, savePhotoTC,saveProfileDataTC,
     updateProfileStatusTC
 } from "../../Redux/reducerProfile/reducerProfile";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import { RouteComponentProps, withRouter} from "react-router-dom";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {saveDataProfileType} from "../../API/api";

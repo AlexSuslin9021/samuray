@@ -4,7 +4,8 @@ import {appReducer, initializedSuccess, initialStateType} from "./appReducer";
 let initialState:initialStateType
 beforeEach(()=>{
     initialState={
-        initialized:false
+        initialized:false,
+        error:''
     }
 })
 test('change initialized for true',()=>{

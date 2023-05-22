@@ -1,6 +1,8 @@
 import {usersApi} from "../../API/api";
 import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
+import axios from "axios";
+import {handleServerAppError, handleServerNetworkError} from "../../common/error-utils/error-utils";
 
 export const reducerUsers = (state: initialStateType = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
@@ -58,34 +60,57 @@ export const toggleIsFetchingAC = (id: number, isFetching: boolean) => {
 // Thunk Creator
 export const getUserThunkCreator = (currentPage: number, pageSize: number): ThunkAction<Promise<void>, initialStateType, unknown, ActionType> => {
     return async (dispatch: Dispatch<ActionType>) => {
-        dispatch(toggleFetchingAC(true))
-        dispatch(setCurrentPageAC(currentPage))
-        let response= await usersApi.getUsers(currentPage, pageSize)
+        try {
+            dispatch(toggleFetchingAC(true))
+            dispatch(setCurrentPageAC(currentPage))
+            let response= await usersApi.getUsers(currentPage, pageSize)
             dispatch(setUsersAC(response.data.items))
             dispatch(setTotalUserAC(response.data.totalCount))
             dispatch(toggleFetchingAC(false))
+        }catch (e) {
+            if (axios.isAxiosError(e))
+                handleServerNetworkError(e, dispatch)
+        }
+
 
     }
 }
 export const followThunkCreator = (id: number): ThunkAction<Promise<void>, initialStateType, unknown, ActionType> => {
-    return async (dispatch: Dispatch<ActionType>) => {
-        dispatch(toggleIsFetchingAC(id, true))
-        let response= await usersApi.gtAuthPost(id)
+    return async (dispatch: Dispatch) => {
+        try {
+            dispatch(toggleIsFetchingAC(id, true))
+            let response = await usersApi.gtAuthPost(id)
             if (response.data.resultCode === 0) {
                 dispatch(followAC(id))
+            } else {
+                handleServerAppError(response.data, dispatch)
             }
             dispatch(toggleIsFetchingAC(id, false))
+        }catch (e) {
+            if (axios.isAxiosError(e))
+                handleServerNetworkError(e, dispatch)
+        }finally {
+            dispatch(toggleIsFetchingAC(id, false))
+        }
     }
 }
 export const unFollowThunkCreator = (id: number): ThunkAction<Promise<void>, initialStateType, unknown, ActionType> => {
-    return async (dispatch: Dispatch<ActionType>) => {
-        dispatch(toggleIsFetchingAC(id, true))
-        let response=  await usersApi.gtAuthDelete(id)
+    return async (dispatch: Dispatch) => {
+        try {
+            dispatch(toggleIsFetchingAC(id, true))
+            let response = await usersApi.gtAuthDelete(id)
             if (response.data.resultCode === 0) {
                 dispatch(unFollowAC(id))
             }
+            else {
+                handleServerAppError(response.data, dispatch)
+            }
+        } catch (e) {
+            if (axios.isAxiosError(e))
+                handleServerNetworkError(e, dispatch)
+        }finally {
             dispatch(toggleIsFetchingAC(id, false))
-
+        }
     }
 }
 

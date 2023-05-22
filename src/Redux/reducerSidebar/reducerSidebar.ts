@@ -7,9 +7,6 @@ let initialState: PropsSidebar[]=[
     {id:'6', title:'Users',to:'/users'},
 
 ]
-const reducerSidebar = (state:PropsSidebar[]=initialState, action:any) => {
-    return state
-};
-//Types
+const reducerSidebar = (state:PropsSidebar[]=initialState, action:any) => {return state};
 export type PropsSidebar = { id: string, title: string, to: string }
 export default reducerSidebar;

@@ -46,7 +46,7 @@ export const reducerProfile = (state: propsProfilePage = initialState, action: A
         case "GET-STATUS":
             return {...state, status: action.status}
         case "SAVE-PHOTO":
-            debugger
+
             return {...state, profile: {...state.profile, photos: action.photos}}
         default:
             return state
@@ -100,7 +100,7 @@ export const savePhotoTC = (photo: any): ThunkAction<Promise<void>, AppStateType
         try {
             let res = await profileApi.updatePhoto(photo)
             if (res.data.resultCode === 0) {
-                debugger
+
                 dispatch(savePhotoAC(res.data.data.photos))
             } else {
 

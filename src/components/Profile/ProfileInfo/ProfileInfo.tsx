@@ -7,6 +7,7 @@ import { ProfileContact } from "./Profilecontact";
 import { saveDataProfileType } from "../../../API/api";
 import { ProfileFormData } from "./ProfileDataForm";
 import changePhoto from "../../../assets/image/changePhoto.svg";
+import {Button} from "../../Button/Button";
 
 
 type ProfileTypeInfo = {
@@ -31,7 +32,6 @@ export function ProfileInfo(props: ProfileTypeInfo) {
     };
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        debugger
         if (e.target.files) props.savePhoto(e.target.files[0]);
     };
 
@@ -49,7 +49,7 @@ export function ProfileInfo(props: ProfileTypeInfo) {
                 )}
             </div>
             <div className={s.description}>
-                {props.isOwner && edit && <button onClick={onClickEdit}>edit</button>}
+                {props.isOwner && edit && <Button onClick={onClickEdit} name={'Change data'}/>        }
 
                 <ProfileStatus status={props.status} updateProfileStatus={props.updateProfileStatus} />
                 {edit ? <ProfileContact profile={props.profile} /> : <ProfileFormData profile={props.profile} callback={onClickSave} />}

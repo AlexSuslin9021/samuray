@@ -21,7 +21,7 @@ export const authReducer = (state: initialStateType = initialState, action: Acti
         case "CHANGE_ISAUTH":
             return {...state, isAuth: action.isAuth}
         case "GET-CAPTCHA":
-            debugger
+
             return {...state, captcha: action.captcha}
         default:
             return state
@@ -49,7 +49,7 @@ export const getAuthThunkCreator = (): ThunkAction<Promise<void>, initialStateTy
     }
 }
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean = false, captcha?: string | null): ThunkAction<Promise<void>, any, unknown, ActionType> => {
-    debugger
+
     return async (dispatch: any) => {
         try {
             let response = await authApi.loginCreate(email, password, rememberMe, captcha)
@@ -85,7 +85,7 @@ export const loginOutThunkCreator = (): ThunkAction<Promise<void>, initialStateT
     }
 }
 export const getCaptchaTC = (): ThunkAction<Promise<void>, initialStateType, unknown, ActionType> => {
-    debugger
+
     return async (dispatch) => {
         let response = await captchaApi.getCaptcha();
         dispatch(getCaptchaAC(response.data.url))

@@ -64,7 +64,7 @@ export const authApi = {
 export const captchaApi = {
 
     getCaptcha() {
-        debugger
+
         return instance.get<{ url: string }>('/security/get-captcha-url')
     }
 }

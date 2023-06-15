@@ -35,7 +35,7 @@ class App extends React.Component<AppType>{
     render() {
 
 if(!this.props.initialized) return <div><img src={preloader} alt=""/></div>
-debugger
+
         return (<BrowserRouter>
                 <div className="app-wrapper">
                     <DataHeader/>

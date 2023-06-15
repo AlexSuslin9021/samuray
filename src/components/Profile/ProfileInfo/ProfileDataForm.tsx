@@ -3,6 +3,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import s from "./ProfileInfo.module.css";
 import {ContactProfileType} from "../../../Redux/reducerProfile/reducerProfile";
 import {saveDataProfileType} from "../../../API/api";
+import {Button} from "../../Button/Button";
 
 
 type Inputs = {
@@ -35,7 +36,9 @@ export const ProfileFormData = (props:ProfileFormDataType) => {
     return (
 
         <form  onSubmit={handleSubmit(onSubmit) }>
-            <div> <button type={'submit'}> save </button></div>
+            <div>
+                <Button name={'save'} type={'submit'}/>
+            </div>
             <div className={s.item}></div>
             <div> <b>About me</b> :<input defaultValue={props.profile.aboutMe} {...register("aboutMe")} /></div>
             <div> <b>Full name</b> :<input defaultValue={props.profile.fullName} {...register("fullName")} /></div>

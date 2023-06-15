@@ -1,7 +1,7 @@
 .dialogsContent{
  margin-top: 20px;
  display: flex;
- /*justify-content: space-around;*/
+ justify-content: space-between;
  width: 100%;
 }
 
@@ -21,6 +21,8 @@
 .dialogs{
  /*margin-left: 100px;*/
  display: flex;
+ flex-direction: column;
+
 }
 .dialog{
 
@@ -39,22 +41,4 @@
 }
 img{
  width: 20px;
-}
-.button{
- height: 30px;
- width: 80px;
- background-color: white; /* Green */
- color: #555555;
- text-align: center;
- text-decoration: none;
- display: inline-block;
- margin: 4px 2px;
- transition-duration: 0.4s;
- cursor: pointer;
- border: 2px solid #555555;
- border-radius: 5px;
-}
-.button:hover {
- background-color: #807d7d;
- color: white;
 }

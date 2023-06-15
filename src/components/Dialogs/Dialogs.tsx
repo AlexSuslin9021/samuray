@@ -5,6 +5,7 @@ import {DialogsItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {propsDialogsPage} from "../../Redux/reduserDialogs/reducerDialogs";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Button} from "../Button/Button";
 
 function Dialogs(props:propsDoalogs){
         const onSubmit=(formData:FormDataType)=>{
@@ -28,7 +29,7 @@ function Dialogs(props:propsDoalogs){
 const AddMessageForm:FC<InjectedFormProps<FormDataType>> =(props)=>{
     return <form onSubmit={props.handleSubmit} >
         <div><Field placeholder={'Message'} name={'message'} component={'textarea'} />   </div>
-        <button className={s.button} > ass</button>
+        <Button name={'ass'}/>
     </form>
 }
 

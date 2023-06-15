@@ -16,12 +16,12 @@ export const GlobalError = (props:GlobalErrorType) => {
         toast.error(props.error);
     }
     useEffect(() => {
-        debugger
+
         setTimeout(() => {
             dispatch(props.setError( null ));
         }, 2000);
     }, [props.error]);
-    debugger
+
     return (
         <ToastContainer
             position="bottom-right"

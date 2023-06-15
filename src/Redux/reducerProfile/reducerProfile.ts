@@ -100,8 +100,10 @@ export const savePhotoTC = (photo: any): ThunkAction<Promise<void>, AppStateType
         try {
             let res = await profileApi.updatePhoto(photo)
             if (res.data.resultCode === 0) {
+                debugger
                 dispatch(savePhotoAC(res.data.data.photos))
             } else {
+
                 handleServerAppError(res.data, dispatch)
             }
         } catch (e) {

@@ -40,11 +40,13 @@ export const profileApi = {
         return instance.put<ResponseType>(`profile/status`, {status: status})
     },
     updatePhoto(photoFile: any) {
-        const formData = new FormData().append('image', photoFile)
+        const formData = new FormData();
+        formData.append('image', photoFile);
         return instance.put<ResponseType<{ photos: { small: string, large: string } }>>(`/profile/photo`, formData, {
             headers: {"Content-Type": 'multipart/form-data'}
-        })
+        });
     }
+
 }
 
 export const authApi = {

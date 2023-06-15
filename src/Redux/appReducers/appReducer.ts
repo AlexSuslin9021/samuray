@@ -1,6 +1,5 @@
-import {AnyAction} from "redux";
 import {getAuthThunkCreator} from "../authReducers/authReducer";
-import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {ThunkAction} from "redux-thunk";
 import {AppStateType, useAppDispatch} from "../reduxState";
 
 
@@ -28,5 +27,5 @@ const setError = 'SET-ERROR'
 export type initialStateType = { initialized: boolean, error: string | null }
 type ActionType = ReturnType<typeof initializedSuccess> | ReturnType<typeof setErrorAC>
 type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, any>
-type ThunkDispatchType = ThunkDispatch<AppStateType, any, AnyAction>
+//
 

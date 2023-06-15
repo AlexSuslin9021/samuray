@@ -1,7 +1,7 @@
 import React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import s from "./ProfileInfo.module.css";
-import {ContactProfileType, ProfileType} from "../../../Redux/reducerProfile/reducerProfile";
+import {ContactProfileType} from "../../../Redux/reducerProfile/reducerProfile";
 import {saveDataProfileType} from "../../../API/api";
 
 

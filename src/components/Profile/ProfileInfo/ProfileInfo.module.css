@@ -8,7 +8,15 @@
     /*margin-left: 40px;*/
 
 }
-
+.label img{
+    width: 10px;
+    height: 10px;
+    z-index: 3;
+    position: relative;
+    bottom:7px;
+    left: 25px;
+    cursor: pointer;
+}
 .avatar img{
     width: 70px;
     height: 100px;
@@ -20,4 +28,12 @@
 .post{
     width: 250px;
     height: 70px;
+}
+.form{
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
